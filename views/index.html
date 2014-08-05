@@ -3,7 +3,19 @@
     <title>TEST 2</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="public/javascripts/script2.js"></script>
+    <script src="javascripts/script2.js">
+      $(function(){
+        var server = io.connect('http://localhost:8080');
+        server.on('tweets', function(data) {
+          console.log("tweets should be received...")
+          insertTweet(data.text);
+        });
+      });
+
+      function insertTweet(tweet) {
+        ('ul').prepend('<li>' + tweet.text + '</li>');
+      }
+    </script>
   </head>
   <body>
     <ul></ul>
