@@ -16,7 +16,7 @@ $(function(){
 
 function insertTweet(tweet) {
 
- if  ($("#twitterFeed > li").length > 10) {
+ if ($("#twitterFeed > li").length > 10) {
   console.log("deleting top tweet...");
   console.log($("li").last());
   $("li").last().remove();
