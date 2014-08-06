@@ -7,5 +7,14 @@ $(function(){
 });
 
 function insertTweet(tweet) {
-  $('ul').prepend('<li>' + tweet.text + '</li>');
+  // var tweetsArray = []
+  // tweetsArray += tweet.text;
+ if  ($("#twitterFeed > li").length > 10) {
+  console.log("deleting top tweet");
+  console.log($("li").last());
+ // $("#orderedList").remove($("li").last());
+ $("li").last().remove();
+  console.log("deleted top tweet");
+}
+  $("#twitterFeed").prepend('<li>' + tweet.text + '</li>');
 }
