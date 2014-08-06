@@ -20,7 +20,7 @@ var t = new twitter({
 
 app.set('port', process.env.PORT || 8080);
 
-app.get('/', function(request, response) {
+app.all('/', function(request, response) {
   console.log('This half works...');
   response.sendfile('views/index.html');
 });
