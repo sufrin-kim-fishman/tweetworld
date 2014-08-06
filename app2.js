@@ -33,18 +33,9 @@ io.sockets.on('connection', function(client) {
   t.stream('statuses/sample',function(stream) {
     stream.on('data', function(tweet) {
       if (tweet.geo !== null) {
-         client.emit('tweets', {text: tweet});
+        console.log('stream is on...')
+        client.emit('tweets', tweet);
       }
-    });
-    stream.on('end', function (response) {
-      // Handle a disconnection
-    });
-    stream.on('destroy', function (response) {
-      // Handle a 'silent' disconnection from Twitter, no end/error event fired
-    });
-    stream.on('error', function(error) {
-      console.log('Tweet errror');
-      console.log(util.inspect(error));
     });
   });
 });
