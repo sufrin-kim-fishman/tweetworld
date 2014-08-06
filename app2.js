@@ -34,6 +34,7 @@ io.sockets.on('connection', function(client) {
     stream.on('data', function(tweet) {
       if (tweet.geo !== null) {
         console.log('stream is on...')
+        console.log(tweet);
         client.emit('tweets', tweet);
       }
     });

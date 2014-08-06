@@ -7,5 +7,5 @@ $(function(){
 });
 
 function insertTweet(tweet) {
-  ('ul').prepend('<li>' + tweet.text + '</li>');
+  $('ul').prepend('<li>' + tweet.text + '</li>');
 }
