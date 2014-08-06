@@ -3,39 +3,34 @@ $(function(){
   countriesToShow = [];
   var country;
   $("#submit").click(function(e) {
-  	console.log("hi");
-  	  country = $("#country").val();
+  	  country = normalizeName($("#country").val());
       countriesToShow.push(country);
+      console.log(country);
+      console.log(countriesToShow);
   	  e.preventDefault();
   });
   server.on('tweets', function(data) {
-
-
-
-
-    if(countriesToShow.indexOf(data.place.country) >= 0) {
-      if($("#" + data.place.country).length === 0) {
-      	$(".tweet_country_holder").append("<div id='"+ data.place.country +"'><ul></ul></div>");
+    normalizedCountry = normalizeName(data.place.country);
+    if(countriesToShow.indexOf(normalizedCountry) >= 0) {
+      if($("#" + normalizedCountry).length === 0) {
+      	$(".tweet_country_holder").append("<div id='" + normalizedCountry + "'>" + 
+          "<h2>" + data.place.country + "</h2><ul></ul></div>");
       }
-      insertTweet(data, data.place.country);
-
+      insertTweet(data, normalizedCountry);
     }
   });
 });
 
 function insertTweet(tweet, country) {
-
  if  ($("#" + country +" > li").length > 9) {
-
   console.log("deleting top tweet...");
   console.log($("#" + country +" li").last());
   $("#" + country +" li").last().remove();
   console.log("deleted top tweet");
 }
-//  $("#" + country).prepend('<li>' + tweet.text + '</li>');
  $("#" + country + " ul").prepend('<li>' + tweet.text + '</li>');
 }
 
-
-
-
+function normalizeName(name) {
+  return name.replace(" ", "-");
+}
