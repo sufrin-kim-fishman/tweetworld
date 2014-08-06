@@ -10,6 +10,7 @@ $(function(){
   	  e.preventDefault();
   });
   server.on('tweets', function(data) {
+    data = JSON.parse(data);
     normalizedCountry = normalizeName(data.place.country);
     if(countriesToShow.indexOf(normalizedCountry) >= 0) {
       if($("#" + normalizedCountry).length === 0) {
