@@ -18,8 +18,6 @@ $(function(){
   });
 });
 
-
-
 function insertTweet(tweet, country) {
  if  ($("#" + country +" > li").length > 9) {
   console.log("deleting top tweet...");
@@ -28,7 +26,7 @@ function insertTweet(tweet, country) {
   console.log("deleted top tweet");
 }
 //  $("#" + country).prepend('<li>' + tweet.text + '</li>');
- $("#" + country).prepend('<li>' + tweet.text + '</li>');
+ $("#" + country + " ul").prepend('<li>' + tweet.text + '</li>');
 }
 
 
