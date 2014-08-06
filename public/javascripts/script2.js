@@ -1,20 +1,30 @@
 $(function(){
   var server = io.connect('http://localhost:8080');
+  var country;
+  $("#submit").click(function(e) {
+  	console.log("hi");
+  	country = $("#country").val();
+  	e.preventDefault();
+  });
   server.on('tweets', function(data) {
-    console.log('receiving tweets...')
-    insertTweet(data);
+    console.log(country);
+    if(country === data.place.country) {
+    	insertTweet(data);
+    }
   });
 });
 
 function insertTweet(tweet) {
-  // var tweetsArray = []
-  // tweetsArray += tweet.text;
+
  if  ($("#twitterFeed > li").length > 10) {
-  console.log("deleting top tweet");
+  console.log("deleting top tweet...");
   console.log($("li").last());
- // $("#orderedList").remove($("li").last());
- $("li").last().remove();
+  $("li").last().remove();
   console.log("deleted top tweet");
 }
   $("#twitterFeed").prepend('<li>' + tweet.text + '</li>');
 }
+
+
+
+
