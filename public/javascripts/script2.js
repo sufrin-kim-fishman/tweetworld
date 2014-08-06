@@ -22,12 +22,12 @@ $(function(){
 });
 
 function insertTweet(tweet, country) {
- if  ($("#" + country +" > li").length > 9) {
-  console.log("deleting top tweet...");
-  console.log($("#" + country +" li").last());
-  $("#" + country +" li").last().remove();
-  console.log("deleted top tweet");
-}
+  if  ($("#" + country + " ul").children().length > 9) {
+    console.log("deleting top tweet...");
+    console.log($("#" + country +" li").last());
+    $("#" + country +" li").last().remove();
+    console.log("deleted top tweet");
+  }
  $("#" + country + " ul").prepend('<li>' + tweet.text + '</li>');
 }
 
