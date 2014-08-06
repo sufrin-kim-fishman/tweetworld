@@ -7,22 +7,25 @@ $(function(){
   	e.preventDefault();
   });
   server.on('tweets', function(data) {
-    console.log(country);
     if(country === data.place.country) {
-    	insertTweet(data);
+    	if($("#country").length === 0) {
+    		$(".tweet_country_holder").append("<div id='"+ country +"'><ul></ul></div>");
+    	}
+    	insertTweet(data, country);
     }
   });
 });
 
-function insertTweet(tweet) {
 
- if ($("#twitterFeed > li").length > 10) {
+
+function insertTweet(tweet, country) {
+ if  ($("#" + country +" > li").length > 10) {
   console.log("deleting top tweet...");
-  console.log($("li").last());
-  $("li").last().remove();
+  console.log($("#" + country +" li").last());
+  $("#" + country +" li").last().remove();
   console.log("deleted top tweet");
 }
-  $("#twitterFeed").prepend('<li>' + tweet.text + '</li>');
+  $("#" + country).prepend('<li>' + tweet.text + '</li>');
 }
 
 
