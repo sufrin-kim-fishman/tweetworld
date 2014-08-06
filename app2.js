@@ -30,14 +30,13 @@ io.sockets.on('connection', function(client) {
   client.on('error', function() {
     console.log('error catch!');
   });
-  t.stream('statuses/sample',function(stream) {
-    stream.on('data', function(tweet) {
-      if (tweet.geo !== null) {
-        console.log('stream is on...')
-        console.log(tweet);
-        client.emit('tweets', JSON.stringify(tweet));
-      }
-    });
+  var stream = t.stream('statuses/sample');
+  stream.on('tweet', function(tweet) {
+    if (tweet.geo !== null) {
+      console.log('stream is on...')
+      console.log(tweet);
+      client.emit('tweets', JSON.stringify(tweet));
+    }
   });
 });
 
