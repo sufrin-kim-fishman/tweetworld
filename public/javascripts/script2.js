@@ -7,14 +7,16 @@ $(function(){
   	e.preventDefault();
   });
   server.on('tweets', function(data) {
-    console.log(country);
     if(country === data.place.country) {
-    	insertTweet(data);
+    	if($("#country").length === 0) {
+    		$(".container").append($("<div id="+ country +"><ul></ul></div>"));
+    	}
+    	$("<div id="+ country +">").append(insertTweet(data));
     }
   });
 });
 
 function insertTweet(tweet) {
-  $('ul').prepend('<li>' + tweet.text + '</li>');
+	$("ul").prepend("<li>" + tweet.text + "</li>");
 }
 
