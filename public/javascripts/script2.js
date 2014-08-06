@@ -9,8 +9,8 @@ $(function(){
   	e.preventDefault();
   });
   server.on('tweets', function(data) {
-   // if(country === data.place.country) {
-    if(countriesToShow.contains(data.place.country)) {
+    if(country === data.place.country) {
+  //  if(countriesToShow.contains(data.place.country)) {
     	if($("#" + country).length === 0) {  
     		$(".tweet_country_holder").append("<div id='"+ country +"'><ul></ul></div>");
       
@@ -24,7 +24,7 @@ $(function(){
 
 
 function insertTweet(tweet, country) {
- if  ($("#" + country +" > li").length > 10) {
+ if  ($("#" + country + " > li").length > 10) {
   console.log("deleting top tweet...");
   console.log($("#" + country +" li").last());
   $("#" + country +" li").last().remove();
