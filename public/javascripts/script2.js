@@ -8,7 +8,7 @@ $(function(){
   });
   server.on('tweets', function(data) {
     if(country === data.place.country) {
-    	if($("#country").length === 0) {
+    	if($("#" + country).length === 0) {
     		$(".tweet_country_holder").append("<div id='"+ country +"'><ul></ul></div>");
     	}
     	insertTweet(data, country);
@@ -26,7 +26,7 @@ function insertTweet(tweet, country) {
   console.log("deleted top tweet");
 }
 //  $("#" + country).prepend('<li>' + tweet.text + '</li>');
- $(".tweet_country_holder").prepend('<li>' + tweet.text + '</li>');
+ $("#" + country).prepend('<li>' + tweet.text + '</li>');
 }
 
 
