@@ -9,11 +9,11 @@ $(function(){
   	  e.preventDefault();
   });
   server.on('tweets', function(data) {
-    if(countriesToShow.indexOf(country) >= 0) {
-      if($("#" + country).length === 0) {
-      	$(".tweet_country_holder").append("<div id='"+ country +"'><ul></ul></div>");
+    if(countriesToShow.indexOf(data.place.country) >= 0) {
+      if($("#" + data.place.country).length === 0) {
+      	$(".tweet_country_holder").append("<div id='"+ data.place.country +"'><ul></ul></div>");
       }
-      insertTweet(data, country);
+      insertTweet(data, data.place.country);
     }
   });
 });
