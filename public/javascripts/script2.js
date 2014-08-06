@@ -25,7 +25,8 @@ function insertTweet(tweet, country) {
   $("#" + country +" li").last().remove();
   console.log("deleted top tweet");
 }
-  $("#" + country).prepend('<li>' + tweet.text + '</li>');
+//  $("#" + country).prepend('<li>' + tweet.text + '</li>');
+ $(".tweet_country_holder").prepend('<li>' + tweet.text + '</li>');
 }
 
 
