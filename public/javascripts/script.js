@@ -1,6 +1,17 @@
 var server = io.connect('http://localhost:8080');
 var countriesToShow = [];
 
+(function tweetListener() {
+  server.on('tweets', function(data) {
+    data = JSON.parse(data);
+    var normalizedCountry = normalizeName(data.place.country);
+    if(countriesToShow.indexOf(normalizedCountry) >= 0) {
+      addNewCountry(data, normalizedCountry);
+      insertTweet(data, normalizedCountry);
+    }
+  });
+})()
+
 $(function(){
   submitListener();
 });
@@ -24,17 +35,6 @@ function submitListener() {
       e.preventDefault();
   });
 }
-
-(function tweetListener() {
-  server.on('tweets', function(data) {
-    data = JSON.parse(data);
-    var normalizedCountry = normalizeName(data.place.country);
-    if(countriesToShow.indexOf(normalizedCountry) >= 0) {
-      addNewCountry(data, normalizedCountry);
-      insertTweet(data, normalizedCountry);
-    }
-  });
-})()
 
 function addNewCountry(data, country) {
   if($("#" + country).length === 0) {
