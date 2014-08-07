@@ -5,6 +5,9 @@ var socket = require('socket.io')
   , path = require('path')
   , app = express();
 
+var pg = require('pg');
+var conString = "postgres://ilanasufrin:@localhost:5432/test";
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 var server = http.createServer(app);
@@ -55,15 +58,10 @@ function streamTweets(client) {
   });
 }
 
-<<<<<<< HEAD
 // function sendAlert(client) {
 //   client.emit('backupAlert', 'BACKUP ERROR!')
 // }
-=======
-function sendAlert(client) {
-  client.emit('backupAlert', 'BACKUP ERROR!');
-}
->>>>>>> 9345d12f2785840e60ab1e4fb1cb18c5d4e3851d
+
 
 function listenToServer() {
   server.listen(8080);
@@ -74,3 +72,23 @@ function listenToServer() {
   openTweetConnection();
   listenToServer();
 })()
+
+
+pg.connect(conString, function(err, client, done) {
+  if(err) {
+    return console.error('error fetching client from pool', err);
+  }
+  client.query('INSERT INTO tristans_test (code) VALUES ($1)', ['THIS IS FROM NODE!!!'], function(err, result) {
+    //call `done()` to release the client back to the pool
+    done();
+
+    if(err) {
+      return console.error('error running query', err);
+    }
+    console.log(result);
+    //output: 1
+  });
+});
+
+
+

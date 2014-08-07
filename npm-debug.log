@@ -1,0 +1,203 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.30
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app',
+5 verbose install   [ 'express',
+5 verbose install     'static-favicon',
+5 verbose install     'morgan',
+5 verbose install     'cookie-parser',
+5 verbose install     'body-parser',
+5 verbose install     'debug',
+5 verbose install     'jade',
+5 verbose install     'pg' ] ]
+6 info preinstall myapp@0.0.1
+7 warn package.json http@0.0.0 http is also the name of a node core module.
+8 warn package.json http@0.0.0 No description
+9 warn package.json http@0.0.0 No repository field.
+10 warn package.json http@0.0.0 No README data
+11 warn package.json indexof@0.0.1 No repository field.
+12 warn package.json path@0.4.9 path is also the name of a node core module.
+13 warn package.json path@0.4.9 No README data
+14 warn package.json util@0.10.3 util is also the name of a node core module.
+15 verbose readDependencies using package.json deps
+16 verbose already installed skipping body-parser@~1.0.0 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+17 verbose already installed skipping debug@~0.7.4 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+18 verbose already installed skipping jade@~1.3.0 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+19 verbose cache add [ 'pg@~9.3.5', null ]
+20 verbose cache add name=undefined spec="pg@~9.3.5" args=["pg@~9.3.5",null]
+21 verbose parsed url { protocol: null,
+21 verbose parsed url   slashes: null,
+21 verbose parsed url   auth: null,
+21 verbose parsed url   host: null,
+21 verbose parsed url   port: null,
+21 verbose parsed url   hostname: null,
+21 verbose parsed url   hash: null,
+21 verbose parsed url   search: null,
+21 verbose parsed url   query: null,
+21 verbose parsed url   pathname: 'pg@~9.3.5',
+21 verbose parsed url   path: 'pg@~9.3.5',
+21 verbose parsed url   href: 'pg@~9.3.5' }
+22 verbose already installed skipping express@~4.2.0 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+23 verbose cache add name="pg" spec="~9.3.5" args=["pg","~9.3.5"]
+24 verbose parsed url { protocol: null,
+24 verbose parsed url   slashes: null,
+24 verbose parsed url   auth: null,
+24 verbose parsed url   host: null,
+24 verbose parsed url   port: null,
+24 verbose parsed url   hostname: null,
+24 verbose parsed url   hash: null,
+24 verbose parsed url   search: null,
+24 verbose parsed url   query: null,
+24 verbose parsed url   pathname: '~9.3.5',
+24 verbose parsed url   path: '~9.3.5',
+24 verbose parsed url   href: '~9.3.5' }
+25 verbose addNamed [ 'pg', '~9.3.5' ]
+26 verbose addNamed [ null, '>=9.3.5-0 <9.4.0-0' ]
+27 verbose already installed skipping static-favicon@~1.0.0 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+28 silly lockFile 1d9bc6ed-pg-9-3-5 pg@~9.3.5
+29 verbose lock pg@~9.3.5 /Users/ilanasufrin/.npm/1d9bc6ed-pg-9-3-5.lock
+30 silly addNameRange { name: 'pg', range: '>=9.3.5-0 <9.4.0-0', hasData: false }
+31 verbose already installed skipping morgan@~1.0.0 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+32 verbose request where is /pg
+33 verbose request registry https://registry.npmjs.org/
+34 verbose request id c8919dbf448aee16
+35 verbose url raw /pg
+36 verbose url resolving [ 'https://registry.npmjs.org/', './pg' ]
+37 verbose url resolved https://registry.npmjs.org/pg
+38 verbose request where is https://registry.npmjs.org/pg
+39 info trying registry request attempt 1 at 14:00:28
+40 verbose etag "9ASZUGRGL7D86LIDZCN59E1ES"
+41 http GET https://registry.npmjs.org/pg
+42 verbose already installed skipping cookie-parser@~1.0.1 /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+43 http 304 https://registry.npmjs.org/pg
+44 silly registry.get cb [ 304,
+44 silly registry.get   { date: 'Thu, 07 Aug 2014 18:00:29 GMT',
+44 silly registry.get     server: 'Apache',
+44 silly registry.get     via: '1.1 varnish',
+44 silly registry.get     'last-modified': 'Thu, 07 Aug 2014 17:07:37 GMT',
+44 silly registry.get     'cache-control': 'max-age=60',
+44 silly registry.get     etag: '"9ASZUGRGL7D86LIDZCN59E1ES"',
+44 silly registry.get     'x-served-by': 'cache-jfk1027-JFK',
+44 silly registry.get     'x-cache': 'HIT',
+44 silly registry.get     'x-cache-hits': '37',
+44 silly registry.get     'x-timer': 'S1407434429.018618,VS0,VE0',
+44 silly registry.get     vary: 'Accept',
+44 silly registry.get     'content-length': '0',
+44 silly registry.get     'keep-alive': 'timeout=10, max=50',
+44 silly registry.get     connection: 'Keep-Alive' } ]
+45 verbose etag https://registry.npmjs.org/pg from cache
+46 silly addNameRange number 2 { name: 'pg', range: '>=9.3.5-0 <9.4.0-0', hasData: true }
+47 silly addNameRange versions [ 'pg',
+47 silly addNameRange   [ '0.4.1',
+47 silly addNameRange     '0.5.0',
+47 silly addNameRange     '0.5.1',
+47 silly addNameRange     '0.5.2',
+47 silly addNameRange     '0.5.3',
+47 silly addNameRange     '0.5.4',
+47 silly addNameRange     '0.5.5',
+47 silly addNameRange     '0.5.6',
+47 silly addNameRange     '0.5.7',
+47 silly addNameRange     '0.5.8',
+47 silly addNameRange     '0.6.0',
+47 silly addNameRange     '0.6.1',
+47 silly addNameRange     '0.6.2',
+47 silly addNameRange     '0.6.3',
+47 silly addNameRange     '0.6.4',
+47 silly addNameRange     '0.6.5',
+47 silly addNameRange     '0.6.6',
+47 silly addNameRange     '0.6.7',
+47 silly addNameRange     '0.6.8',
+47 silly addNameRange     '0.6.9',
+47 silly addNameRange     '0.6.10',
+47 silly addNameRange     '0.6.11',
+47 silly addNameRange     '0.6.12',
+47 silly addNameRange     '0.6.13',
+47 silly addNameRange     '0.6.14',
+47 silly addNameRange     '0.6.15',
+47 silly addNameRange     '0.6.16',
+47 silly addNameRange     '0.6.17',
+47 silly addNameRange     '0.6.18',
+47 silly addNameRange     '0.7.0',
+47 silly addNameRange     '0.7.1',
+47 silly addNameRange     '0.7.2',
+47 silly addNameRange     '0.8.0',
+47 silly addNameRange     '0.8.1',
+47 silly addNameRange     '0.8.2',
+47 silly addNameRange     '0.8.3',
+47 silly addNameRange     '0.8.4',
+47 silly addNameRange     '0.8.6',
+47 silly addNameRange     '0.8.7',
+47 silly addNameRange     '0.8.8',
+47 silly addNameRange     '0.9.0',
+47 silly addNameRange     '0.10.0',
+47 silly addNameRange     '0.10.2',
+47 silly addNameRange     '0.11.1',
+47 silly addNameRange     '0.11.2',
+47 silly addNameRange     '0.11.3',
+47 silly addNameRange     '0.12.0',
+47 silly addNameRange     '0.12.1',
+47 silly addNameRange     '0.12.3',
+47 silly addNameRange     '0.13.0',
+47 silly addNameRange     '0.13.1',
+47 silly addNameRange     '0.13.3',
+47 silly addNameRange     '0.14.0',
+47 silly addNameRange     '0.14.1',
+47 silly addNameRange     '0.15.0',
+47 silly addNameRange     '0.15.1',
+47 silly addNameRange     '1.0.0',
+47 silly addNameRange     '1.0.1',
+47 silly addNameRange     '1.0.2',
+47 silly addNameRange     '1.0.3',
+47 silly addNameRange     '1.0.4',
+47 silly addNameRange     '1.1.0',
+47 silly addNameRange     '1.1.1',
+47 silly addNameRange     '1.1.2',
+47 silly addNameRange     '1.1.3',
+47 silly addNameRange     '1.2.0',
+47 silly addNameRange     '1.3.0',
+47 silly addNameRange     '2.0.0',
+47 silly addNameRange     '2.1.0',
+47 silly addNameRange     '2.2.0',
+47 silly addNameRange     '2.3.0',
+47 silly addNameRange     '2.3.1',
+47 silly addNameRange     '2.4.0',
+47 silly addNameRange     '2.5.0',
+47 silly addNameRange     '2.5.1',
+47 silly addNameRange     '2.6.0',
+47 silly addNameRange     '2.6.1',
+47 silly addNameRange     '2.6.2',
+47 silly addNameRange     '2.7.0',
+47 silly addNameRange     '2.8.0',
+47 silly addNameRange     '2.8.1',
+47 silly addNameRange     '2.8.2',
+47 silly addNameRange     '2.8.3',
+47 silly addNameRange     '2.8.4',
+47 silly addNameRange     '2.8.5',
+47 silly addNameRange     '2.9.0',
+47 silly addNameRange     '2.10.0',
+47 silly addNameRange     '2.11.0',
+47 silly addNameRange     '2.11.1',
+47 silly addNameRange     '3.0.2',
+47 silly addNameRange     '3.0.3',
+47 silly addNameRange     '3.1.0',
+47 silly addNameRange     '3.2.0',
+47 silly addNameRange     '3.3.0',
+47 silly addNameRange     '3.4.0' ] ]
+48 silly lockFile 1d9bc6ed-pg-9-3-5 pg@~9.3.5
+49 silly lockFile 1d9bc6ed-pg-9-3-5 pg@~9.3.5
+50 error notarget No compatible version found: pg@'>=9.3.5-0 <9.4.0-0'
+50 error notarget Valid install targets:
+50 error notarget ["0.4.1","0.5.0","0.5.1","0.5.2","0.5.3","0.5.4","0.5.5","0.5.6","0.5.7","0.5.8","0.6.0","0.6.1","0.6.2","0.6.3","0.6.4","0.6.5","0.6.6","0.6.7","0.6.8","0.6.9","0.6.10","0.6.11","0.6.12","0.6.13","0.6.14","0.6.15","0.6.16","0.6.17","0.6.18","0.7.0","0.7.1","0.7.2","0.8.0","0.8.1","0.8.2","0.8.3","0.8.4","0.8.6","0.8.7","0.8.8","0.9.0","0.10.0","0.10.2","0.11.1","0.11.2","0.11.3","0.12.0","0.12.1","0.12.3","0.13.0","0.13.1","0.13.3","0.14.0","0.14.1","0.15.0","0.15.1","1.0.0","1.0.1","1.0.2","1.0.3","1.0.4","1.1.0","1.1.1","1.1.2","1.1.3","1.2.0","1.3.0","2.0.0","2.1.0","2.2.0","2.3.0","2.3.1","2.4.0","2.5.0","2.5.1","2.6.0","2.6.1","2.6.2","2.7.0","2.8.0","2.8.1","2.8.2","2.8.3","2.8.4","2.8.5","2.9.0","2.10.0","2.11.0","2.11.1","3.0.2","3.0.3","3.1.0","3.2.0","3.3.0","3.4.0"]
+50 error notarget
+50 error notarget This is most likely not a problem with npm itself.
+50 error notarget In most cases you or one of your dependencies are requesting
+50 error notarget a package version that doesn't exist.
+51 error System Darwin 13.3.0
+52 error command "node" "/usr/local/bin/npm" "install"
+53 error cwd /Users/ilanasufrin/Documents/IlanaSufrinWholeSystem/FlatironSchool/node_express_sample_app
+54 error node -v v0.10.30
+55 error npm -v 1.4.21
+56 error code ETARGET
+57 verbose exit [ 1, true ]
