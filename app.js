@@ -27,6 +27,7 @@ function setPage() {
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
+    console.log('Connection is open...');
     catchError(client);
     streamTweets(client);
   });
@@ -41,17 +42,17 @@ function catchError(client) {
 function streamTweets(client) {
   var stream = t.stream('statuses/sample');
   stream.on('tweet', function(tweet) {
-    console.log(tweet);
-    var buffer_good = client.write(tweet);
+    // var buffer_good = client.write(tweet);
     if(!buffer_good) {sendAlert(client);}
     if (tweet.geo !== null) {
+      console.log(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
 function sendAlert(client) {
-  client.emit('backupAlert', 'BACKUP ERROR!')
+  client.emit('backupAlert', 'BACKUP ERROR!');
 }
 
 function listenToServer() {
