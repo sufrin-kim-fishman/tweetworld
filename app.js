@@ -39,7 +39,6 @@ app.use(session({secret: 'topsecretsecret'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
->>>>>>> a979890648c102c9920dc63699978228046e0b07
 
 var server = http.createServer(app);
 var io = socket.listen(server);
