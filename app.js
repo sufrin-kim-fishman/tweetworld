@@ -27,15 +27,15 @@ app.get('/sign_up_form', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-  // var username = req.body.username;
-  // var password = req.body.password;
+  var username = req.body.username;
+  var password = req.body.password;
   console.log(req.body);
-  // console.log("Username is " + username + " and password is" + password);
+  console.log("Username is " + username + " and password is" + password);
 });
 app.use(cookieParser());
 app.use(bodyParser());
 
-app.use(session({secret: 'topsecretsecret'}));
+// app.use(session({secret: 'topsecretsecret'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
