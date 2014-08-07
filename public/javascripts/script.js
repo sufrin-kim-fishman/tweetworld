@@ -1,4 +1,7 @@
 var server = io.connect('http://localhost:8080');
+server.on('error', function() {
+  server.socket.connect();
+});
 var countriesToShow = [];
 
 function insertTweet(tweet, country) {
@@ -38,12 +41,6 @@ function addNewCountry($country, country) {
     if(countriesToShow.indexOf(normalizedCountry) >= 0) {
       insertTweet(data, normalizedCountry);
     }
-  });
-})();
-
-(function alertListener() {
-  server.on('backupAlert', function(data) {
-    alert(data);
   });
 })();
 

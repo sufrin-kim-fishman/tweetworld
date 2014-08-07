@@ -11,23 +11,22 @@ var server = http.createServer(app);
 var io = socket.listen(server);
 
 var t = new twitter({
-    consumer_key: "k8Owe3iZwGMUgD1Dn64lTKN32",          
-    consumer_secret: "6HhPFD747pq9iXbHNoqCMclqGa1Ibd4IhvWC7h6bBY8h7hp762",       
-    access_token: "942399211-7J7mUWuEC1shJHXRnFvKyEFUJVhRh9aFfQd43BzB",      
-    access_token_secret: "EPXwymTXCdTWkMzcxlnVYsI0Gexxo4mB1505idQ40jb9k"
+    consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
+    consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
+    access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
+    access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
 });
-
+var stream = t.stream('statuses/sample');
 app.set('port', process.env.PORT || 8080);
 
 function setPage() {
-  app.all('/', function(request, response) {
+  app.get('/', function(request, response) {
     response.sendfile('views/index.html');
   });
 }
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
-    console.log('Connection is open...');
     catchError(client);
     streamTweets(client);
   });
@@ -40,19 +39,12 @@ function catchError(client) {
 }
 
 function streamTweets(client) {
-  var stream = t.stream('statuses/sample');
   stream.on('tweet', function(tweet) {
-    // var buffer_good = client.write(tweet);
-    if(!buffer_good) {sendAlert(client);}
     if (tweet.geo !== null) {
       console.log(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
-}
-
-function sendAlert(client) {
-  client.emit('backupAlert', 'BACKUP ERROR!');
 }
 
 function listenToServer() {
