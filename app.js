@@ -29,7 +29,7 @@ app.get('/sign_up_form', function(req, res) {
 app.post('/signup', function(req, res) {
   // var username = req.body.username;
   // var password = req.body.password;
-  console.log(req.body.username);
+  console.log(req.body);
   // console.log("Username is " + username + " and password is" + password);
 });
 app.use(cookieParser());
@@ -73,14 +73,9 @@ function catchError(client) {
 
 function streamTweets(client) {
   stream.on('tweet', function(tweet) {
-<<<<<<< HEAD
-    if (tweet.geo !== null) {
-      // console.log(tweet);
-=======
     if (tweet.place !== null) {
       console.log(tweet);
       insertIntoDatabase(tweet.place.country);
->>>>>>> a979890648c102c9920dc63699978228046e0b07
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
@@ -150,6 +145,3 @@ function insertIntoDatabase(tweet) {
     });
   });
 }
-
-
-
