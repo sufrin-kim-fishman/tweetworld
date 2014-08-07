@@ -15,16 +15,18 @@ function normalizeName(name) {
 
 function submitListener() {
   $("#submit").click(function(e) {
-      var country = normalizeName($("#country").val());
-      countriesToShow.push(country);
-      e.preventDefault();
+    var $country = $("#country").val();
+    var country = normalizeName($country);
+    countriesToShow.push(country);
+    addNewCountry($country, country);
+    e.preventDefault();
   });
 }
 
-function addNewCountry(data, country) {
+function addNewCountry($country, country) {
   if($("#" + country).length === 0) {
     var newCountry = "<div id='" + country + "'>" + 
-      "<h2>" + data.place.country + "</h2><ul></ul></div>"
+      "<h2>" + $country + "</h2><ul></ul></div>"
     $(".tweet_country_holder").append(newCountry);
   }
 }
@@ -34,17 +36,18 @@ function addNewCountry(data, country) {
     data = JSON.parse(data);
     var normalizedCountry = normalizeName(data.place.country);
     if(countriesToShow.indexOf(normalizedCountry) >= 0) {
-      addNewCountry(data, normalizedCountry);
       insertTweet(data, normalizedCountry);
     }
   });
-})()
+})();
+
 
 // (function alertListener() {
 //   server.on('backupAlert', function(data) {
 //     alert(data);
 //   });
 // })()
+
 
 $(function(){
   submitListener();

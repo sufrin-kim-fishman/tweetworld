@@ -27,6 +27,7 @@ function setPage() {
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
+    console.log('Connection is open...');
     catchError(client);
     streamTweets(client);
   });
@@ -41,18 +42,28 @@ function catchError(client) {
 function streamTweets(client) {
   var stream = t.stream('statuses/sample');
   stream.on('tweet', function(tweet) {
+
     console.log(tweet);
     // var buffer_good = client.write(tweet);
     // if(!buffer_good) {sendAlert(client);}
+
+
     if (tweet.geo !== null) {
+      console.log(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
+<<<<<<< HEAD
 // function sendAlert(client) {
 //   client.emit('backupAlert', 'BACKUP ERROR!')
 // }
+=======
+function sendAlert(client) {
+  client.emit('backupAlert', 'BACKUP ERROR!');
+}
+>>>>>>> 9345d12f2785840e60ab1e4fb1cb18c5d4e3851d
 
 function listenToServer() {
   server.listen(8080);
