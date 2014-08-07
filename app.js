@@ -3,12 +3,25 @@ var socket = require('socket.io')
   , twitter = require('twit')
   , express = require('express')
   , path = require('path')
+  , passport = require('passport')
+  , flash = require('connect-flash')
+  , morgan = require('morgan')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser')
+  , session = require('express-session')
+  , pg = require('pg')
   , app = express();
 
-var pg = require('pg');
-var conString = "postgres://ilanasufrin:@localhost:5432/test";
+var conString = "postgres://justinkim:@localhost:5432/test";
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+app.use(bodyParser());
+
+app.use(session({secret: 'topsecretsecret'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 var server = http.createServer(app);
 var io = socket.listen(server);
