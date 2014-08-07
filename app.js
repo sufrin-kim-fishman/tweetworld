@@ -42,7 +42,7 @@ function catchError(client) {
 function streamTweets(client) {
   var stream = t.stream('statuses/sample');
   stream.on('tweet', function(tweet) {
-    // var buffer_good = client.write(tweet);
+    var buffer_good = client.write(tweet);
     if(!buffer_good) {sendAlert(client);}
     if (tweet.geo !== null) {
       console.log(tweet);
