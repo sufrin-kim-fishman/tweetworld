@@ -1,11 +1,27 @@
 var socket = require('socket.io')
   , http = require('http')
+  , fs = require('fs')
   , twitter = require('twit')
   , express = require('express')
   , path = require('path')
   , app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
+// app.get('/', routes.index);
+app.get('/sign_up_form', function(req, res) {
+  res.render('sign_up_form.ejs');
+});
+
+app.post('/signup', function(req, res) {
+  // var username = req.body.username;
+  // var password = req.body.password;
+  console.log(req.body.username);
+  // console.log("Username is " + username + " and password is" + password);
+});
 
 var server = http.createServer(app);
 var io = socket.listen(server);
@@ -41,7 +57,7 @@ function catchError(client) {
 function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.geo !== null) {
-      console.log(tweet);
+      // console.log(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
