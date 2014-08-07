@@ -4,7 +4,17 @@ var socket = require('socket.io')
   , twitter = require('twit')
   , express = require('express')
   , path = require('path')
+  , passport = require('passport')
+  , flash = require('connect-flash')
+  , morgan = require('morgan')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser')
+  , session = require('express-session')
+  , pg = require('pg')
   , app = express();
+
+//configure this using your local postgres settings
+var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
@@ -22,6 +32,14 @@ app.post('/signup', function(req, res) {
   console.log(req.body.username);
   // console.log("Username is " + username + " and password is" + password);
 });
+app.use(cookieParser());
+app.use(bodyParser());
+
+app.use(session({secret: 'topsecretsecret'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+>>>>>>> a979890648c102c9920dc63699978228046e0b07
 
 var server = http.createServer(app);
 var io = socket.listen(server);
@@ -56,12 +74,24 @@ function catchError(client) {
 
 function streamTweets(client) {
   stream.on('tweet', function(tweet) {
+<<<<<<< HEAD
     if (tweet.geo !== null) {
       // console.log(tweet);
+=======
+    if (tweet.place !== null) {
+      console.log(tweet);
+      insertIntoDatabase(tweet.place.country);
+>>>>>>> a979890648c102c9920dc63699978228046e0b07
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
+
+
+// function sendAlert(client) {
+//   client.emit('backupAlert', 'BACKUP ERROR!')
+// }
+
 
 function listenToServer() {
   server.listen(8080);
@@ -72,3 +102,55 @@ function listenToServer() {
   openTweetConnection();
   listenToServer();
 })()
+
+
+// pg.connect(conString, function(err, client, done) {
+//   if(err) {
+//     return console.error('error fetching client from pool', err);
+//   }
+//   client.query('INSERT INTO tristans_test (code) VALUES ($1)', ['THIS IS FROM NODE!!!'], function(err, result) {
+  
+//     //call `done()` to release the client back to the pool
+//     done();
+
+//     if(err) {
+//       return console.error('error running query', err);
+//     }
+//     console.log(result);
+//     //output: 1
+//   });
+// });
+
+
+  //RUN THIS LOCALLY: create database "TweetWorld";
+function insertIntoDatabase(tweet) {
+  pg.connect(conString, function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+
+    client.query('CREATE TABLE IF NOT EXISTS countryNames ("id" SERIAL PRIMARY KEY, "name" varchar(200));', function(err, result) {
+      console.log("created table or using one that exists. good.");
+      //call `done()` to release the client back to the pool
+      done();
+
+      if(err) {
+        return console.error('problem creating table', err);
+      }
+    });
+
+    client.query("INSERT INTO countryNames (name) VALUES ('" + tweet + "');", function(err, result) {
+      //call `done()` to release the client back to the pool
+      done();
+
+      if(err) {
+        return console.error('problem inserting country name', err);
+      }
+      console.log(result);
+    //output: 1
+    });
+  });
+}
+
+
+
