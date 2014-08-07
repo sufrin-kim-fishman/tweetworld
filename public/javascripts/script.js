@@ -40,11 +40,11 @@ function addNewCountry(data, country) {
   });
 })()
 
-(function alertListener() {
-  server.on('backupAlert', function(data) {
-    alert(data);
-  });
-})()
+// (function alertListener() {
+//   server.on('backupAlert', function(data) {
+//     alert(data);
+//   });
+// })()
 
 $(function(){
   submitListener();

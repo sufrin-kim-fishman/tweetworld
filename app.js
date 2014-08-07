@@ -42,17 +42,17 @@ function streamTweets(client) {
   var stream = t.stream('statuses/sample');
   stream.on('tweet', function(tweet) {
     console.log(tweet);
-    var buffer_good = client.write(tweet);
-    if(!buffer_good) {sendAlert(client);}
+    // var buffer_good = client.write(tweet);
+    // if(!buffer_good) {sendAlert(client);}
     if (tweet.geo !== null) {
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
-function sendAlert(client) {
-  client.emit('backupAlert', 'BACKUP ERROR!')
-}
+// function sendAlert(client) {
+//   client.emit('backupAlert', 'BACKUP ERROR!')
+// }
 
 function listenToServer() {
   server.listen(8080);
