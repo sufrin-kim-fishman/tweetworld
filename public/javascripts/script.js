@@ -21,7 +21,6 @@ function submitListener() {
   $("#submit").click(function(e) {
       var country = normalizeName($("#country").val());
       countriesToShow.push(country);
-      console.log(countriesToShow);
       e.preventDefault();
   });
 }
@@ -30,7 +29,6 @@ function submitListener() {
   server.on('tweets', function(data) {
     data = JSON.parse(data);
     var normalizedCountry = normalizeName(data.place.country);
-    console.log(normalizedCountry);
     if(countriesToShow.indexOf(normalizedCountry) >= 0) {
       addNewCountry(data, normalizedCountry);
       insertTweet(data, normalizedCountry);

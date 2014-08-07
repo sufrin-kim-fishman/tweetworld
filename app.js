@@ -42,7 +42,6 @@ function streamTweets(client) {
   var stream = t.stream('statuses/sample');
   stream.on('tweet', function(tweet) {
     if (tweet.geo !== null) {
-      console.log(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
