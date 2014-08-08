@@ -47,6 +47,10 @@ app.get('/dashboard', function(req, res) {
   res.render('dashboard.ejs');
 });
 
+app.get('/map', function(req, res) {
+  res.render('map.ejs');
+});
+
 app.post('/login', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;

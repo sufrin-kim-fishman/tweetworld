@@ -1,4 +1,18 @@
 <html>
 <head>
-<title>Hello</title>
 <script src="javascripts/script.js"></script>
+<title>Hello</title>
+</head>
+<body>
+<h1>Hello</h1>
+<form id="country_form" method="post" action="http://localhost:8080">
+   <!--  Country: <input id="country" type="text"> -->
+      <select id="country">
+        <script src="javascripts/countries2.js"></script>
+      </select>
+      <input type="submit" value="Submit" id="submit">
+    </form>
+    
+    <div class="tweet_country_holder"></div>
+</body>
+</html>
