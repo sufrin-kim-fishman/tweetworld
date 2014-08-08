@@ -1,6 +1,6 @@
 module.exports = function(app, passport) {
   app.get('/', function(req, res) {
-    res.render('index.html');
+    res.render('index.ejs');
   });
 
   app.get('/login', function(req, res) {
@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
   });
 
   app.post('/login', passport.authenticate('login', {
-    successRedirect: '/profile',
+    successRedirect: '/dashboard',
     failureRedirect: '/login',
     failureFlash: true
   }));
@@ -18,7 +18,7 @@ module.exports = function(app, passport) {
   });
 
   app.post('/signup', passport.authenticate('signup', {
-    successRedirect: '/profile',
+    successRedirect: '/dashboard',
     failureRedirect: '/signup',
     failureFlash: true
   }));
@@ -37,6 +37,11 @@ module.exports = function(app, passport) {
     req.logout();
     res.redirect('/');
   });
+
+  app.get('/map', function(req, res) {
+    res.render('map.ejs');
+  });
+
 };
 
 function isLoggedIn(req, res, next) {
