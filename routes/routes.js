@@ -29,6 +29,10 @@ module.exports = function(app, passport) {
     });
   });
 
+  app.get('/map', function(req, res) {
+    res.render('map.ejs');
+  });
+
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');

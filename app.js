@@ -16,14 +16,11 @@ var socket = require('socket.io')
 
 
 //RUN THIS LOCALLY: create database "TweetWorld";
-<<<<<<< HEAD
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 //run this: 
 //npm install --save pg
 //npm install --save sequelize-cli
-
-
 
 
 app.use(function(req, res, next) {
@@ -112,6 +109,4 @@ function listenToServer() {
   openTweetConnection();
   listenToServer();
 })()
-
-
 
