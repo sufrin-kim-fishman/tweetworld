@@ -16,6 +16,7 @@
     "pg": "~3.4.0",
     "passport": "~0.2.0",
     "connect-flash": "~0.1.1",
-    "express-session": "~1.7.43"
+    "express-session": "~1.7.43",
+    "bcrypt-nodejs": "0.0.3"
   }
 }

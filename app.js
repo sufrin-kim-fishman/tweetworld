@@ -12,6 +12,9 @@ var socket = require('socket.io')
   , pg = require('pg')
   , app = express();
 
+require('./config/passport')(passport);
+require('./routes/routes.js')(app, passport);
+
 //configure this using your local postgres settings
 var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
@@ -64,12 +67,6 @@ function streamTweets(client) {
     }
   });
 }
-
-
-// function sendAlert(client) {
-//   client.emit('backupAlert', 'BACKUP ERROR!')
-// }
-
 
 function listenToServer() {
   server.listen(8080);
@@ -129,6 +126,3 @@ function insertIntoDatabase(tweet) {
     });
   });
 }
-
-
-

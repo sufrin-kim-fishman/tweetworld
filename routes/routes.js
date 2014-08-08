@@ -11,9 +11,17 @@ module.exports = function(app, passport) {
     res.render('signup.ejs', {message: req.flash('signupMessage')});
   });
 
-  // app.get('/profile', isLoggedIn, function(req, res) {
-  //   res.render('profile.ejs')
-  // });
+  app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/profile',
+    failureRedirect: '/signup',
+    failureFlash: true
+  }));
+
+  app.get('/dashboard', isLoggedIn, function(req, res) {
+    res.render('dashboard.ejs', {
+      user: req.user
+    });
+  });
 
   app.get('/logout', function(req, res) {
     req.logout();
