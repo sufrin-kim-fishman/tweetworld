@@ -1,19 +1,45 @@
 var socket = require('socket.io')
   , http = require('http')
+  , fs = require('fs')
   , twitter = require('twit')
+  , flash = require('connect-flash')
   , express = require('express')
   , path = require('path')
+  , passport = require('passport')
+  , morgan = require('morgan')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser')
+  , session = require('express-session')
+  , pg = require('pg')
   , app = express();
 
-var pg = require('pg');
 //configure this using your local postgres settings
+<<<<<<< HEAD
 //RUN THIS LOCALLY: create database "TweetWorld";
 var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 
 
+=======
+var conString = "postgres://justinkim:@localhost:5432/TweetWorld";
+>>>>>>> d5cae83c0dcbdb29d815c25cab7c57d5a79dc41b
 
+app.use(session({secret: 'topsecretsecret',
+                saveUninitialized: true,
+                resave: true,
+                cookie: {maxAge: 6000}}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+require('./config/passport')(passport);
+require('./routes/routes.js')(app, passport);
 
 var server = http.createServer(app);
 var io = socket.listen(server);
@@ -56,12 +82,6 @@ function streamTweets(client) {
   });
 }
 
-
-// function sendAlert(client) {
-//   client.emit('backupAlert', 'BACKUP ERROR!')
-// }
-
-
 function listenToServer() {
   server.listen(8080);
 }
@@ -72,9 +92,12 @@ function listenToServer() {
   listenToServer();
 })()
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> d5cae83c0dcbdb29d815c25cab7c57d5a79dc41b
   //RUN THIS LOCALLY: create database "TweetWorld";
 function doDatabaseThings(tweet) {
  createTable();
@@ -116,6 +139,7 @@ function insertRecord(tweet) {
     //output: 1
     });
   });
+<<<<<<< HEAD
 }
 
 function findRowName(name) {
@@ -146,3 +170,6 @@ function findRowName(name) {
 
 
 
+=======
+}
+>>>>>>> d5cae83c0dcbdb29d815c25cab7c57d5a79dc41b

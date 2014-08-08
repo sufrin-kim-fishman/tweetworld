@@ -13,6 +13,11 @@
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
     "jade": "~1.3.0",
-    "pg": "~9.3.5"
+    "ejs": "*",
+    "pg": "~3.4.0",
+    "passport": "~0.2.0",
+    "connect-flash": "~0.1.1",
+    "express-session": "~1.7.4",
+    "bcrypt-nodejs": "0.0.3"
   }
 }
