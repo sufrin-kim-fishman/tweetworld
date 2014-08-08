@@ -108,5 +108,5 @@ function listenToServer() {
 (function() {
   openTweetConnection();
   listenToServer();
-})()
+})();
 
