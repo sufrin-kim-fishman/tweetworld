@@ -126,3 +126,29 @@ function insertRecord(tweet) {
     });
   });
 }
+
+function findRowName(name) {
+  pg.connect(conString, function(err, client, done) {
+    if(err) {
+      return console.error('problems connecting', err);
+    }
+
+
+    client.query("SELECT * from countryNames where name = '" + name + "';", function(err, result) {
+      //call `done()` to release the client back to the pool
+      console.log("THIS IS WHAT GETS RETURNED: " + result);
+      if(result == false) {
+        insertRecord(tweet);
+      }
+      done();
+
+      if(err) {
+        return console.error('problem finding country name', err);
+      }
+      console.log(result);
+
+      //true or false here
+      
+   });
+  });
+}
