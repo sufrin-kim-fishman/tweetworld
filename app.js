@@ -12,6 +12,7 @@ var socket = require('socket.io')
   , session = require('express-session')
   , pg = require('pg')
   , app = express()
+  , port = process.env.PORT || 8080
   , db   = require('./models');
 
 
@@ -30,7 +31,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
                 resave: true,
@@ -45,7 +45,6 @@ app.use(bodyParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
  db
   .sequelize
@@ -62,10 +61,9 @@ app.use(flash());
   })
 
 
+require('./config/passport')(passport);
+require('./routes/routes.js')(app, passport);
 
-
-require('config/passport')(passport);
-require('routes/routes.js')(app, passport);
 
 var server = http.createServer(app);
 var io = socket.listen(server);
@@ -95,18 +93,16 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-    //  doDatabaseThings(tweet.place.country);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
 function listenToServer() {
-  server.listen(8080);
+  server.listen(port);
 }
 
 (function() {
   openTweetConnection();
   listenToServer();
 })()
-
