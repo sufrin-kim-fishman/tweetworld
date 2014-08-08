@@ -14,6 +14,7 @@ var socket = require('socket.io')
   , app = express();
 
 //configure this using your local postgres settings
+
 //RUN THIS LOCALLY: create database "TweetWorld";
 var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
@@ -35,6 +36,7 @@ var Sequelize = require('sequelize')
       console.log('Connection has been established successfully.')
     }
   })
+
 
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
@@ -172,7 +174,8 @@ function findRowName(name) {
       
    });
   });
-}
 
 }
+
+
 
