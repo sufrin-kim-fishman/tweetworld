@@ -11,7 +11,8 @@ var socket = require('socket.io')
   , bodyParser = require('body-parser')
   , session = require('express-session')
   , pg = require('pg')
-  , app = express();
+  , app = express()
+  , db      = require('./models');
 
 //configure this using your local postgres settings
 
@@ -21,19 +22,20 @@ var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 //run this: 
 //npm install --save pg
-var Sequelize = require('sequelize')
-  , sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "" {
-      dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-      port:    5432, // or 3306 for any other SQL database
-    })
+//npm install --save sequelize-cli
+//configure this using your local postgres settings
 
-  sequelize
+ db
+  .sequelize
   .authenticate()
+  .sync({ force: true })
   .complete(function(err) {
-    if (!!err) {
-      console.log('Unable to connect to the database:', err)
+    if (err) {
+      throw err[0]
     } else {
-      console.log('Connection has been established successfully.')
+      http.createServer(app).listen(app.get('port'), function(){
+        console.log('Express server listening on port ' + app.get('port'))
+      })
     }
   })
 
@@ -90,7 +92,7 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-      doDatabaseThings(tweet.place.country);
+    //  doDatabaseThings(tweet.place.country);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
@@ -107,75 +109,75 @@ function listenToServer() {
 })()
 
 
-  //RUN THIS LOCALLY: create database "TweetWorld";
-function doDatabaseThings(tweet) {
- createTable();
- findRowName(tweet);
-}
+//   //RUN THIS LOCALLY: create database "TweetWorld";
+// function doDatabaseThings(tweet) {
+//  createTable();
+//  findRowName(tweet);
+// }
 
-function createTable() {
-   pg.connect(conString, function(err, client, done) {
-    if(err) {
-      return console.error('error fetching client from pool', err);
-    }
+// function createTable() {
+//    pg.connect(conString, function(err, client, done) {
+//     if(err) {
+//       return console.error('error fetching client from pool', err);
+//     }
 
-    client.query('CREATE TABLE IF NOT EXISTS countryNames ("id" SERIAL PRIMARY KEY, "name" varchar(200));', function(err, result) {
-      console.log("created table or using one that exists. good.");
-      //call `done()` to release the client back to the pool
-      done();
+//     client.query('CREATE TABLE IF NOT EXISTS countryNames ("id" SERIAL PRIMARY KEY, "name" varchar(200));', function(err, result) {
+//       console.log("created table or using one that exists. good.");
+//       //call `done()` to release the client back to the pool
+//       done();
 
-      if(err) {
-        return console.error('problem creating table', err);
-      }
-    });
-  });
-}
+//       if(err) {
+//         return console.error('problem creating table', err);
+//       }
+//     });
+//   });
+// }
 
-function insertRecord(tweet) {
-   pg.connect(conString, function(err, client, done) {
-    if(err) {
-      return console.error('error fetching client from pool', err);
-    }
+// function insertRecord(tweet) {
+//    pg.connect(conString, function(err, client, done) {
+//     if(err) {
+//       return console.error('error fetching client from pool', err);
+//     }
 
-    client.query("INSERT INTO countryNames (name) VALUES ('" + tweet + "');", function(err, result) {
-      //call `done()` to release the client back to the pool
-      done();
+//     client.query("INSERT INTO countryNames (name) VALUES ('" + tweet + "');", function(err, result) {
+//       //call `done()` to release the client back to the pool
+//       done();
 
-      if(err) {
-        return console.error('problem inserting country name', err);
-      }
-      console.log(result);
-    //output: 1
-    });
-  });
-}
+//       if(err) {
+//         return console.error('problem inserting country name', err);
+//       }
+//       console.log(result);
+//     //output: 1
+//     });
+//   });
+// }
 
-function findRowName(name) {
-  pg.connect(conString, function(err, client, done) {
-    if(err) {
-      return console.error('problems connecting', err);
-    }
+// function findRowName(name) {
+//   pg.connect(conString, function(err, client, done) {
+//     if(err) {
+//       return console.error('problems connecting', err);
+//     }
 
 
-    client.query("SELECT * from countryNames where name = '" + name + "';", function(err, result) {
-      //call `done()` to release the client back to the pool
-      console.log("THIS IS WHAT GETS RETURNED: " + result);
-      if(result == false) {
-        insertRecord(tweet);
-      }
-      done();
+//     client.query("SELECT * from countryNames where name = '" + name + "';", function(err, result) {
+//       //call `done()` to release the client back to the pool
+//       console.log("THIS IS WHAT GETS RETURNED: " + result);
+//       if(result == false) {
+//         insertRecord(tweet);
+//       }
+//       done();
 
-      if(err) {
-        return console.error('problem finding country name', err);
-      }
-      console.log(result);
+//       if(err) {
+//         return console.error('problem finding country name', err);
+//       }
+//       console.log(result);
 
-      //true or false here
+//       //true or false here
       
-   });
-  });
+//    });
+//   });
 
-}
+// }
 
 
 
