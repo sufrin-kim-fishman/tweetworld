@@ -12,6 +12,7 @@ var socket = require('socket.io')
   , session = require('express-session')
   , pg = require('pg')
   , app = express()
+  , port = process.env.PORT || 8080
   , db   = require('./models');
 
 
@@ -30,7 +31,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
                 resave: true,
@@ -44,7 +44,6 @@ app.use(bodyParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
  db
   .sequelize
@@ -60,9 +59,6 @@ app.use(flash());
     }
   })
 
-
-
-
 require('./config/passport')(passport);
 require('./routes/routes.js')(app, passport);
 
@@ -76,9 +72,6 @@ var t = new twitter({
     access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
 });
 var stream = t.stream('statuses/sample');
-
-app.set('port', process.env.PORT || 9000);
-
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
@@ -97,18 +90,16 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-    //  doDatabaseThings(tweet.place.country);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
 function listenToServer() {
-  server.listen(8080);
+  server.listen(port);
 }
 
 (function() {
   openTweetConnection();
   listenToServer();
 })()
-
