@@ -13,8 +13,8 @@ var socket = require('socket.io')
   , pg = require('pg')
   , app = express();
 
-require('./config/passport')(passport);
-require('./routes/routes.js')(app, passport);
+// require('./config/passport')(passport);
+// require('./routes/routes.js')(app, passport);
 
 //configure this using your local postgres settings
 var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
