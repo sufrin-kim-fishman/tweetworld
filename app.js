@@ -22,6 +22,8 @@ var socket = require('socket.io')
 //npm install --save pg
 //npm install --save sequelize-cli
 
+//now go into models/index.js and change your database settings from ilanasufrin to yours
+
 
 app.use(function(req, res, next) {
   res.locals.login = req.isAuthenticated();
