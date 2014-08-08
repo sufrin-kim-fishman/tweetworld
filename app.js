@@ -104,7 +104,7 @@ function streamTweets(client) {
 }
 
 function listenToServer() {
-  server.listen(8080);
+  server.listen(9000);
 }
 
 (function() {
