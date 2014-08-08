@@ -15,7 +15,6 @@ var socket = require('socket.io')
   , port = process.env.PORT || 8080
   , db   = require('./models');
 
-
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
@@ -24,7 +23,6 @@ var socket = require('socket.io')
 //npm install --save sequelize-cli
 
 //now go into models/index.js and change your database settings from ilanasufrin to yours
-
 
 app.use(function(req, res, next) {
   res.locals.login = req.isAuthenticated();
@@ -60,10 +58,8 @@ app.use(flash());
     }
   })
 
-
 require('./config/passport')(passport);
 require('./routes/routes.js')(app, passport);
-
 
 var server = http.createServer(app);
 var io = socket.listen(server);

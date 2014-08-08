@@ -1,20 +1,20 @@
 {
   "development": {
-    "username": "ilanasufrin",
+    "username": "justinkim",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "ilanasufrin",
+    "username": "justinkim",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "ilanasufrin",
+    "username": "justinkim",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
