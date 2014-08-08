@@ -1,5 +1,6 @@
 var socket = require('socket.io')
   , http = require('http')
+  , fs = require('fs')
   , twitter = require('twit')
   , express = require('express')
   , path = require('path')
@@ -19,10 +20,38 @@ require('./routes/routes.js')(app, passport);
 var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(bodyParser());
 
-app.use(session({secret: 'topsecretsecret'}));
+// app.get('/', routes.index);
+app.get('/sign_up_form', function(req, res) {
+  res.render('sign_up_form.ejs');
+});
+
+app.post('/signup', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  console.log(req.body.username);
+  console.log(req.body.password);
+  console.log("Username is " + username + " and password is" + password);
+});
+
+app.get('/login_form', function(req, res) {
+  res.render('login_form.ejs');
+});
+
+app.post('/login', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  console.log(req.body.username);
+  console.log(req.body.password);
+  console.log("Username is " + username + " and password is" + password);
+});
+
+// app.use(session({secret: 'topsecretsecret'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
