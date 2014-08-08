@@ -16,6 +16,7 @@ var socket = require('socket.io')
 
 
 //RUN THIS LOCALLY: create database "TweetWorld";
+<<<<<<< HEAD
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 //run this: 
@@ -76,7 +77,9 @@ var t = new twitter({
     access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
 });
 var stream = t.stream('statuses/sample');
+
 app.set('port', process.env.PORT || 9000);
+
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
@@ -108,9 +111,7 @@ function listenToServer() {
 (function() {
   openTweetConnection();
   listenToServer();
-<<<<<<< HEAD
 })()
-
 
 
 
