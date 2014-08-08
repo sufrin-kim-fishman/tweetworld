@@ -13,6 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
  
+
+
   function generateHash(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
   };

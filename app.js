@@ -12,8 +12,8 @@ var socket = require('socket.io')
   , session = require('express-session')
   , pg = require('pg')
   , app = express()
+  , port = process.env.PORT || 8080
   , db   = require('./models');
-
 
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
@@ -22,12 +22,12 @@ var socket = require('socket.io')
 //npm install --save pg
 //npm install --save sequelize-cli
 
+//now go into models/index.js and change your database settings from ilanasufrin to yours
 
 app.use(function(req, res, next) {
   res.locals.login = req.isAuthenticated();
   next();
 });
-
 
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
@@ -36,13 +36,13 @@ app.use(session({secret: 'topsecretsecret',
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+//app.set('port', process.env.PORT || 8080);
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
  db
   .sequelize
@@ -58,9 +58,6 @@ app.use(flash());
     }
   })
 
-
-
-
 require('./config/passport')(passport);
 require('./routes/routes.js')(app, passport);
 
@@ -74,9 +71,6 @@ var t = new twitter({
     access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
 });
 var stream = t.stream('statuses/sample');
-
-app.set('port', process.env.PORT || 9000);
-
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
@@ -95,18 +89,16 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-    //  doDatabaseThings(tweet.place.country);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
 function listenToServer() {
-  server.listen(8080);
+  server.listen(port);
 }
 
 (function() {
   openTweetConnection();
   listenToServer();
 })();
-
