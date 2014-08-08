@@ -23,6 +23,15 @@
     </script>
   </head>
   <body>
+    <header>
+    <a href="/map" class="btn btn-default btn-sm">Map</a>
+    <% if (login) { %>
+      <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
+    <% } else { %>
+      <a href="/login" class="btn btn-default btn-sm">Log In</a>
+      <a href="/signup" class="btn btn-default btn-sm">Sign Up</a>
+    <% } %>
+    </header>
     <div id="map-canvas"/>
   </body>
 </html>

@@ -16,27 +16,30 @@ var socket = require('socket.io')
 //configure this using your local postgres settings
 
 //RUN THIS LOCALLY: create database "TweetWorld";
-var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
+// var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
+// //run this: 
+// //npm install --save pg
+// var Sequelize = require('sequelize')
+//   , sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
+//       dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
+//       port:    5432, // or 3306 for any other SQL database
+//     })
 
-//run this: 
-//npm install --save pg
-var Sequelize = require('sequelize')
-  , sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "" {
-      dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-      port:    5432, // or 3306 for any other SQL database
-    })
+//   sequelize
+//   .authenticate()
+//   .complete(function(err) {
+//     if (!!err) {
+//       console.log('Unable to connect to the database:', err)
+//     } else {
+//       console.log('Connection has been established successfully.')
+//     }
+//   })
 
-  sequelize
-  .authenticate()
-  .complete(function(err) {
-    if (!!err) {
-      console.log('Unable to connect to the database:', err)
-    } else {
-      console.log('Connection has been established successfully.')
-    }
-  })
-
+app.use(function(req, res, next) {
+  res.locals.login = req.isAuthenticated();
+  next();
+});
 
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
@@ -59,19 +62,13 @@ var server = http.createServer(app);
 var io = socket.listen(server);
 
 var t = new twitter({
-    consumer_key: "N3wxjYdnjaq8OjmlyeAnQ0uiX",          
-    consumer_secret: "C2Y71NQyrFBCbGHhkSFPqHE9penIacIvB1DUgrk7jAkUW8qpmM",       
-    access_token: "316015598-IciiwWwpx7tf0HaslKVu2SL5otrONTzZOJwG0TnR",      
-    access_token_secret: "9Ju0fDyFZ2ksMf9YTwDJlO7csqyecrBs3pwtBclQqyjOg"
+    consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
+    consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
+    access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
+    access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
 });
 var stream = t.stream('statuses/sample');
 app.set('port', process.env.PORT || 8080);
-
-function setPage() {
-  app.get('/', function(request, response) {
-    response.sendfile('views/index.html');
-  });
-}
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
@@ -90,7 +87,6 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-      doDatabaseThings(tweet.place.country);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
@@ -101,7 +97,6 @@ function listenToServer() {
 }
 
 (function() {
-  setPage();
   openTweetConnection();
   listenToServer();
 })()

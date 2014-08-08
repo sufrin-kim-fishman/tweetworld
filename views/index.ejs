@@ -1,0 +1,32 @@
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <title>TEST 2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/script.js"></script>
+    <script src="routes/routes.js"></script>
+  </head>
+  <body>
+    <header>
+    <a href="/map" class="btn btn-default btn-sm">Map</a>
+    <% if (login) { %>
+      <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
+    <% } else { %>
+      <a href="/login" class="btn btn-default btn-sm">Log In</a>
+      <a href="/signup" class="btn btn-default btn-sm">Sign Up</a>
+    <% } %>
+    </header>
+
+    <form id="country_form" method="post" action="http://localhost:8080">
+      <select id="country">
+        <script src="javascripts/countries2.js"></script>
+      </select>
+      <input type="submit" value="Submit" id="submit">
+    </form>
+    
+    <div class="tweet_country_holder"></div>
+
+  </body>
+</html>

@@ -1,6 +1,6 @@
 module.exports = function(app, passport) {
   app.get('/', function(req, res) {
-    res.render('index.html');
+    res.render('index.ejs');
   });
 
   app.get('/login', function(req, res) {
@@ -37,6 +37,7 @@ module.exports = function(app, passport) {
   app.get('/map', function(req, res) {
     res.render('map.ejs');
   });
+
 };
 
 function isLoggedIn(req, res, next) {
