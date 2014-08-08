@@ -14,8 +14,7 @@ var socket = require('socket.io')
   , app = express();
 
 //configure this using your local postgres settings
-//RUN THIS LOCALLY: create database "TweetWorld";
-var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
+var conString = "postgres://justinkim:@localhost:5432/TweetWorld";
 
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
@@ -127,3 +126,32 @@ function insertRecord(tweet) {
     });
   });
 }
+<<<<<<< HEAD
+=======
+
+function findRowName(name) {
+  pg.connect(conString, function(err, client, done) {
+    if(err) {
+      return console.error('problems connecting', err);
+    }
+
+
+    client.query("SELECT * from countryNames where name = '" + name + "';", function(err, result) {
+      //call `done()` to release the client back to the pool
+      console.log("THIS IS WHAT GETS RETURNED: " + result);
+      if(result == false) {
+        insertRecord(tweet);
+      }
+      done();
+
+      if(err) {
+        return console.error('problem finding country name', err);
+      }
+      console.log(result);
+
+      //true or false here
+      
+   });
+  });
+}
+>>>>>>> 561418b63d77203e23e6bf1c2db1e5dfdc70fef6
