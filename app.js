@@ -43,6 +43,10 @@ app.get('/login_form', function(req, res) {
   res.render('login_form.ejs');
 });
 
+app.get('/dashboard', function(req, res) {
+  res.render('dashboard.ejs');
+});
+
 app.post('/login', function(req, res) {
   var username = req.body.username;
   var password = req.body.password;
