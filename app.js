@@ -12,32 +12,19 @@ var socket = require('socket.io')
   , session = require('express-session')
   , pg = require('pg')
   , app = express()
-  , db      = require('./models');
+  , db   = require('./models');
 
 //configure this using your local postgres settings
 
 //RUN THIS LOCALLY: create database "TweetWorld";
-var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
-
+//var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 //run this: 
 //npm install --save pg
 //npm install --save sequelize-cli
 //configure this using your local postgres settings
 
- db
-  .sequelize
-  .authenticate()
-  .sync({ force: true })
-  .complete(function(err) {
-    if (err) {
-      throw err[0]
-    } else {
-      http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on port ' + app.get('port'))
-      })
-    }
-  })
+
 
 
 app.use(session({secret: 'topsecretsecret',
@@ -54,6 +41,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+ db
+  .sequelize
+  .authenticate()
+//  .sync({ force: true })
+  .complete(function(err) {
+    if (err) {
+      throw err[0]
+    } else {
+      http.createServer(app).listen(app.get('port'), function(){
+        console.log('Express server listening on port ' + app.get('port'))
+      })
+    }
+  })
+
+
+
+
 require('./config/passport')(passport);
 require('./routes/routes.js')(app, passport);
 
@@ -67,7 +72,7 @@ var t = new twitter({
     access_token_secret: "9Ju0fDyFZ2ksMf9YTwDJlO7csqyecrBs3pwtBclQqyjOg"
 });
 var stream = t.stream('statuses/sample');
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 9000);
 
 function setPage() {
   app.get('/', function(request, response) {

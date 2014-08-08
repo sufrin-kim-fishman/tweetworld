@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Task = sequelize.define('Country', {
+  var Country = sequelize.define('Country', {
     name: DataTypes.STRING
   }, {
     classMethods: {
@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
         Country.hasMany(models.User)
       }
     }
-  })
+  });
  
-  return Task
-}
+  return Country;
+};
