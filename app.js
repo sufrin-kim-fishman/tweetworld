@@ -14,7 +14,29 @@ var socket = require('socket.io')
   , app = express();
 
 //configure this using your local postgres settings
-var conString = "postgres://justinkim:@localhost:5432/TweetWorld";
+
+//RUN THIS LOCALLY: create database "TweetWorld";
+var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
+
+
+//run this: 
+//npm install --save pg
+var Sequelize = require('sequelize')
+  , sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "" {
+      dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
+      port:    5432, // or 3306 for any other SQL database
+    })
+
+  sequelize
+  .authenticate()
+  .complete(function(err) {
+    if (!!err) {
+      console.log('Unable to connect to the database:', err)
+    } else {
+      console.log('Connection has been established successfully.')
+    }
+  })
+
 
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
@@ -84,6 +106,7 @@ function listenToServer() {
   listenToServer();
 })()
 
+
   //RUN THIS LOCALLY: create database "TweetWorld";
 function doDatabaseThings(tweet) {
  createTable();
@@ -151,4 +174,6 @@ function findRowName(name) {
       
    });
   });
+}
+
 }
