@@ -20,23 +20,30 @@ module.exports = function(passport) {
   },
   function(req, username, password, done) {
     process.nextTick(function() {
-      user.findOne({'username': username}, function(err, user) {
+      user.find({'username': username}, function(err, user) {
         if (err) return done(err);
         if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
-          var newUser = new User();
-          newUser.username = username;
-          newUser.password = newUser.generateHash(password);
-
-          newUser.save(function(err) {
-            if(err) throw err;
-            return done(null, newUser);
+          var newUser = User.build( {
+              newUser.username: username,
+              newUser.password: newUser.generateHash(password)
+            });
+        
+          newUser.save();
+          newUser.complete(function(err) {
+            if(err) {
+              throw err;
+              console.log('The instance has not been saved:', err)
+            }
+            console.log('We have a persisted instance now')
           });
         }
       });
     })
   }));
+
+
 
   passport.use('login', new LocalStrategy({
     usernameField: 'username',
@@ -44,7 +51,7 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
     function(req, username, password, done) {
-      user.findOne({'username': username}, function(err, user) {
+      user.find({'username': username}, function(err, user) {
         if (err) return done(err);
         if (!user || !user.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
