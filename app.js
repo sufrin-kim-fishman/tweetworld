@@ -2,10 +2,10 @@ var socket = require('socket.io')
   , http = require('http')
   , fs = require('fs')
   , twitter = require('twit')
+  , flash = require('connect-flash')
   , express = require('express')
   , path = require('path')
   , passport = require('passport')
-  , flash = require('connect-flash')
   , morgan = require('morgan')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser')
@@ -13,56 +13,25 @@ var socket = require('socket.io')
   , pg = require('pg')
   , app = express();
 
-// require('./config/passport')(passport);
-// require('./routes/routes.js')(app, passport);
-
 //configure this using your local postgres settings
-var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
+var conString = "postgres://justinkim:@localhost:5432/TweetWorld";
 
+app.use(session({secret: 'topsecretsecret',
+                saveUninitialized: true,
+                resave: true,
+                cookie: {maxAge: 6000}}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(bodyParser());
-
-// app.get('/', routes.index);
-app.get('/sign_up_form', function(req, res) {
-  res.render('sign_up_form.ejs');
-});
-
-app.post('/signup', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  console.log(req.body.username);
-  console.log(req.body.password);
-  console.log("Username is " + username + " and password is" + password);
-});
-
-app.get('/login_form', function(req, res) {
-  res.render('login_form.ejs');
-});
-
-app.get('/dashboard', function(req, res) {
-  res.render('dashboard.ejs');
-});
-
-app.get('/map', function(req, res) {
-  res.render('map.ejs');
-});
-
-app.post('/login', function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
-  console.log(req.body.username);
-  console.log(req.body.password);
-  console.log("Username is " + username + " and password is" + password);
-});
-
-// app.use(session({secret: 'topsecretsecret'}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+require('./config/passport')(passport);
+require('./routes/routes.js')(app, passport);
 
 var server = http.createServer(app);
 var io = socket.listen(server);
@@ -114,25 +83,6 @@ function listenToServer() {
   openTweetConnection();
   listenToServer();
 })()
-
-
-// pg.connect(conString, function(err, client, done) {
-//   if(err) {
-//     return console.error('error fetching client from pool', err);
-//   }
-//   client.query('INSERT INTO tristans_test (code) VALUES ($1)', ['THIS IS FROM NODE!!!'], function(err, result) {
-  
-//     //call `done()` to release the client back to the pool
-//     done();
-
-//     if(err) {
-//       return console.error('error running query', err);
-//     }
-//     console.log(result);
-//     //output: 1
-//   });
-// });
-
 
   //RUN THIS LOCALLY: create database "TweetWorld";
 function insertIntoDatabase(tweet) {

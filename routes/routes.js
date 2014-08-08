@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
     res.render('login.ejs', {message: req.flash('loginMessage')});
   });
 
-  app.post('/login', passport.authentication('login', {
+  app.post('/login', passport.authenticate('login', {
     successRedirect: '/profile',
     failureRedirect: '/login',
     failureFlash: true
