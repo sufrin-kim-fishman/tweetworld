@@ -25,7 +25,7 @@ var t = new twitter({
     access_token_secret: "9Ju0fDyFZ2ksMf9YTwDJlO7csqyecrBs3pwtBclQqyjOg"
 });
 var stream = t.stream('statuses/sample');
-app.set('port', process.env.PORT || 8181);
+app.set('port', process.env.PORT || 8080);
 
 function setPage() {
   app.get('/', function(request, response) {
@@ -63,7 +63,7 @@ function streamTweets(client) {
 
 
 function listenToServer() {
-  server.listen(8181);
+  server.listen(8080);
 }
 
 (function() {

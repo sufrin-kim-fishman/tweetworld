@@ -1,4 +1,4 @@
-var server = io.connect('http://localhost:8181');
+var server = io.connect('http://localhost:8080');
 server.on('error', function() {
   server.socket.connect();
 });
