@@ -126,8 +126,6 @@ function insertRecord(tweet) {
     });
   });
 }
-<<<<<<< HEAD
-=======
 
 function findRowName(name) {
   pg.connect(conString, function(err, client, done) {
@@ -154,4 +152,3 @@ function findRowName(name) {
    });
   });
 }
->>>>>>> 561418b63d77203e23e6bf1c2db1e5dfdc70fef6
