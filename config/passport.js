@@ -28,9 +28,8 @@ module.exports = function(passport) {
     process.nextTick(function() {
       User.find({where: { 'username': username} })
       .complete(function(err, user) {
-        console.log(User);
         if (err) return done(err);
-        if (err) {
+        if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
           var newUser = User.build( {
