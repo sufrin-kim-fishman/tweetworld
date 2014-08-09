@@ -1,5 +1,11 @@
 var LocalStrategy = require('passport-local').Strategy;
-var user = require('../models/user');
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
+    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
+    port:    5432, // or 3306 for any other SQL database
+  });
+var user = sequelize.import(__dirname + "/../models/user.js");
+
 
 module.exports = function(passport) {
 
@@ -20,16 +26,16 @@ module.exports = function(passport) {
   },
   function(req, username, password, done) {
     process.nextTick(function() {
-      user.find({where: { username: 'username'} }) 
-      user.complete(function(err, user) {
+      user.find({where: { username: 'username'} })
+      .complete(function(err, user) {
         if (err) return done(err);
         if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
-          var newUser = User.build( {
+          var newUser = user.build( {
               username: username,
-              password: newUser.generateHash(password)
-            })
+              password: this.generateHash(password)
+            });
           //let's get the syntax right because it's wrong
           newUser.save();
           newUser.complete(function(err) {
