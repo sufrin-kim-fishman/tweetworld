@@ -1,5 +1,11 @@
 var LocalStrategy = require('passport-local').Strategy;
-var user = require('../models/user');
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
+    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
+    port:    5432, // or 3306 for any other SQL database
+  });
+var User = sequelize.import(__dirname + "/../models/user.js");
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport) {
 
@@ -20,19 +26,20 @@ module.exports = function(passport) {
   },
   function(req, username, password, done) {
     process.nextTick(function() {
-      user.find({where: { username: 'username'} }) 
-      user.complete(function(err, user) {
+      User.find({where: { 'username': username} })
+      .complete(function(err, user) {
+        console.log(User);
         if (err) return done(err);
-        if (user) {
+        if (err) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
           var newUser = User.build( {
               username: username,
-              password: newUser.generateHash(password)
-            })
+              password: generateHash(password)
+            });
           //let's get the syntax right because it's wrong
-          newUser.save();
-          newUser.complete(function(err) {
+          newUser.save()
+          .complete(function(err) {
             if(err) {
               throw err;
               console.log('The instance has not been saved:', err)
@@ -44,20 +51,22 @@ module.exports = function(passport) {
     })
   }));
 
-
-
   passport.use('login', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true
   },
     function(req, username, password, done) {
-      user.find({'username': username}, function(err, user) {
+      User.find({'username': username}, function(err, user) {
         if (err) return done(err);
-        if (!user || !user.validPassword(password))
+        if (!user || !User.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
   }))
 
 };
+
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
