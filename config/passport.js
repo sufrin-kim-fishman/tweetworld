@@ -56,14 +56,15 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
     function(req, username, password, done) {
-      User.find({'username': username}, function(err, user) {
+      User.find({where: {'username': username}})
+      .complete(function(err, user) {
+        console.log(user);
         if (err) return done(err);
         if (!user || !User.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
-  }))
-
+    }))
 };
 
 function generateHash(password) {
