@@ -4,6 +4,11 @@
 </header>
 
 <h1>Log In!</h1>
+
+<% if(message.length > 0) { %>
+  <div><%= message %></div>
+<% } %>
+
 <form name="login_form" id="login_form" method="post" action="/login">
       Username: <input type="text" name="username"><br>
       Password: <input type="password" name="password"><br>

@@ -62,7 +62,7 @@ module.exports = function(passport) {
       User.find({where: {'username': username}})
       .complete(function(err, user) {
         if (err) return done(err);
-        if (!user || !User.validPassword(password))
+        if (!user || !user.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
