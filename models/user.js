@@ -1,4 +1,4 @@
-var bycrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt-nodejs');
 
 //got this from the docs
 module.exports = function(sequelize, DataTypes) {
@@ -10,9 +10,12 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.hasMany(models.Country)
       }
+    },
+    getterMethods: {  
+      validPassword: function(password) { return bcrypt.compareSync(password, this.password);}
     }
   });
-  User.validPassword = function(password) { return bcrypt.compareSync(password, this.password);};
-  User.generateHash = function(password) { return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);};
+  // User.validPassword = function(password) { return bcrypt.compareSync(password, this.password);};
+  // User.generateHash = function(password) { return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);};
   return User;
 };

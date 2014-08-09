@@ -1,11 +1,11 @@
 var LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
+var sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
     dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
     port:    5432, // or 3306 for any other SQL database
   });
 var user = sequelize.import(__dirname + "/../models/user.js");
-
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport) {
 
@@ -32,9 +32,10 @@ module.exports = function(passport) {
         if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
+          debugger;
           var newUser = user.build( {
               username: username,
-              password: this.generateHash(password)
+              password: generateHash(password)
             });
           //let's get the syntax right because it's wrong
           newUser.save();
@@ -49,8 +50,6 @@ module.exports = function(passport) {
       });
     })
   }));
-
-
 
   passport.use('login', new LocalStrategy({
     usernameField: 'username',
@@ -67,3 +66,7 @@ module.exports = function(passport) {
   }))
 
 };
+
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
