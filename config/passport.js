@@ -14,7 +14,8 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(id, done) {
-    user.findById(id, function(err, user) {
+    User.find({where: {'id': id}})
+    .complete(function(err, user) {
       done(err, user);
     });
   });
@@ -24,13 +25,12 @@ module.exports = function(passport) {
     passwordField: 'password',
     passReqToCallback: true
   },
-  function(req, username, password, done) {
-    process.nextTick(function() {
-      User.find({where: { 'username': username} })
-      .complete(function(err, user) {
-        console.log(User);
+    function(req, username, password, done) {
+      process.nextTick(function() {
+        User.find({where: { 'username': username} })
+        .complete(function(err, user) {
         if (err) return done(err);
-        if (err) {
+        if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
           var newUser = User.build( {
@@ -38,17 +38,19 @@ module.exports = function(passport) {
               password: generateHash(password)
             });
           //let's get the syntax right because it's wrong
+
           newUser.save()
           .complete(function(err) {
             if(err) {
               throw err;
-              console.log('The instance has not been saved:', err)
+              console.log('The instance has not been saved:', err);
             }
-            console.log('We have a persisted instance now')
+            console.log('We have a persisted instance now');
+            return done(null, newUser);
           });
         }
       });
-    })
+    });
   }));
 
   passport.use('login', new LocalStrategy({
@@ -57,14 +59,14 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
     function(req, username, password, done) {
-      User.find({'username': username}, function(err, user) {
+      User.find({where: {'username': username}})
+      .complete(function(err, user) {
         if (err) return done(err);
-        if (!user || !User.validPassword(password))
+        if (!user || !user.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
-  }))
-
+    }))
 };
 
 function generateHash(password) {

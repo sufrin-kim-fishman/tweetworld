@@ -34,7 +34,7 @@ function addNewCountry($country, country) {
   }
 }
 
-(function tweetListener() {
+function tweetListener() {
   server.on('tweets', function(data) {
     data = JSON.parse(data);
     var normalizedCountry = normalizeName(data.place.country);
@@ -42,8 +42,9 @@ function addNewCountry($country, country) {
       insertTweet(data, normalizedCountry);
     }
   });
-})();
+}
 
 $(function(){
   submitListener();
+  tweetListener();
 });
