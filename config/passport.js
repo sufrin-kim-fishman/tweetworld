@@ -26,13 +26,12 @@ module.exports = function(passport) {
   },
   function(req, username, password, done) {
     process.nextTick(function() {
-      user.find({where: { username: 'username'} })
+      user.find({where: { 'username': username} })
       .complete(function(err, user) {
         if (err) return done(err);
         if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
-          debugger;
           var newUser = user.build( {
               username: username,
               password: generateHash(password)
