@@ -4,7 +4,7 @@ var sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
     dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
     port:    5432, // or 3306 for any other SQL database
   });
-var user = sequelize.import(__dirname + "/../models/user.js");
+var User = sequelize.import(__dirname + "/../models/user.js");
 var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport) {
@@ -26,19 +26,20 @@ module.exports = function(passport) {
   },
   function(req, username, password, done) {
     process.nextTick(function() {
-      user.find({where: { 'username': username} })
+      User.find({where: { 'username': username} })
       .complete(function(err, user) {
+        console.log(User);
         if (err) return done(err);
-        if (user) {
+        if (err) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
-          var newUser = user.build( {
+          var newUser = User.build( {
               username: username,
               password: generateHash(password)
             });
           //let's get the syntax right because it's wrong
-          newUser.save();
-          newUser.complete(function(err) {
+          newUser.save()
+          .complete(function(err) {
             if(err) {
               throw err;
               console.log('The instance has not been saved:', err)
@@ -56,9 +57,9 @@ module.exports = function(passport) {
     passReqToCallback: true
   },
     function(req, username, password, done) {
-      user.find({'username': username}, function(err, user) {
+      User.find({'username': username}, function(err, user) {
         if (err) return done(err);
-        if (!user || !user.validPassword(password))
+        if (!user || !User.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
