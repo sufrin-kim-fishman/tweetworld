@@ -20,16 +20,17 @@ module.exports = function(passport) {
   },
   function(req, username, password, done) {
     process.nextTick(function() {
-      user.find({'username': username}, function(err, user) {
+      user.find({where: { username: 'username'} }) 
+      user.complete(function(err, user) {
         if (err) return done(err);
         if (user) {
           return done(null, false, req.flash('signupMessage', 'That username is already taken'))
         } else {
           var newUser = User.build( {
-              newUser.username: username,
-              newUser.password: newUser.generateHash(password)
-            });
-        
+              username: username,
+              password: newUser.generateHash(password)
+            })
+          //let's get the syntax right because it's wrong
           newUser.save();
           newUser.complete(function(err) {
             if(err) {
