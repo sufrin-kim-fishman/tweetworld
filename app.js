@@ -14,6 +14,7 @@ var socket = require('socket.io')
   , app = express()
   , port = process.env.PORT || 8080
   , db   = require('./models');
+  hi
 
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
