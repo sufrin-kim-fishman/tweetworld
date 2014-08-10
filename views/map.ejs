@@ -16,10 +16,11 @@
   </head>
   <body>
     <header>
-    <a href="/" class="btn btn-default btn-sm">Home</a>
     <% if (login) { %>
+      <a href="/dashboard" class="btn btn-default btn-sm">Dashboard</a>
       <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
     <% } else { %>
+      <a href="/" class="btn btn-default btn-sm">Home</a>
       <a href="/login" class="btn btn-default btn-sm">Log In</a>
       <a href="/signup" class="btn btn-default btn-sm">Sign Up</a>
     <% } %>
