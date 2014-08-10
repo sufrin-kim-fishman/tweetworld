@@ -13,7 +13,7 @@ var socket = require('socket.io')
   , pg = require('pg')
   , app = express()
   , port = process.env.PORT || 8080
-  , db   = require('./mods');
+  , db   = require('./models');
 
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
