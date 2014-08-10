@@ -36,7 +36,7 @@ app.use(session({secret: 'topsecretsecret',
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-//app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8080);
 app.engine('html', require('ejs').renderFile);
 app.use(cookieParser());
 app.use(bodyParser());
@@ -57,6 +57,11 @@ app.use(flash());
       })
     }
   })
+
+if (!module.parent) {
+  app.listen(8080);
+  console.log("Express server listening on port %d", app.get('port'))
+}
 
 require('./config/passport')(passport);
 require('./routes/routes.js')(app, passport);
