@@ -1,11 +1,7 @@
-var LocalStrategy = require('passport-local').Strategy;
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
-    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-    port:    5432, // or 3306 for any other SQL database
-  });
-var User = sequelize.import(__dirname + "/../models/user.js");
-var bcrypt = require('bcrypt-nodejs');
+var LocalStrategy = require('passport-local').Strategy
+  , env = require('./environment.js')()
+  , database = require('../models/index.js')
+  , User = database.sequelize.import(__dirname + "/../models/user.js");
 
 module.exports = function(passport) {
 
@@ -70,5 +66,5 @@ module.exports = function(passport) {
 };
 
 function generateHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return env.bcrypt.hashSync(password, env.bcrypt.genSaltSync(8), null);
 }

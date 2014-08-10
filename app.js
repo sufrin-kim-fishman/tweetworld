@@ -1,45 +1,22 @@
-var socket = require('socket.io')
-  , http = require('http')
-  , fs = require('fs')
-  , twitter = require('twit')
-  , flash = require('connect-flash')
-  , express = require('express')
-  , path = require('path')
-  , passport = require('passport')
-  , morgan = require('morgan')
-  , cookieParser = require('cookie-parser')
-  , bodyParser = require('body-parser')
-  , session = require('express-session')
-  , pg = require('pg')
-  , app = express()
-  , port = process.env.PORT || 8080
-  , db   = require('./models');
+var env = require('./config/environment.js')()
+  , app = env.express();
+//go into models/index.js and change your database settings from ilanasufrin to yours
 
-//RUN THIS LOCALLY: create database "TweetWorld";
-//var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
-
-//run this: 
-//npm install --save pg
-//npm install --save sequelize-cli
-
-//now go into models/index.js and change your database settings from ilanasufrin to yours
-
-app.use(session({secret: 'topsecretsecret',
+app.use(env.session({secret: 'topsecretsecret',
                 saveUninitialized: true,
                 resave: true,
                 cookie: {maxAge: 6000}}));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(env.express.static(env.path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-//app.set('port', process.env.PORT || 8080);
 app.engine('html', require('ejs').renderFile);
-app.use(cookieParser());
-app.use(bodyParser());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+app.use(env.cookieParser());
+app.use(env.bodyParser());
+app.use(env.passport.initialize());
+app.use(env.passport.session());
+app.use(env.flash());
 
- db
+env.db
   .sequelize
   .authenticate()
 //  .sync({ force: true })
@@ -47,19 +24,20 @@ app.use(flash());
     if (err) {
       throw err[0]
     } else {
-      http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on port ' + app.get('port'))
+      env.http.createServer(app).listen(app.get('port'), function(){
+        console.log('Express server listening on port ' + app.get('env.port'))
       })
     }
   })
 
-require('./config/passport')(passport);
-require('./routes/routes.js')(app, passport);
+require('./config/passport')(env.passport);
+require('./routes/routes.js')(app, env.passport);
 
-var server = http.createServer(app);
-var io = socket.listen(server);
+var server = env.http.createServer(app);
+var io = env.socket.listen(server);
+var client;
 
-var t = new twitter({
+var t = new env.twitter({
     consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
     consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
     access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
@@ -68,19 +46,21 @@ var t = new twitter({
 var stream = t.stream('statuses/sample');
 
 function openTweetConnection() {
-  io.sockets.on('connection', function(client) {
-    catchError(client);
-    streamTweets(client);
+  io.sockets.on('connection', function(clientSide) {
+    client = clientSide;
+    catchError();
+    streamTweets();
+    getUsername();
   });
 }
 
-function catchError(client) {
+function catchError() {
   client.on('error', function() {
     console.log('error catch!');
   });
 }
 
-function streamTweets(client) {
+function streamTweets() {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
@@ -89,11 +69,22 @@ function streamTweets(client) {
   });
 }
 
+function sendUsersCountries(username) {
+  client.emit('username', JSON.stringify(countries));
+}
+
+function getUsername() {
+  client.on('username', function(data) {
+    var username = JSON.parse(data);
+    sendUsersCountries(username);
+  });
+}
+
 function listenToServer() {
-  server.listen(port);
+  server.listen(env.port);
 }
 
 (function() {
-  // openTweetConnection();
+  openTweetConnection();
   listenToServer();
 })()
