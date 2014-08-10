@@ -24,11 +24,6 @@ var socket = require('socket.io')
 
 //now go into models/index.js and change your database settings from ilanasufrin to yours
 
-app.use(function(req, res, next) {
-  res.locals.login = req.isAuthenticated();
-  next();
-});
-
 app.use(session({secret: 'topsecretsecret',
                 saveUninitialized: true,
                 resave: true,
@@ -99,6 +94,6 @@ function listenToServer() {
 }
 
 (function() {
-  openTweetConnection();
+  // openTweetConnection();
   listenToServer();
 })()
