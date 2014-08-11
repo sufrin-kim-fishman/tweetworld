@@ -44,10 +44,6 @@ var io = env.socket.listen(server);
 var client;
 
 var t = new env.twitter({
-    // consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
-    // consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
-    // access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
-    // access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
     consumer_key: apikeys.consumer_key,          
     consumer_secret: apikeys.consumer_secret,       
     access_token: apikeys.access_token,      
@@ -82,20 +78,21 @@ function streamTweets() {
 }
 
 function addCountryToDatabase(tweet, done) {
- // function(countryname, done) {
   var countryname = tweet.place.country;
       process.nextTick(function() {
         Country.find({where: { 'name': countryname} })
         .complete(function(err, country) {
+<<<<<<< HEAD
         if (err) return done(err);
         if (country) {
           return done(null, false, console.log('That country is already in the database'))
         } else {
+=======
+        if (!country) {
+>>>>>>> 3cd16e9f44ad50c59e60513cf323d64c92c5b87f
           var newCountry = Country.build( {
               name: countryname
             });
-          //let's get the syntax right because it's wrong
-
           newCountry.save()
           .complete(function(err) {
             if(err) {
@@ -103,10 +100,8 @@ function addCountryToDatabase(tweet, done) {
               console.log('The country instance has not been saved:', err);
             }
             console.log('We have a persisted country instance now');
-            return done(null, newCountry);
           });
-       // }
-      }//);
+      }
     });
   });
 }
@@ -138,17 +133,17 @@ function getCountry() {
   });
 }
 
-function persistCountry(countryName, username) {
-  Country.findOrCreate({'name': countryName})
-  .success(function(country, created) {
-    if (created) {
-      User.find({where: {'username': username}})
-      .success(function(user) {
-        user.addCountry(country);
-      });
-    }
-  });
-}
+// function persistCountry(countryName, username) {
+//   Country.findOrCreate({'name': countryName})
+//   .success(function(country, created) {
+//     if (created) {
+//       User.find({where: {'username': username}})
+//       .success(function(user) {
+//         user.addCountry(country);
+//       });
+//     }
+//   });
+// }
 
 function listenToServer() {
   server.listen(env.port);
