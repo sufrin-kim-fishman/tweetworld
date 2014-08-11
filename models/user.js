@@ -11,11 +11,9 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.country)
       }
     },
-    getterMethods: {  
-      validPassword: function(password) { return bcrypt.compareSync(password, this.password);}
+    instanceMethods: {  
+      validPassword: function(password) { return bcrypt.compareSync(password, this.password);},
     }
   });
-  // User.validPassword = function(password) { return bcrypt.compareSync(password, this.password);};
-  // User.generateHash = function(password) { return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);};
   return User;
 };

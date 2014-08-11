@@ -1,3 +1,4 @@
+
 var LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
@@ -6,6 +7,11 @@ var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
   });
 var User = sequelize.import(__dirname + "/../models/user.js");
 var bcrypt = require('bcrypt-nodejs');
+
+  , env = require('./environment.js')()
+  , database = require('../models/index.js')
+  , User = database.sequelize.import(__dirname + "/../models/user.js");
+
 
 module.exports = function(passport) {
 
@@ -37,7 +43,6 @@ module.exports = function(passport) {
               username: username,
               password: generateHash(password)
             });
-          //let's get the syntax right because it's wrong
 
           newUser.save()
           .complete(function(err) {
@@ -62,7 +67,7 @@ module.exports = function(passport) {
       User.find({where: {'username': username}})
       .complete(function(err, user) {
         if (err) return done(err);
-        if (!user || !User.validPassword(password))
+        if (!user || !user.validPassword(password))
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
@@ -70,5 +75,5 @@ module.exports = function(passport) {
 };
 
 function generateHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return env.bcrypt.hashSync(password, env.bcrypt.genSaltSync(8), null);
 }

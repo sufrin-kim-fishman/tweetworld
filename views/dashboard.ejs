@@ -1,17 +1,18 @@
 <html>
   <head>
+    <title>Hello</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="javascripts/script.js"></script>
-   <title>Hello</title>
+    <script type="text/javascript" src="javascripts/dashboard.js"></script>
   </head>
 
   <body>
-
     <header>
       <a href="/map" class="btn btn-default btn-sm">Map</a>
       <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
     </header>
-
-    <h1>Hello</h1>
+    <h1>Hello <span id="username"><%= user.dataValues.username %></span>!</h1>
 
     <form id="country_form" method="post" action="http://localhost:8080">
       <select id="country">
