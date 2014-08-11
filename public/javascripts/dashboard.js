@@ -5,13 +5,24 @@ server.on('error', function() {
 
 function scrapeUsername() {
   var username = $("#username").text();
-  server.emit('username', JSON.stringify(username));
+  server.emit('username', username);
 }
 
-function getUsername() {
+function populateUsersCountries(countries) {
+  var $countryHolder = $('.tweet_country_holder');
+  for (var i = 0; i < countries.length; i++) {
+    var country = countries[i];
+    var newCountry = "<div id='" + normalizeName(country) + "'>" +
+    "<h2>" + country + "</h2><ul></ul></div>";
+    $countryHolder.append(newCountry);
+  }
+}
+
+function getUsersCountries() {
   server.on('username', function(data) {
-    var username = JSON.parse(data);
-    populateUsersCountries(username);
+    var countries = JSON.parse(data);
+    //countries should be an array
+    populateUsersCountries(countries);
   });
 }
 
@@ -24,19 +35,11 @@ function submitListener() {
 }
 
 function persistCountry(country) {
-
+  server.emit('country', country);
 }
 
-function populateUsersCountries(username) {
-  var countries = getUsersCountries();
-}
-
-function getUsersCountries() {
-  var countries;
-  server.on('username', function(data) {
-    countries = JSON.parse(data);
-  });
-  return countries;
+function normalizeName(name) {
+  return name.split(" ").join("-");
 }
 
 // function populateCountryTweets() {
@@ -49,7 +52,7 @@ function getUsersCountries() {
 
 $(function() {
   scrapeUsername();
-  getUsername();
+  getUsersCountries();
   submitListener();
   //populateCountryTweets();
   //tweetListener();

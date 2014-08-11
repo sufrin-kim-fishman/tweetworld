@@ -51,6 +51,7 @@ function openTweetConnection() {
     catchError();
     streamTweets();
     getUsername();
+    getCountry();
   });
 }
 
@@ -70,14 +71,24 @@ function streamTweets() {
 }
 
 function sendUsersCountries(username) {
+  //query for user's countries
   client.emit('username', JSON.stringify(countries));
 }
 
 function getUsername() {
-  client.on('username', function(data) {
-    var username = JSON.parse(data);
+  client.on('username', function(username) {
     sendUsersCountries(username);
   });
+}
+
+function getCountry() {
+  client.on('country', function(country) {
+    persistCountry(country);
+  });
+}
+
+function persistCountry(country) {
+  
 }
 
 function listenToServer() {
