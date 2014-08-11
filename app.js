@@ -5,31 +5,8 @@ var env = require('./config/environment.js')()
   , Country = database.sequelize.import(__dirname + "/models/country.js");
 //go into models/index.js and change your database settings from ilanasufrin to yours
 
-
-
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
-    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-    port:    5432, // or 3306 for any other SQL database
-  });
-var Country = sequelize.import(__dirname + "/models/country.js");
-
-
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
-
-//run this: 
-//npm install --save pg
-//npm install --save sequelize-cli
-
-//now go into models/index.js and change your database settings from ilanasufrin to yours
-
-app.use(function(req, res, next) {
-  res.locals.login = req.isAuthenticated();
-  next();
-});
-
-//app.use(session({secret: 'topsecretsecret',
 
 app.use(env.session({secret: 'topsecretsecret',
 
@@ -101,34 +78,29 @@ function streamTweets() {
   });
 }
 
-
-
 function addCountryToDatabase(tweet, done) {
- // function(countryname, done) {
   var countryname = tweet.place.country;
-      process.nextTick(function() {
-        Country.find({where: { 'name': countryname} })
-        .complete(function(err, country) {
-      //  if (err) return done(err);
-        if (country) {
-       //   return done(null, false, console.log('That country is already in the database'))
-        } else {
-          var newCountry = Country.build( {
-              name: countryname
-            });
-          //let's get the syntax right because it's wrong
-
-          newCountry.save()
-          .complete(function(err) {
-            if(err) {
-              throw err;
-              console.log('The country instance has not been saved:', err);
-            }
-            console.log('We have a persisted country instance now');
-         //   return done(null, newCountry);
+    process.nextTick(function() {
+      Country.find({where: { 'name': countryname}})
+      .complete(function(err, country) {
+      if (err) return done(err);
+      if (country) {
+        return done(null, false, console.log('That country is already in the database'));
+      } else {
+        var newCountry = Country.build( {
+            name: countryname
           });
-       // }
-      }//);
+
+        newCountry.save()
+        .complete(function(err) {
+          if(err) {
+            throw err;
+            console.log('The country instance has not been saved:', err);
+          }
+          console.log('We have a persisted country instance now');
+          return done(null, newCountry);
+        });
+      }
     });
   });
 }
@@ -162,18 +134,17 @@ function getCountry() {
   });
 }
 
-// function persistCountry(countryName, username) {
-//   Country.findOrCreate({'name': countryName})
-//   .success(function(country, created) {
-//     if (created) {
-//       User.find({where: {'username': username}})
-//       .success(function(user) {
-//         user.addCountry(country);
-//       });
-//     }
-//   });
-// }
-
+function persistCountry(countryName, username) {
+  Country.findOrCreate({'name': countryName})
+  .success(function(country, created) {
+    if (created) {
+      User.find({where: {'username': username}})
+      .success(function(user) {
+        user.addCountry(country);
+      });
+    }
+  });
+}
 
 function listenToServer() {
   server.listen(env.port);
