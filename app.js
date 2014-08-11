@@ -82,14 +82,7 @@ function addCountryToDatabase(tweet, done) {
       process.nextTick(function() {
         Country.find({where: { 'name': countryname} })
         .complete(function(err, country) {
-<<<<<<< HEAD
-        if (err) return done(err);
-        if (country) {
-          return done(null, false, console.log('That country is already in the database'))
-        } else {
-=======
         if (!country) {
->>>>>>> 3cd16e9f44ad50c59e60513cf323d64c92c5b87f
           var newCountry = Country.build( {
               name: countryname
             });
