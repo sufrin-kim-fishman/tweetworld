@@ -8,12 +8,11 @@
   </head>
 
   <body>
-    <h1>Hello <span id="username"><%= user.dataValues.username %></span>!</h1>
     <header>
       <a href="/map" class="btn btn-default btn-sm">Map</a>
       <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
     </header>
-    <h1>Hello</h1>
+    <h1>Hello <span id="username"><%= user.dataValues.username %></span>!</h1>
 
     <form id="country_form" method="post" action="http://localhost:8080">
       <select id="country">
