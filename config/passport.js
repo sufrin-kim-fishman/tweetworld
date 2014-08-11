@@ -1,4 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy
+  , env = require('./environment.js')()
   , database = require('../models/index.js')
   , bcrypt = require('bcrypt-nodejs')
   , env = require('./environment.js')()
