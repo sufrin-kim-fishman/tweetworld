@@ -15,6 +15,15 @@ var socket = require('socket.io')
   , port = process.env.PORT || 8080
   , db   = require('./models');
 
+
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
+    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
+    port:    5432, // or 3306 for any other SQL database
+  });
+var Country = sequelize.import(__dirname + "/models/country.js");
+
+
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
@@ -89,10 +98,43 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
+      addCountyToDatabase(tweet.place.country);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
+
+
+function addCountyToDatabase(tweet) {
+  function(countryname, done) {
+      process.nextTick(function() {
+        Country.find({where: { 'name': countryname} })
+        .complete(function(err, country) {
+        if (err) return done(err);
+        if (country) {
+          return done(null, false, console.log('That country is already in the database'))
+        } else {
+          var newCountry = Country.build( {
+              countryname: name
+            });
+          //let's get the syntax right because it's wrong
+
+          newCountry.save()
+          .complete(function(err) {
+            if(err) {
+              throw err;
+              console.log('The country instance has not been saved:', err);
+            }
+            console.log('We have a persisted country instance now');
+            return done(null, newCountry);
+          });
+        }
+      });
+    });
+  }));
+}
+
+
 
 function listenToServer() {
   server.listen(port);

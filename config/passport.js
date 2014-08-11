@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
+var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
     dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
     port:    5432, // or 3306 for any other SQL database
   });
