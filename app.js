@@ -3,7 +3,7 @@ var env = require('./config/environment.js')()
   , database = require('models/index.js')
   , User = database.sequelize.import(__dirname + "/models/user.js")
   , Country = database.sequelize.import(__dirname + "/models/country.js")
-  , apikeys = require('./config/apikeys.js');
+  , apikeys = require('./config/apikeys.js')();
 
 //go into models/index.js and change your database settings from ilanasufrin to yours
 
