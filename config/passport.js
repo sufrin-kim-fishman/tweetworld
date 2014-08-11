@@ -1,11 +1,8 @@
-var LocalStrategy = require('passport-local').Strategy;
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('TweetWorld', 'Ado', "", {
-    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-    port:    5432, // or 3306 for any other SQL database
-  });
-var User = sequelize.import(__dirname + "/../models/user.js");
-var bcrypt = require('bcrypt-nodejs');
+var LocalStrategy = require('passport-local').Strategy
+  , database = require('../models/index.js')
+  , bcrypt = require('bcrypt-nodejs')
+  , env = require('./environment.js')()
+  , User = database.sequelize.import(__dirname + "/../models/user.js");
 
 module.exports = function(passport) {
 
