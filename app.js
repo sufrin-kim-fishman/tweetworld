@@ -1,35 +1,14 @@
-//var env = require('./config/environment.js')();
-//  , app = env.express()
- // , database = require('../models/index.js')
-//  , User = database.sequelize.import(__dirname + "./models/user.js")
-//  , Country = database.sequelize.import(__dirname + "./models/user.js");
+var env = require('./config/environment.js')()
+  , app = env.express()
+  , database = require('models/index.js')
+  , User = database.sequelize.import(__dirname + "/models/user.js")
+  , Country = database.sequelize.import(__dirname + "/models/country.js")
+  , apikeys = require('./config/apikeys.js');
+
 //go into models/index.js and change your database settings from ilanasufrin to yours
-
-
-
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
-    dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-    port:    5432, // or 3306 for any other SQL database
-  });
-var Country = sequelize.import(__dirname + "/models/country.js");
-
 
 //RUN THIS LOCALLY: create database "TweetWorld";
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
-
-//run this: 
-//npm install --save pg
-//npm install --save sequelize-cli
-
-//now go into models/index.js and change your database settings from ilanasufrin to yours
-
-app.use(function(req, res, next) {
-  res.locals.login = req.isAuthenticated();
-  next();
-});
-
-//app.use(session({secret: 'topsecretsecret',
 
 app.use(env.session({secret: 'topsecretsecret',
 
@@ -67,10 +46,14 @@ var io = env.socket.listen(server);
 var client;
 
 var t = new env.twitter({
-    consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
-    consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
-    access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
-    access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
+    // consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
+    // consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
+    // access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
+    // access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
+    consumer_key: apikeys.consumer_key,          
+    consumer_secret: apikeys.consumer_secret,       
+    access_token: apikeys.access_token,      
+    access_token_secret: apikeys.access_token_secret
 });
 var stream = t.stream('statuses/sample');
 
@@ -100,23 +83,17 @@ function streamTweets() {
   });
 }
 
-
-
 function addCountryToDatabase(tweet, done) {
-
-  var countryname = tweet.place.country;
+var countryname = tweet.place.country;
       process.nextTick(function() {
         Country.find({where: { 'name': countryname} })
         .complete(function(err, country) {
-      
         if (country) {
        //   return done(null, false, console.log('That country is already in the database'))
         } else {
           var newCountry = Country.build( {
               name: countryname
             });
-         
-
           newCountry.save()
           .complete(function(err) {
             if(err) {
@@ -126,7 +103,6 @@ function addCountryToDatabase(tweet, done) {
             console.log('We have a persisted country instance now');
         
           });
-      
       }
     });
   });
@@ -172,7 +148,6 @@ function persistCountry(countryName, username) {
     }
   });
 }
-
 
 function listenToServer() {
   server.listen(env.port);
