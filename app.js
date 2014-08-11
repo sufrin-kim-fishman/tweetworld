@@ -1,8 +1,8 @@
-var env = require('./config/environment.js')()
-  , app = env.express()
-  , database = require('../models/index.js')
-  , User = database.sequelize.import(__dirname + "./models/user.js")
-  , Country = database.sequelize.import(__dirname + "./models/user.js");
+//var env = require('./config/environment.js')();
+//  , app = env.express()
+ // , database = require('../models/index.js')
+//  , User = database.sequelize.import(__dirname + "./models/user.js")
+//  , Country = database.sequelize.import(__dirname + "./models/user.js");
 //go into models/index.js and change your database settings from ilanasufrin to yours
 
 
@@ -49,7 +49,6 @@ app.use(env.flash());
 env.db
   .sequelize
   .authenticate()
-//  .sync({ force: true })
   .complete(function(err) {
     if (err) {
       throw err[0]
@@ -104,19 +103,19 @@ function streamTweets() {
 
 
 function addCountryToDatabase(tweet, done) {
- // function(countryname, done) {
+
   var countryname = tweet.place.country;
       process.nextTick(function() {
         Country.find({where: { 'name': countryname} })
         .complete(function(err, country) {
-      //  if (err) return done(err);
+      
         if (country) {
        //   return done(null, false, console.log('That country is already in the database'))
         } else {
           var newCountry = Country.build( {
               name: countryname
             });
-          //let's get the syntax right because it's wrong
+         
 
           newCountry.save()
           .complete(function(err) {
@@ -125,10 +124,10 @@ function addCountryToDatabase(tweet, done) {
               console.log('The country instance has not been saved:', err);
             }
             console.log('We have a persisted country instance now');
-         //   return done(null, newCountry);
+        
           });
-       // }
-      }//);
+      
+      }
     });
   });
 }
@@ -162,17 +161,17 @@ function getCountry() {
   });
 }
 
-// function persistCountry(countryName, username) {
-//   Country.findOrCreate({'name': countryName})
-//   .success(function(country, created) {
-//     if (created) {
-//       User.find({where: {'username': username}})
-//       .success(function(user) {
-//         user.addCountry(country);
-//       });
-//     }
-//   });
-// }
+function persistCountry(countryName, username) {
+  Country.findOrCreate({'name': countryName})
+  .success(function(country, created) {
+    if (created) {
+      User.find({where: {'username': username}})
+      .success(function(user) {
+        user.addCountry(country);
+      });
+    }
+  });
+}
 
 
 function listenToServer() {
