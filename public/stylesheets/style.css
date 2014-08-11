@@ -7,8 +7,14 @@ a {
   color: #00B7FF;
 }
 
-#twitter {
-	width: 1px;
-	height: 1px;
+footer {
+  text-align: center;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  color:black;
+  /*text-shadow: 0.1em 0.1em 0.2em black;*/
+  background-color: lightgray;
 }
-
