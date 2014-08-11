@@ -9,7 +9,6 @@ var env = require('./config/environment.js')()
 //var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 app.use(env.session({secret: 'topsecretsecret',
-
                 saveUninitialized: true,
                 resave: true,
                 cookie: {maxAge: 6000}}));
@@ -72,40 +71,10 @@ function streamTweets() {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-      addCountryToDatabase(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
-
-function addCountryToDatabase(tweet, done) {
-  var countryname = tweet.place.country;
-    process.nextTick(function() {
-      Country.find({where: { 'name': countryname}})
-      .complete(function(err, country) {
-      if (err) return done(err);
-      if (country) {
-        return done(null, false, console.log('That country is already in the database'));
-      } else {
-        var newCountry = Country.build( {
-            name: countryname
-          });
-
-        newCountry.save()
-        .complete(function(err) {
-          if(err) {
-            throw err;
-            console.log('The country instance has not been saved:', err);
-          }
-          console.log('We have a persisted country instance now');
-          return done(null, newCountry);
-        });
-      }
-    });
-  });
-}
-
-
 
 function getUsername() {
   client.on('username', function(username) {

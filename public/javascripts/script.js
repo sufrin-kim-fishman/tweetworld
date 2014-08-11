@@ -8,7 +8,7 @@ function insertTweet(tweet, country) {
   if  ($countryUl.children().length > 9) {
     $("#" + country +" li").last().remove();
   }
- $countryUl.prepend('<li>' + tweet.text + '</li>');
+  $countryUl.prepend('<li>' + tweet.text + '</li>');
 }
 
 function normalizeName(name) {
