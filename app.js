@@ -84,16 +84,20 @@ function streamTweets() {
 }
 
 function addCountryToDatabase(tweet, done) {
-var countryname = tweet.place.country;
+ // function(countryname, done) {
+  var countryname = tweet.place.country;
       process.nextTick(function() {
         Country.find({where: { 'name': countryname} })
         .complete(function(err, country) {
+      //  if (err) return done(err);
         if (country) {
        //   return done(null, false, console.log('That country is already in the database'))
         } else {
           var newCountry = Country.build( {
               name: countryname
             });
+          //let's get the syntax right because it's wrong
+
           newCountry.save()
           .complete(function(err) {
             if(err) {
@@ -101,9 +105,10 @@ var countryname = tweet.place.country;
               console.log('The country instance has not been saved:', err);
             }
             console.log('We have a persisted country instance now');
-        
+         //   return done(null, newCountry);
           });
-      }
+       // }
+      }//);
     });
   });
 }
