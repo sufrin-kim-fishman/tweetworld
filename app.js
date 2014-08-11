@@ -15,6 +15,7 @@ app.use(env.session({secret: 'topsecretsecret',
                 cookie: {maxAge: 6000}}));
 app.use(env.express.static(env.path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
+app.use("../stylesheets", env.express.static(__dirname + "/stylesheets"));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(env.cookieParser());
@@ -68,11 +69,15 @@ function catchError() {
 }
 
 function streamTweets() {
+  var i = 0;
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      console.log(tweet);
-      addCountryToDatabase(tweet);
-      client.emit('tweets', JSON.stringify(tweet));
+      if(i % 5 === 0) {
+        console.log(tweet);
+        addCountryToDatabase(tweet);
+        client.emit('tweets', JSON.stringify(tweet));
+      }
+      i++;
     }
   });
 }
