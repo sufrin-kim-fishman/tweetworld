@@ -2,7 +2,9 @@ var env = require('./config/environment.js')()
   , app = env.express()
   , database = require('models/index.js')
   , User = database.sequelize.import(__dirname + "/models/user.js")
-  , Country = database.sequelize.import(__dirname + "/models/country.js");
+  , Country = database.sequelize.import(__dirname + "/models/country.js")
+  , apikeys = require('./config/apikeys.js')();
+
 //go into models/index.js and change your database settings from ilanasufrin to yours
 
 //RUN THIS LOCALLY: create database "TweetWorld";
@@ -25,7 +27,6 @@ app.use(env.flash());
 env.db
   .sequelize
   .authenticate()
-//  .sync({ force: true })
   .complete(function(err) {
     if (err) {
       throw err[0]
@@ -44,10 +45,14 @@ var io = env.socket.listen(server);
 var client;
 
 var t = new env.twitter({
-    consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
-    consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
-    access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
-    access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
+    // consumer_key: "35AidvtI1yk6AKcNc6BDoMcVs",          
+    // consumer_secret: "ZhrapDlProEE6zZya4g1QdZjkfv9Q6HTBG7Q2Oy5TkGSXjihcD",       
+    // access_token: "2453054691-taj0rqSb33InlsEgkxEG2JSSxl546vWRt0QnkyH",      
+    // access_token_secret: "gUI8lk4GQVIAZ7zzUJ61s1XyGvx6D8oGO2ECGW8ZZsd1A"
+    consumer_key: apikeys.consumer_key,          
+    consumer_secret: apikeys.consumer_secret,       
+    access_token: apikeys.access_token,      
+    access_token_secret: apikeys.access_token_secret
 });
 var stream = t.stream('statuses/sample');
 
