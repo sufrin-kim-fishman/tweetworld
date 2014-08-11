@@ -98,24 +98,25 @@ function streamTweets(client) {
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
-      addCountyToDatabase(tweet.place.country);
+      addCountryToDatabase(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
 
 
-function addCountyToDatabase(tweet) {
-  function(countryname, done) {
+function addCountryToDatabase(tweet, done) {
+ // function(countryname, done) {
+  var countryname = tweet.place.country;
       process.nextTick(function() {
         Country.find({where: { 'name': countryname} })
         .complete(function(err, country) {
-        if (err) return done(err);
+      //  if (err) return done(err);
         if (country) {
-          return done(null, false, console.log('That country is already in the database'))
+       //   return done(null, false, console.log('That country is already in the database'))
         } else {
           var newCountry = Country.build( {
-              countryname: name
+              name: countryname
             });
           //let's get the syntax right because it's wrong
 
@@ -126,12 +127,12 @@ function addCountyToDatabase(tweet) {
               console.log('The country instance has not been saved:', err);
             }
             console.log('We have a persisted country instance now');
-            return done(null, newCountry);
+         //   return done(null, newCountry);
           });
-        }
-      });
+       // }
+      }//);
     });
-  }));
+  });
 }
 
 
