@@ -30,7 +30,7 @@ server.on('error', function() {
 $(document).ready(function() {
   initialize();
   // tweetsMarker();
-  tweety();
+  // tweety();
 });
 
 function initialize() {
@@ -50,9 +50,13 @@ function initialize() {
     center: new google.maps.LatLng(25, 10)
     });
 
-    function tweety() {
-     d3.select("body").append("svg").attr("width", 50).attr("height", 50).append("circle").attr("cx", 25).attr("cy", 25).attr("r", 25).style("fill", "purple");
-   }
+   //  function tweety() {
+   //   d3.select("#map-canvas").append("svg")
+   //   .attr("width", 50).attr("height", 50)
+   //   .append("circle").attr("cx", 25)
+   //   .attr("cy", 25).attr("r", 25)
+   //   .style("fill", "purple");
+   // }
       // var svgContainer = d3.select("#map-canvas").append("svg")
       //     .attr("width", 600)
       //     .attr("height", 600);
@@ -62,24 +66,24 @@ function initialize() {
       //     .attr("cy", 10)
       //     .attr("r", 20);
       //     console.log(circle);
-    }
+    // }
     
-  //   function tweetsMarker() {
-  //     server.on('tweets', function(d) {
-  //       d = JSON.parse(d);
-  //       d3.json(d, function(data) {
-  //         var svgContainer = d3.select("#map-canvas").append("svg")
-  //         .attr("width", 200)
-  //         .attr("height", 200);
-  //         console.log(svgContainer);
-  //         var circle = svgContainer.append("circle")
-  //         .attr("cx", d.coordinates.coordinates[0])
-  //         .attr("cy", d.coordinates.coordinates[1])
-  //         .attr("r", 20);
-  //         console.log(circle);
-  //     });
-  //   });
-  // }
+    function tweetsMarker() {
+      server.on('tweets', function(d) {
+        d = JSON.parse(d);
+        d3.json(d, function(data) {
+          var svgContainer = d3.select("#map-canvas").append("svg")
+          .attr("width", 200)
+          .attr("height", 200);
+          console.log(svgContainer);
+          var circle = svgContainer.append("circle")
+          .attr("cx", d.coordinates.coordinates[0])
+          .attr("cy", d.coordinates.coordinates[1])
+          .attr("r", 20);
+          console.log(circle);
+      });
+    });
+  }
 
 
    //  	overlay.onAdd = function() {
