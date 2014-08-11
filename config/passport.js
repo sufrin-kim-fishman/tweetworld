@@ -37,7 +37,6 @@ module.exports = function(passport) {
               username: username,
               password: generateHash(password)
             });
-          //let's get the syntax right because it's wrong
 
           newUser.save()
           .complete(function(err) {
@@ -70,5 +69,5 @@ module.exports = function(passport) {
 };
 
 function generateHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  return env.bcrypt.hashSync(password, env.bcrypt.genSaltSync(8), null);
 }

@@ -1,4 +1,10 @@
 module.exports = function(app, passport) {
+
+  app.use(function(req, res, next) {
+    res.locals.login = req.isAuthenticated();
+    next();
+  });
+
   app.get('/', function(req, res) {
     res.render('index.ejs');
   });
