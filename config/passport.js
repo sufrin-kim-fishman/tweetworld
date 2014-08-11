@@ -33,7 +33,6 @@ module.exports = function(passport) {
               username: username,
               password: generateHash(password)
             });
-          //let's get the syntax right because it's wrong
 
           newUser.save()
           .complete(function(err) {

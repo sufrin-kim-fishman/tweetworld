@@ -4,8 +4,17 @@ server.on('error', function() {
 });
 
 function scrapeUsername() {
-  var username = $("#username").text();
-  server.emit('username', username);
+  return $("#username").text();
+}
+
+function sendUsername() {
+  server.emit('username', scrapeUsername());
+}
+
+function getUsersCountries() {
+  server.on('username', function(countries) {
+    populateUsersCountries(countries);
+  });
 }
 
 function populateUsersCountries(countries) {
@@ -18,14 +27,6 @@ function populateUsersCountries(countries) {
   }
 }
 
-function getUsersCountries() {
-  server.on('username', function(data) {
-    var countries = JSON.parse(data);
-    //countries should be an array
-    populateUsersCountries(countries);
-  });
-}
-
 function submitListener() {
   $("#submit").click(function(e) {
     var $country = $("#country").val();
@@ -35,7 +36,11 @@ function submitListener() {
 }
 
 function persistCountry(country) {
-  server.emit('country', country);
+  var countryObj = {
+    name: country,
+    user: scrapeUsername()
+  };
+  server.emit('country', JSON.stringify(countryObj));
 }
 
 function normalizeName(name) {
@@ -51,8 +56,8 @@ function normalizeName(name) {
 // }
 
 $(function() {
-  scrapeUsername();
   getUsersCountries();
+  sendUsername();
   submitListener();
   //populateCountryTweets();
   //tweetListener();

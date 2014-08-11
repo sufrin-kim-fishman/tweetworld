@@ -1,5 +1,8 @@
 var env = require('./config/environment.js')()
-  , app = env.express();
+  , app = env.express()
+  , database = require('../models/index.js')
+  , User = database.sequelize.import(__dirname + "./models/user.js")
+  , Country = database.sequelize.import(__dirname + "./models/user.js");
 //go into models/index.js and change your database settings from ilanasufrin to yours
 
 app.use(env.session({secret: 'topsecretsecret',
@@ -70,25 +73,43 @@ function streamTweets() {
   });
 }
 
-function sendUsersCountries(username) {
-  //query for user's countries
-  client.emit('username', JSON.stringify(countries));
-}
-
 function getUsername() {
   client.on('username', function(username) {
-    sendUsersCountries(username);
+    findUser(username);
+  });
+}
+
+function findUser(username) {
+  User.find({where: {'username': username}})
+  .success(function(user) {
+    sendUsersCountries(user);
+  });
+}
+
+function sendUsersCountries(user) {
+  user.getCountries()
+  .success(function(countries) {
+    client.emit('username', countries);
   });
 }
 
 function getCountry() {
-  client.on('country', function(country) {
-    persistCountry(country);
+  client.on('country', function(countryObj) {
+    var country = JSON.parse(countryObj);
+    persistCountry(country.name, country.user);
   });
 }
 
-function persistCountry(country) {
-  
+function persistCountry(countryName, username) {
+  Country.findOrCreate({'name': countryName})
+  .success(function(country, created) {
+    if (created) {
+      User.find({where: {'username': username}})
+      .success(function(user) {
+        user.addCountry(country);
+      });
+    }
+  });
 }
 
 function listenToServer() {
