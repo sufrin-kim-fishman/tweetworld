@@ -3,12 +3,13 @@
     <title>Hello</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/script.js"></script>
     <script type="text/javascript" src="javascripts/dashboard.js"></script>
   </head>
 
   <body>
     <header>
-      <a href="/map" class="btn btn-default btn-sm">Map</a>
+      <a href="/map" class="btn btn-default btn-sm tweet-stream">Map</a>
       <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
     </header>
     <h1>Hello <span id="username"><%= user.dataValues.username %></span>!</h1>

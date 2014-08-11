@@ -5,11 +5,6 @@ var env = require('./config/environment.js')()
   , Country = database.sequelize.import(__dirname + "/models/country.js")
   , apikeys = require('./config/apikeys.js')();
 
-//go into models/index.js and change your database settings from ilanasufrin to yours
-
-//RUN THIS LOCALLY: create database "TweetWorld";
-//var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
-
 app.use(env.session({secret: 'topsecretsecret',
                 saveUninitialized: true,
                 resave: true,
@@ -35,7 +30,7 @@ env.db
         console.log('Express server listening on port ' + app.get('env.port'))
       })
     }
-  })
+  });
 
 require('./config/passport')(env.passport);
 require('./routes/routes.js')(app, env.passport);
@@ -54,9 +49,12 @@ var stream = t.stream('statuses/sample');
 
 function openTweetConnection() {
   io.sockets.on('connection', function(clientSide) {
+    console.log('server is connected...');
     client = clientSide;
     catchError();
     streamTweets();
+    stopStreaming();
+    // restartStreaming();
     getUsername();
     getCountry();
   });
@@ -69,6 +67,7 @@ function catchError() {
 }
 
 function streamTweets() {
+  console.log('About to stream...');
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet);
@@ -79,15 +78,15 @@ function streamTweets() {
 
 function getUsername() {
   client.on('username', function(username) {
-    findUser(username);
+    findUser(username)
+    .success(function(user) {
+      sendUsersCountries(user);
+    });
   });
 }
 
 function findUser(username) {
-  User.find({where: {'username': username}})
-  .success(function(user) {
-    sendUsersCountries(user);
-  });
+  return User.find({where: {'username': username}});
 }
 
 function sendUsersCountries(user) {
@@ -108,7 +107,7 @@ function persistCountry(countryName, username) {
   Country.findOrCreate({'name': countryName})
   .success(function(country, created) {
     if (created) {
-      User.find({where: {'username': username}})
+      findUser(username)
       .success(function(user) {
         user.addCountry(country);
       });
@@ -118,7 +117,19 @@ function persistCountry(countryName, username) {
 
 function listenToServer() {
   server.listen(env.port);
-  server.listen('8080/dashboard');
+}
+
+function stopStreaming() {
+  client.on('stop-tweets', function() {
+    stream.stop();
+    console.log('tweets stopped');
+  });
+}
+
+function restartStreaming() {
+  client.on('restart-tweets', function() {
+    stream.start();
+  });
 }
 
 (function() {

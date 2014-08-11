@@ -33,8 +33,8 @@ function addNewCountry($country, country) {
 }
 
 function tweetListener() {
-  server.on('tweets', function(tweet) {
-    tweet = JSON.parse(tweet);
+  server.on('tweets', function(data) {
+    var tweet = JSON.parse(data);
     var normalizedCountry = normalizeName(tweet.place.country);
     if($("#" + normalizedCountry).length === 1) {
       insertTweet(tweet, normalizedCountry);
@@ -42,7 +42,21 @@ function tweetListener() {
   });
 }
 
+function stopStreaming() {
+  $(".tweet-stream").click(function() {
+    server.emit('stop-tweets');
+  });
+}
+
+function restartStreaming() {
+  $(".tweet-stream").click(function() {
+    server.emit('restart-tweets');
+  });
+}
+
 $(function(){
   submitListener();
   tweetListener();
+  stopStreaming();
+  // restartStreaming();
 });
