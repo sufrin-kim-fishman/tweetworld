@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Country = sequelize.define('Country', {
+  var Country = sequelize.define('country', {
     name: DataTypes.STRING
   }, {
     classMethods: {
