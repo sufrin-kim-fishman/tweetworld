@@ -1,8 +1,8 @@
 var env = require('./config/environment.js')()
   , app = env.express()
-  , database = require('../models/index.js')
-  , User = database.sequelize.import(__dirname + "./models/user.js")
-  , Country = database.sequelize.import(__dirname + "./models/user.js");
+  , database = require('models/index.js')
+  , User = database.sequelize.import(__dirname + "/models/user.js")
+  , Country = database.sequelize.import(__dirname + "/models/country.js");
 //go into models/index.js and change your database settings from ilanasufrin to yours
 
 app.use(env.session({secret: 'topsecretsecret',
