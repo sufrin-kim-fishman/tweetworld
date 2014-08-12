@@ -26,7 +26,7 @@ function submitListener() {
 
 function addNewCountry($country, country) {
   if($("#" + country).length === 0) {
-    var newCountry = "<div id='" + country + "'>" + 
+    var newCountry = "<div id='" + country + "' class='col-md-4' style='background-color:white;border:2px;border-style:dashed;border-color:gray;border-radius:5%;margin:auto;float:left;'>" + 
       "<h2>" + $("#country").val() + "</h2><ul></ul></div>"
     $(".tweet_country_holder").append(newCountry);
   }
