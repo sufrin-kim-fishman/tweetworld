@@ -43,6 +43,10 @@ module.exports = function(app, passport) {
     res.render('map.ejs');
   });
 
+  app.get('/stream', function(req, res) {
+    res.render('stream.ejs');
+  });
+
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
