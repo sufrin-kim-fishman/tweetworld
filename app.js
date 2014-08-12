@@ -38,7 +38,6 @@ require('./routes/routes.js')(app, env.passport);
 
 var server = env.http.createServer(app);
 var io = env.socket.listen(server);
-var stream;
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
@@ -59,12 +58,11 @@ function setStreaming() {
       access_token: apikeys.access_token,      
       access_token_secret: apikeys.access_token_secret
   });
-  stream = t.stream('statuses/sample');
-  console.log('set stream');
+  return t.stream('statuses/sample');
 }
 
 function streamTweets() {
-  stream.on('tweet', function(tweet) {
+  setStreaming().on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet.text);
       io.sockets.emit('tweets', JSON.stringify(tweet));
@@ -116,8 +114,7 @@ function listenToServer() {
 }
 
 (function() {
-  setStreaming();
-  openTweetConnection();
   streamTweets();
+  openTweetConnection();
   listenToServer();
 })();
