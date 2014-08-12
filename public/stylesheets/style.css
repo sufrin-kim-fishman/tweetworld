@@ -105,3 +105,17 @@ h2.center {
   color: #949494;
   text-align: center;
 }
+
+.country_tweet_panel {
+background-color:white;
+border:2px;
+border-style:dashed;
+border-color:gray;
+border-radius:5%;
+margin:auto;
+float:left;
+}
+
+
+
+
