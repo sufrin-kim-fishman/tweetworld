@@ -48,7 +48,7 @@ footer {
 .about-div {
   /*background-color: #333;*/
   border-radius: 10px;
-  color: #949494;*/
+  color: #949494;
   padding: 2.5%;
   font-size: 20px;
   font-weight: bold;
@@ -75,3 +75,32 @@ h2.center {
   text-align: center;
 }
 
+#submit {
+  border-radius: 4px;
+  moz-border-radius: 4px;
+  webkit-border-radius: 4px;
+  background-color: #B2BBBF;
+}
+
+.ex_button {
+  border-radius: 100%;
+  border: 2px solid #c2c2c2;
+  position: relative;
+  padding: 1px 5px;
+  top: -20px;
+  background-color: #605F61;
+  left: 198px;
+}
+
+.tweetworld {
+  float: right;
+  font-size: 80px;
+}
+
+.tweet {
+  font: Gotham Narrow;
+  font-size: 50px;
+  font-weight: bold;
+  color: #949494;
+  text-align: center;
+}

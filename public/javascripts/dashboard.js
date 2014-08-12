@@ -21,8 +21,14 @@ function populateUsersCountries(countries) {
     var newCountry = "<div id='" + normalizeName(country) + "'>" +
     "<h2>" + country + "</h2><ul></ul></div>";
     $countryHolder.append(newCountry);
+    $countryHolder.append($(".ex_button"));
   }
 }
+
+// function removeCountry() {
+//   $(".ex_button").click(function(e) {
+//     e.preventDefault();
+//   });
 
 function submitListener() {
   $("#submit").click(function(e) {
