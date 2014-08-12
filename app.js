@@ -43,7 +43,6 @@ var stream;
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
     console.log('Something is connected...');
-    streamTweets(client);
     getData(client);
   });
 }
@@ -64,18 +63,12 @@ function setStreaming() {
   console.log('set stream');
 }
 
-function streamTweets(client) {
-  console.log('Accepting tweets...');
-  var emitTweet = function(tweet) {
+function streamTweets() {
+  stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet.text);
-      client.emit('tweets', JSON.stringify(tweet));
+      io.sockets.emit('tweets', JSON.stringify(tweet));
     }
-  };
-  stream.on('tweet', emitTweet);
-  client.on('disconnect', function() {
-    console.log('DISCONNECTED!!!!!!!!!!!!!!!!!!!');
-    stream.removeListener('tweet', emitTweet);
   });
 }
 
@@ -125,5 +118,6 @@ function listenToServer() {
 (function() {
   setStreaming();
   openTweetConnection();
+  streamTweets();
   listenToServer();
 })();
