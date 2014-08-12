@@ -93,29 +93,52 @@ h2.center {
   left: 198px;
 }
 
-.tweetworld {
-  float: right;
-  font-size: 80px;
+.image {
+  float:left;
 }
 
-.tweet {
-  font: Gotham Narrow;
-  font-size: 50px;
-  font-weight: bold;
-  color: #949494;
+.tweetworld {
+  font-family: PicoBlackAl;
+  font-size: 60px;
+  text-align: center;
+  color: #0033CC;
+}
+
+#buttons {
   text-align: center;
 }
 
-.country_tweet_panel {
-background-color:white;
-border:2px;
-border-style:dashed;
-border-color:gray;
-border-radius:5%;
-margin:auto;
-float:left;
+#viewbuttons {
+  background-image: linear-gradient(to bottom,#0033CC 0,#0033CC 100%);
 }
 
+.btn-animation {
+  -webkit-transition: all 0.15s ease-in-out;
+  -moz-transition: all 0.15s ease-in-out;
+  -ms-transition: all 0.15s ease-in-out;
+  -o-transition: all 0.15s ease-in-out;
+}
+
+.green-glow:hover {
+  -webkit-text-shadow: 0 0 5px #fff;
+  text-shadow: 0 0 5px #fff;
+  -webkit-box-shadow: 0 0 5px #fff,
+                      0 0 10px #fff,
+                      0 0 15px #fff,
+                      0 0 20px #009900,
+                      0 0 35px #009900,
+                      0 0 40px #009900,
+                      0 0 50px #009900,
+                      0 0 75px #009900;
+  box-shadow: 0 0 5px #fff,
+              0 0 10px #fff,
+              0 0 15px #fff,
+              0 0 20px #009900,
+              0 0 35px #009900,
+              0 0 40px #009900,
+              0 0 50px #009900,
+              0 0 75px #009900;
+}
 
 
 
