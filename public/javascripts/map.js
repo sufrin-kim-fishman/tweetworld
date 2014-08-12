@@ -28,54 +28,45 @@ var styling = [{"featureType":"water","elementType":"geometry","stylers":
   "stylers":[{"color":"#000000"},{"lightness":20}]},
   {"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]}];
 
-var myLatlng, icon, mapOptions, map;
-
-$(document).ready(function() {
-  initialize();
-});
+var map;
 
 function initialize() {
-  myLatlng = new google.maps.LatLng(25, 10);
-  setIcon();
-  setMapOptions();
-  tweetListener();
+  var myLatlng = new google.maps.LatLng(25, 10);
+  var icon = setIcon();
+  var mapOptions = setMapOptions(myLatlng);
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  google.maps.event.addDomListener(window, 'load', initialize);
+  tweetListener(icon);
 }
 
 function setIcon() {
-  icon = {
+  return {
     url: "../images/pink_dot_very_small.png",
     size: new google.maps.Size(20, 20)
   };
 }
 
-function setMapOptions() {
-  mapOptions = {
+function setMapOptions(myLatlng) {
+  return {
     zoom: 2,
     center: myLatlng,
     styles: styling
   };
 }
 
-function tweetListener() {
+function tweetListener(icon) {
   server.on('tweets', function(d) {
-    console.log('hi');
-    d = JSON.parse(d);
-    console.log(d);
-    d3.json(d, function(data) {
-      makeD3Markers(d, data);
+    tweet = JSON.parse(d);
+    d3.json(tweet, function(data) {
+      D3Markers(tweet, data, icon);
     });
   });
 }
 
-function D3Markers(d, data) {
-  var tweetLatlng = new google.maps.LatLng(d.geo.coordinates[0], d.geo.coordinates[1]);
-  console.log(tweetLatlng);
-  var marker;
-  setMarker();
+function D3Markers(tweet, data, icon) {
+  var tweetLatlng = new google.maps.LatLng(tweet.geo.coordinates[0], tweet.geo.coordinates[1]);
+  var marker = setMarker(tweetLatlng, icon);
   marker.setMap(map);
-  var contentString = d.text;
+  var contentString = tweet.text;
   var infowindow = new google.maps.InfoWindow({
     content: contentString
   });
@@ -83,10 +74,12 @@ function D3Markers(d, data) {
   setTimeout(function(){infowindow.close();}, '6000');
 }
 
-function setMarker() {
-  marker = new google.maps.Marker({
+function setMarker(tweetLatlng, icon) {
+  return new google.maps.Marker({
     position: tweetLatlng,
     title:"Hello World!",
     icon: icon
   });
 }
+
+google.maps.event.addDomListener(window, 'load', initialize);
