@@ -68,7 +68,7 @@ function streamTweets(client) {
   console.log('Accepting tweets...');
   stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      // console.log(tweet);
+      console.log(tweet.text);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
