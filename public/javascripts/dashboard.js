@@ -1,5 +1,3 @@
-var server = io.connect('http://localhost:8080');
-
 function scrapeUsername() {
   return $("#username").text();
 }
@@ -54,28 +52,6 @@ function persistCountry(country) {
     user: scrapeUsername()
   };
   server.emit('country', JSON.stringify(countryObj));
-}
-
-function normalizeName(name) {
-  return name.split(" ").join("-");
-}
-
-function tweetListener() {
-  server.on('tweets', function(data) {
-    var tweet = JSON.parse(data);
-    var normalizedCountry = normalizeName(tweet.place.country);
-    if($("#" + normalizedCountry).length === 1) {
-      insertTweet(tweet, normalizedCountry);
-    }
-  });
-}
-
-function insertTweet(tweet, country) {
-  var $countryUl = $("#" + country + " ul");
-  if  ($countryUl.children().length > 9) {
-    $("#" + country +" li").last().remove();
-  }
-  $countryUl.prepend('<li>' + tweet.text + '</li>');
 }
 
 // function populateCountryTweets() {

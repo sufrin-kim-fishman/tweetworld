@@ -5,6 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/countries.js"></script>
     <script src="javascripts/script.js"></script>
     <script type="text/javascript" src="javascripts/dashboard.js"></script>
 
@@ -45,9 +46,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
-            <li><a href="/" >Home</a></li>
             <li><a href="/about" >About</a></li>
             <li><a href="/map" >Map</a></li>
+            <li><a href="/stream" >Stream</a></li>
             <% if (login) { %>
               <li><a href="/dashboard" >Dashboard</a></li>
               </ul>
