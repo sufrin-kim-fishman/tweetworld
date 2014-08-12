@@ -157,8 +157,8 @@ var states = {
 	"United Arab Emirates": "الامارات العربية المتحدة"
 };
 
-for(var hi=0; hi<states.length; hi++)
-    document.write("<option value=\""+states[hi]+"\">"+states[hi]+"</option>");
+for(var state in states)
+    document.write("<option value=\""+state+"\">"+state+"</option>");
 
 
 

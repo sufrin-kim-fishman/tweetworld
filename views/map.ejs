@@ -16,7 +16,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="javascripts/script.js"></script>
     <script type="text/javascript" src="javascripts/map.js"></script>
 
     <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
@@ -51,16 +50,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand">Tweet World</a>
+          <a href="/" class="navbar-brand">Tweet World</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
             <li><a href="/" >Home</a></li>
             <li><a href="/about" >About</a></li>
-    
+            <li><a href="/map" >Map</a></li>
             <% if (login) { %>
               <li><a href="/dashboard" >Dashboard</a></li>
-              <li><a href="/map" >Map</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout" >Log Out</a></li>
