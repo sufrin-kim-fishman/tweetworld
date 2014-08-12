@@ -17,14 +17,16 @@ function populateUsersCountries(countries) {
   for (var i = 0; i < countries.length; i++) {
     var country = countries[i];
     var newCountry = "<div id='" + normalizeName(country) + "'>" +
-    "<h2>" + country + "</h2><ul></ul></div>";
+    "<h2>" + country + "</h2><ul></ul>" +
+    '<button type="button" class="ex_button">X</button>' +
+    "</div>";
     $countryHolder.append(newCountry);
-    $countryHolder.append($(".ex_button"));
+    $countryHolder.append($(".delete"));
   }
 }
 
 // function removeCountry() {
-//   $(".ex_button").click(function(e) {
+//   $(".delete").click(function(e) {
 //     e.preventDefault();
 //   });
 
