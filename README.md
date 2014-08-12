@@ -39,7 +39,7 @@ Make a pull request if you're interested in helping develop for this project.
 
 ## Future
 
-feasfawdasdas
+We'd love to analyze tweet statistics by country to see trending hashtags. We also want to use a translation API to display tweets in languages selected by the user.
 
 ## Authors
 
