@@ -45,8 +45,8 @@ var states = {
 	"Djibouti": "Djibouti", 
 	"Dominican Republic": "Dominican Republic", 
 	"Ecuador": "Ecuador", 
-	"Estonia", "Eesti",
-	"Egypt", "مصر",  
+	"Estonia": "Eesti",
+	"Egypt": "مصر",  
 	"El Salvador": "El Salvador", 
 	"Spain": "España", 
 	"France": "France", 
@@ -76,7 +76,7 @@ var states = {
 	"Kenya": "Kenya", 
 	"Korea": "Korea, Republic Of", 
 	"Kosovo": "Kosovo",
-	"Kuwait", "دولة الكويت",
+	"Kuwait": "دولة الكويت",
 	"Latvia": "Latvija", 
 	"Lebanon": "Lebanon", 
 	"Lesotho": "Lesotho", 
@@ -115,7 +115,7 @@ var states = {
 	"Portugal": "Portugal", 
 	"Puerto Rico": "Puerto Rico", 
 	"The Philippines": "Republic of the Philippines",
-	"Qatar", "دولة قطر",  
+	"Qatar": "دولة قطر",  
 	"Romania": "Romania", 
 	"Morocco": "Royaume du Maroc", 
 	"Russia": "Russia", 
@@ -123,7 +123,7 @@ var states = {
 	"St. Kitts and Nevis": "Saint Kitts and Nevis", 
 	"St. Lucia": "Saint Lucia", 
 	"St. Vincent and the Grenadines": "Saint Vincent and the Grenadines", 
-	"Saudi Arabia", "المملكة العربية السعودية",
+	"Saudi Arabia": "المملكة العربية السعودية",
 	"Senegal": "Senegal", 
 	"Serbia": "Serbia", 
 	"Singapore": "Singapore", 
@@ -138,7 +138,7 @@ var states = {
 	"Syria": "Syrian Arab Republic", 
 	"Taiwan": "Taiwan", 
 	"Tanzania": "Tanzania, United Republic Of",
-	"Thailand", "ประเทศไทย", 
+	"Thailand": "ประเทศไทย", 
 	"Trinidad and Tobago": "Trinidad and Tobago", 
 	"Tunisia": "Tunisia", 
 	"Turks and Caicos": "Turks and Caicos Islands", 
@@ -154,11 +154,11 @@ var states = {
 	"Yemen": "Yemen", 
 	"Zambia": "Zambia", 
 	"Zimbabwe": "Zimbabwe",   
-	"United Arab Emirates", "الامارات العربية المتحدة"
+	"United Arab Emirates": "الامارات العربية المتحدة"
 };
 
-for(var hi=0; hi<states_translated.length; hi++)
-    document.write("<option value=\""+states_translated[hi]+"\">"+states_translated[hi]+"</option>");
+for(var hi=0; hi<states; hi++)
+    document.write("<option value=\""+states[hi]+"\">"+states[hi]+"</option>");
 
 
 

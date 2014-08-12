@@ -1,15 +1,19 @@
-<head>
-   <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TWEET WORLD</title>
+     <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-     <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
+    <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
     <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Optional theme -->
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-     <!--  flat-ui theme -->
+   
+      <!--  flat-ui theme -->
         <link rel="stylesheet" src="../stylesheets/flat-ui.css">
 
          <!--  any custom styles -->
@@ -23,6 +27,7 @@
     <![endif]-->
 
 </head>
+<body>
 
  <header>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -39,9 +44,8 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
             <li><a href="/" >Home</a></li>
-            <li><a href="#" >About</a></li>
+            <li><a href="/about" >About</a></li>
     
-    <div class="tweet_country_holder"></div>
             <% if (login) { %>
               <li><a href="/dashboard" >Dashboard</a></li>
               <li><a href="/map" >Map</a></li>
@@ -83,3 +87,9 @@
 
 <!-- Latest compiled and minified bootstrap JavaScript -->
       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    </body>
+
+    </html>
+
+    
