@@ -61,20 +61,24 @@ function catchError() {
 
 function streamTweets() {
   setTimeout(function() {
-    var t = new env.twitter({
-        consumer_key: apikeys.consumer_key,          
-        consumer_secret: apikeys.consumer_secret,       
-        access_token: apikeys.access_token,      
-        access_token_secret: apikeys.access_token_secret
-    });
-    stream = t.stream('statuses/sample');
-    stream.on('tweet', function(tweet) {
+    setStreaming().on('tweet', function(tweet) {
       if (tweet.place !== null) {
         console.log(tweet);
         client.emit('tweets', JSON.stringify(tweet));
       }
     });
   }, 500);
+}
+
+function setStreaming() {
+  var t = new env.twitter({
+      consumer_key: apikeys.consumer_key,          
+      consumer_secret: apikeys.consumer_secret,       
+      access_token: apikeys.access_token,      
+      access_token_secret: apikeys.access_token_secret
+  });
+  stream = t.stream('statuses/sample');
+  return stream;
 }
 
 function restartStreaming() {
