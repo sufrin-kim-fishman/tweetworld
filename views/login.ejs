@@ -61,7 +61,7 @@
     </div>
     </header>
 
-     <div class="container content">
+     <div class="container content" style="text-align:center;">
 
 <h1>Log In!</h1>
 
@@ -69,9 +69,9 @@
   <div><%= message %></div>
 <% } %>
 
-<form name="login_form" id="login_form" method="post" action="/login">
-      Username: <input type="text" name="username"><br>
-      Password: <input type="password" name="password"><br>
+<form name="login_form" id="login_form" method="post" action="/login" style="font-size:20px">
+      Username: <input type="text" name="username" style="margin:10px"><br>
+      Password: <input type="password" name="password" style="margin:10px"><br>
       <input type="submit" value="Log In" id="login">
 </form>
 

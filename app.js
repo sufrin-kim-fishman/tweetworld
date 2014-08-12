@@ -38,12 +38,10 @@ require('./routes/routes.js')(app, env.passport);
 
 var server = env.http.createServer(app);
 var io = env.socket.listen(server);
-var stream;
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
     console.log('Something is connected...');
-    streamTweets(client);
     getData(client);
   });
 }
@@ -60,16 +58,14 @@ function setStreaming() {
       access_token: apikeys.access_token,      
       access_token_secret: apikeys.access_token_secret
   });
-  stream = t.stream('statuses/sample');
-  console.log('set stream');
+  return t.stream('statuses/sample');
 }
 
-function streamTweets(client) {
-  console.log('Accepting tweets...');
-  stream.on('tweet', function(tweet) {
+function streamTweets() {
+  setStreaming().on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      // console.log(tweet);
-      client.emit('tweets', JSON.stringify(tweet));
+      console.log(tweet.text);
+      io.sockets.emit('tweets', JSON.stringify(tweet));
     }
   });
 }
@@ -118,7 +114,7 @@ function listenToServer() {
 }
 
 (function() {
-  setStreaming();
+  streamTweets();
   openTweetConnection();
   listenToServer();
 })();
