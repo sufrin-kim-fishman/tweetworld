@@ -38,14 +38,7 @@ require('./routes/routes.js')(app, env.passport);
 var server = env.http.createServer(app);
 var io = env.socket.listen(server);
 var client;
-
-var t = new env.twitter({
-    consumer_key: apikeys.consumer_key,          
-    consumer_secret: apikeys.consumer_secret,       
-    access_token: apikeys.access_token,      
-    access_token_secret: apikeys.access_token_secret
-});
-var stream = t.stream('statuses/sample');
+var stream;
 
 function openTweetConnection() {
   io.sockets.on('connection', function(clientSide) {
@@ -53,8 +46,7 @@ function openTweetConnection() {
     client = clientSide;
     catchError();
     streamTweets();
-    stopStreaming();
-    // restartStreaming();
+    restartStreaming();
     getUsername();
     getCountry();
   });
@@ -68,11 +60,29 @@ function catchError() {
 
 function streamTweets() {
   console.log('About to stream...');
-  stream.on('tweet', function(tweet) {
-    if (tweet.place !== null) {
-      console.log(tweet);
-      client.emit('tweets', JSON.stringify(tweet));
-    }
+  setTimeout(function() {
+    var t = new env.twitter({
+        consumer_key: apikeys.consumer_key,          
+        consumer_secret: apikeys.consumer_secret,       
+        access_token: apikeys.access_token,      
+        access_token_secret: apikeys.access_token_secret
+    });
+    stream = t.stream('statuses/sample');
+    stream.on('tweet', function(tweet) {
+      if (tweet.place !== null) {
+        console.log(tweet);
+        client.emit('tweets', JSON.stringify(tweet));
+      }
+    });
+  }, 500);
+}
+
+function restartStreaming() {
+  client.on('restart-tweets', function() {
+    stream.stop();
+    setTimeout(function() {
+      streamTweets();
+    }, 500);
   });
 }
 
@@ -117,19 +127,6 @@ function persistCountry(countryName, username) {
 
 function listenToServer() {
   server.listen(env.port);
-}
-
-function stopStreaming() {
-  client.on('stop-tweets', function() {
-    stream.stop();
-    console.log('tweets stopped');
-  });
-}
-
-function restartStreaming() {
-  client.on('restart-tweets', function() {
-    stream.start();
-  });
 }
 
 (function() {

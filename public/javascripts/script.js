@@ -42,21 +42,14 @@ function tweetListener() {
   });
 }
 
-function stopStreaming() {
-  $(".tweet-stream").click(function() {
-    server.emit('stop-tweets');
-  });
-}
-
 function restartStreaming() {
-  $(".tweet-stream").click(function() {
+  if ($("#home").length === 1) {
     server.emit('restart-tweets');
-  });
+  }
 }
 
 $(function(){
   submitListener();
   tweetListener();
-  stopStreaming();
-  // restartStreaming();
+  restartStreaming();
 });

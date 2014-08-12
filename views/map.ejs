@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>TWEET WORLD</title>
+     <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
@@ -10,20 +12,41 @@
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnmgA_TW_34xNXfZ6q6pSMiznkbQtCutY"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="javascripts/script.js"></script>
     <script type="text/javascript" src="javascripts/map.js"></script>
+
+    <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
+    <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Optional theme -->
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+   
+      <!--  flat-ui theme -->
+        <link rel="stylesheet" src="../stylesheets/flat-ui.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
   </head>
   <body>
     <header>
     <% if (login) { %>
-      <a href="/dashboard" class="btn btn-default btn-sm tweet-stream">Dashboard</a>
+      <a href="/dashboard" class="btn btn-default btn-sm">Dashboard</a>
       <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
     <% } else { %>
-      <a href="/" class="btn btn-default btn-sm tweet-stream">Home</a>
+      <a href="/" class="btn btn-default btn-sm">Home</a>
       <a href="/login" class="btn btn-default btn-sm">Log In</a>
       <a href="/signup" class="btn btn-default btn-sm">Sign Up</a>
     <% } %>
     </header>
     <div id="map-canvas"/>
+
+     <!-- Latest compiled and minified bootstrap JavaScript -->
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </body>
 </html>
