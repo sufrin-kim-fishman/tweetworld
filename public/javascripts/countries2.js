@@ -76,7 +76,7 @@ var states = {
 	"Kenya": "Kenya", 
 	"Korea": "Korea, Republic Of", 
 	"Kosovo": "Kosovo",
-	"Kuwait", "دولة الكويت",
+	"Kuwait": "دولة الكويت",
 	"Latvia": "Latvija", 
 	"Lebanon": "Lebanon", 
 	"Lesotho": "Lesotho", 
