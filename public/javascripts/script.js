@@ -17,7 +17,7 @@ function normalizeName(name) {
 
 function submitListener() {
   $("#submit").click(function(e) {
-    var $country = $("#country").val();
+    var $country = states[$("#country").val()];
     var country = normalizeName($country);
     addNewCountry($country, country);
     e.preventDefault();
@@ -27,7 +27,7 @@ function submitListener() {
 function addNewCountry($country, country) {
   if($("#" + country).length === 0) {
     var newCountry = "<div id='" + country + "'>" + 
-      "<h2>" + $country + "</h2><ul></ul></div>"
+      "<h2>" + $("#country").val() + "</h2><ul></ul></div>"
     $(".tweet_country_holder").append(newCountry);
   }
 }
