@@ -1,23 +1,10 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>TWEET WORLD</title>
      <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map-canvas { height: 100% }
-      #twitter { height: 1px; width: 1px;}
-    </style>
     <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnmgA_TW_34xNXfZ6q6pSMiznkbQtCutY"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="javascripts/script.js"></script>
-    <script type="text/javascript" src="javascripts/map.js"></script>
 
     <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
     <!-- Latest compiled and minified CSS -->
@@ -57,7 +44,6 @@
             <li><a href="/" >Home</a></li>
             <li><a href="/about" >About</a></li>
     
-    <div class="tweet_country_holder"></div>
             <% if (login) { %>
               <li><a href="/dashboard" >Dashboard</a></li>
               <li><a href="/map" >Map</a></li>
