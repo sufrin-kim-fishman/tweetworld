@@ -94,7 +94,7 @@ function sendUsersCountries(user) {
   });
 }
 
-function getCountry(client) {
+function getCountry(client, callback) {
   client.on('country', function(countryObj) {
     var country = JSON.parse(countryObj);
     persistCountry(country.name, country.user);
