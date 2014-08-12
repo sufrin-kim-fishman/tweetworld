@@ -17,7 +17,7 @@ function normalizeName(name) {
 
 function submitListener() {
   $("#submit").click(function(e) {
-    var $country = $("#country").val();
+    var $country = states[$("#country").val()];
     var country = normalizeName($country);
     addNewCountry($country, country);
     e.preventDefault();
