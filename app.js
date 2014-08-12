@@ -38,24 +38,19 @@ require('./routes/routes.js')(app, env.passport);
 
 var server = env.http.createServer(app);
 var io = env.socket.listen(server);
-var client, stream;
+var stream;
 
 function openTweetConnection() {
-  io.sockets.on('connection', function(clientSide) {
-    client = clientSide;
-    streamTweets();
-    startListeners();
+  io.sockets.on('connection', function(client) {
+    console.log('Something is connected...');
+    streamTweets(client);
+    getData(client);
   });
 }
 
-function startListeners() {
-  restartStreaming();
-  stopStreaming();
-}
-
-function getData() {
-  getUsername();
-  getCountry();
+function getData(client) {
+  getUsername(client);
+  getCountry(client);
 }
 
 function setStreaming() {
@@ -67,44 +62,19 @@ function setStreaming() {
   });
   stream = t.stream('statuses/sample');
   console.log('set stream');
-  return stream;
 }
 
-function streamTweets() {
-  console.log('About to stream...');
-  setStreaming().on('tweet', function(tweet) {
+function streamTweets(client) {
+  console.log('Accepting tweets...');
+  stream.on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      console.log(tweet);
+      // console.log(tweet);
       client.emit('tweets', JSON.stringify(tweet));
     }
   });
-  getData();
 }
 
-function streamTweetsAfterDelay() {
-  setTimeout(function() {
-    streamTweets();
-  }, 500);
-}
-
-function restartStreaming() {
-  client.on('restart-tweets', function() {
-    setTimeout(function() {
-      stream.stop();
-      streamTweetsAfterDelay();
-    }, 500);
-  });
-}
-
-function stopStreaming() {
-  client.on('stop-tweets', function() {
-    setTimeout(function() {
-      stream.stop();
-    }, 500);
-  });
-}
-
-function getUsername() {
+function getUsername(client) {
   client.on('username', function(username) {
     findUser(username)
     .success(function(user) {
@@ -124,7 +94,7 @@ function sendUsersCountries(user) {
   });
 }
 
-function getCountry() {
+function getCountry(client) {
   client.on('country', function(countryObj) {
     var country = JSON.parse(countryObj);
     persistCountry(country.name, country.user);
@@ -148,6 +118,7 @@ function listenToServer() {
 }
 
 (function() {
+  setStreaming();
   openTweetConnection();
   listenToServer();
 })();
