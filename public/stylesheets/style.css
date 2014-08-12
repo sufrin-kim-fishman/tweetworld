@@ -1,7 +1,7 @@
 body {
   /*padding: 50px;*/
   font-family:"Symbola";
-   background:url('') no-repeat center center fixed; 
+   background:url('../images/pale_blue_background.gif') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
