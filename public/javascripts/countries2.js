@@ -119,7 +119,7 @@ var states = {
 	"Romania": "Romania", 
 	"Morocco": "Royaume du Maroc", 
 	"Russia": "Russia", 
-	"St. Barths ": "Saint Barthelemy", 
+	"St. Barths": "Saint Barthelemy", 
 	"St. Kitts and Nevis": "Saint Kitts and Nevis", 
 	"St. Lucia": "Saint Lucia", 
 	"St. Vincent and the Grenadines": "Saint Vincent and the Grenadines", 

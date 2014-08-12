@@ -1,7 +1,7 @@
 body {
   /*padding: 50px;*/
   font-family:"Symbola";
-   background:url('../images/pale_blue_background.gif') no-repeat center center fixed; 
+  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -42,28 +42,32 @@ footer {
   padding: 5px;
   display: inline-block;
   background-color: #fff;
-  color: #333;
+  color: #949494;
 }
 
 .about-div {
-  background-color: #333;
+  /*background-color: #333;*/
   border-radius: 10px;
-  color: #fff;
+  color: #949494;*/
   padding: 2.5%;
-  overflow: scroll;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Arial;
+  /*overflow: scroll;*/
 }
 
 .left-about {
-  height: 400px;
-  float: left;
-  width: 30%;
+  /*height: 400px;*/
+  width: 80%;
   padding:50px;
+  margin: auto;
 }
 
 .right-about {
-  height: 400px;
-  float: right;
-  width: 65%;
+  /*height: 400px;*/
+  /*float: right;*/
+  width: 80%;
+  margin: auto;
   text-align: center;
 }
 
