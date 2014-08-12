@@ -3,20 +3,7 @@ server.on('error', function() {
   server.socket.connect();
 });
 
-$(document).ready(function() {
-  initialize();
-});
-
-function initialize() {
-  var myLatlng = new google.maps.LatLng(25, 10);
-  var icon = {
-    url: "../images/pink_dot_very_small.png",
-    size: new google.maps.Size(20, 20)
-  };
-  var mapOptions = {
-  zoom: 2,
-  center: myLatlng,
-  styles: [{"featureType":"water","elementType":"geometry","stylers":
+var styling = [{"featureType":"water","elementType":"geometry","stylers":
   [{"color":"#0B3861"},{"lightness":25}]},
   {"featureType":"landscape","elementType":"geometry",
   "stylers":[{"color":"#00BFFF"},{"lightness":20}]},
@@ -39,34 +26,67 @@ function initialize() {
   "stylers":[{"color":"#000000"},{"lightness":19}]},
   {"featureType":"administrative","elementType":"geometry.fill",
   "stylers":[{"color":"#000000"},{"lightness":20}]},
-  {"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]}]
-                };
+  {"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]}];
 
-// }
-var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+var myLatlng, icon, mapOptions, map;
 
+$(document).ready(function() {
+  initialize();
+});
+
+function initialize() {
+  myLatlng = new google.maps.LatLng(25, 10);
+  setIcon();
+  setMapOptions();
+  tweetListener();
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  google.maps.event.addDomListener(window, 'load', initialize);
+}
+
+function setIcon() {
+  icon = {
+    url: "../images/pink_dot_very_small.png",
+    size: new google.maps.Size(20, 20)
+  };
+}
+
+function setMapOptions() {
+  mapOptions = {
+    zoom: 2,
+    center: myLatlng,
+    styles: styling
+  };
+}
+
+function tweetListener() {
   server.on('tweets', function(d) {
     console.log('hi');
     d = JSON.parse(d);
     console.log(d);
     d3.json(d, function(data) {
-      var tweetLatlng = new google.maps.LatLng(d.geo.coordinates[0], d.geo.coordinates[1]);
-      console.log(tweetLatlng);
-      var marker = new google.maps.Marker({
-        position: tweetLatlng,
-        title:"Hello World!",
-        icon: icon
-      })
-      marker.setMap(map);
-      var contentString = d.text;
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-      // google.maps.event.addListener(marker, 'click', function() {
-        infowindow.open(map, marker);
-        setTimeout(function(){infowindow.close();}, '6000');
-      // });
-});
-});
-google.maps.event.addDomListener(window, 'load', initialize);
-};
+      makeD3Markers(d, data);
+    });
+  });
+}
+
+function D3Markers(d, data) {
+  var tweetLatlng = new google.maps.LatLng(d.geo.coordinates[0], d.geo.coordinates[1]);
+  console.log(tweetLatlng);
+  var marker;
+  setMarker();
+  marker.setMap(map);
+  var contentString = d.text;
+  var infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  infowindow.open(map, marker);
+  setTimeout(function(){infowindow.close();}, '6000');
+}
+
+function setMarker() {
+  marker = new google.maps.Marker({
+    position: tweetLatlng,
+    title:"Hello World!",
+    icon: icon
+  });
+}
