@@ -8,10 +8,16 @@
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #map-canvas { height: 100% }
+      #twitter { height: 1px; width: 1px;}
     </style>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnmgA_TW_34xNXfZ6q6pSMiznkbQtCutY"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+>>>>>>> 10158dfa40983c2c996cc0708fcfd5b72e257edf
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="javascripts/script.js"></script>
     <script type="text/javascript" src="javascripts/map.js"></script>
@@ -34,17 +40,49 @@
 
   </head>
   <body>
+
     <header>
-    <% if (login) { %>
-      <a href="/dashboard" class="btn btn-default btn-sm">Dashboard</a>
-      <a href="/logout" class="btn btn-default btn-sm">Log Out</a>
-    <% } else { %>
-      <a href="/" class="btn btn-default btn-sm">Home</a>
-      <a href="/login" class="btn btn-default btn-sm">Log In</a>
-      <a href="/signup" class="btn btn-default btn-sm">Sign Up</a>
-    <% } %>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="navbar-brand">Tweet World</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a href="/" >Home</a></li>
+            <li><a href="#" >About</a></li>
+    
+    <div class="tweet_country_holder"></div>
+            <% if (login) { %>
+              <li><a href="/dashboard" >Dashboard</a></li>
+              <li><a href="/map" >Map</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout" >Log Out</a></li>
+            <% } else { %>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+               <li><a href="/signup" >Sign Up</a></li>
+                <li><a href="/login" >Log In</a></li>
+            <% } %>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
     </header>
+
     <div id="map-canvas"/>
+
+        <footer>
+    Built with &#9825; at the <a href="http://www.flatironschool.com" target="_blank">Flatiron School</a>
+    <span style="float:left;padding-left:2px;">  &#169; Copyright 2014 MIT License</span>
+    </footer>
 
      <!-- Latest compiled and minified bootstrap JavaScript -->
       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

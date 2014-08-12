@@ -11,6 +11,7 @@ app.use(env.session({secret: 'topsecretsecret',
                 cookie: {maxAge: 6000}}));
 app.use(env.express.static(env.path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
+app.use("../stylesheets", env.express.static(__dirname + "/stylesheets"));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(env.cookieParser());
@@ -132,4 +133,4 @@ function listenToServer() {
 (function() {
   openTweetConnection();
   listenToServer();
-})()
+})();
