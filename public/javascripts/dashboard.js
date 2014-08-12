@@ -34,13 +34,13 @@ function submitListener() {
   $("#submit").click(function(e) {
     var $country = $("#country").val();
     var country = normalizeName($country);
-    addNewCountry($country, country);
+    addNewDashboardCountry($country, country);
     persistCountry($country);
     e.preventDefault();
   });
 }
 
-function addNewCountry($country, country) {
+function addNewDashboardCountry($country, country) {
   if($("#" + country).length === 0) {
     var newCountry = "<div id='" + country + "'>" +
       "<h2>" + $country + "</h2><ul></ul></div>"
