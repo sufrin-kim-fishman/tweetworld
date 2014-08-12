@@ -43,7 +43,9 @@ function submitListener() {
 function addNewDashboardCountry($country, country) {
   if($("#" + country).length === 0) {
     var newCountry = "<div id='" + country + "'>" +
-      "<h2>" + $country + "</h2><ul></ul></div>"
+      "<h2>" + $country + "</h2>"+
+      '<button type="button" class="ex_button">X</button>' +
+      "<ul></ul></div>"
     $(".tweet_country_holder").append(newCountry);
   }
 }
