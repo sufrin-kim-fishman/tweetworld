@@ -49,5 +49,5 @@ We'd love to analyze tweet statistics by country to see trending hashtags. We al
 
 ## License
 
-Concertify is MIT Licensed. See LICENSE for details.
+Tweet World is MIT Licensed. See LICENSE for details.
 
