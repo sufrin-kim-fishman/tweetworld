@@ -28,52 +28,49 @@ var styling = [{"featureType":"water","elementType":"geometry","stylers":
   "stylers":[{"color":"#000000"},{"lightness":20}]},
   {"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]}];
 
-var myLatlng, icon, mapOptions, map;
-
 $(document).ready(function() {
   initialize();
 });
 
 function initialize() {
-  myLatlng = new google.maps.LatLng(25, 10);
-  setIcon();
-  setMapOptions();
-  tweetListener();
-  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  var myLatlng = new google.maps.LatLng(25, 10);
+  var icon = setIcon();
+  var mapOptions = setMapOptions(myLatlng);
+  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  tweetListener(map, icon);
   google.maps.event.addDomListener(window, 'load', initialize);
 }
 
 function setIcon() {
-  icon = {
+  return {
     url: "../images/pink_dot_very_small.png",
     size: new google.maps.Size(20, 20)
   };
 }
 
-function setMapOptions() {
-  mapOptions = {
+function setMapOptions(myLatlng) {
+  return {
     zoom: 2,
     center: myLatlng,
     styles: styling
   };
 }
 
-function tweetListener() {
+function tweetListener(map, icon) {
   server.on('tweets', function(d) {
     console.log('hi');
     d = JSON.parse(d);
     console.log(d);
     d3.json(d, function(data) {
-      makeD3Markers(d, data);
+      D3Markers(d, data, map, icon);
     });
   });
 }
 
-function D3Markers(d, data) {
+function D3Markers(d, data, map, icon) {
   var tweetLatlng = new google.maps.LatLng(d.geo.coordinates[0], d.geo.coordinates[1]);
   console.log(tweetLatlng);
-  var marker;
-  setMarker();
+  var marker = setMarker(tweetLatlng, icon);
   marker.setMap(map);
   var contentString = d.text;
   var infowindow = new google.maps.InfoWindow({
@@ -83,8 +80,8 @@ function D3Markers(d, data) {
   setTimeout(function(){infowindow.close();}, '6000');
 }
 
-function setMarker() {
-  marker = new google.maps.Marker({
+function setMarker(tweetLatlng, icon) {
+  return new google.maps.Marker({
     position: tweetLatlng,
     title:"Hello World!",
     icon: icon
