@@ -43,7 +43,6 @@ var stream;
 
 function openTweetConnection() {
   io.sockets.on('connection', function(clientSide) {
-    console.log('server is connected...');
     client = clientSide;
     catchError();
     streamTweets();
@@ -60,7 +59,6 @@ function catchError() {
 }
 
 function streamTweets() {
-  console.log('About to stream...');
   setTimeout(function() {
     var t = new env.twitter({
         consumer_key: apikeys.consumer_key,          

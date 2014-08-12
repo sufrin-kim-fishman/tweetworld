@@ -72,18 +72,6 @@ function insertTweet(tweet, country) {
   $countryUl.prepend('<li>' + tweet.text + '</li>');
 }
 
-function stopStreaming() {
-  $("a").click(function() {
-    server.emit('stop-tweets');
-  });
-}
-
-function restartStreaming() {
-  $(".tweet-stream").click(function() {
-    server.emit('restart-tweets');
-  });
-}
-
 // function populateCountryTweets() {
 
 // }
@@ -93,7 +81,5 @@ $(function() {
   sendUsername();
   submitListener();
   tweetListener();
-  stopStreaming();
-  restartStreaming();
   //populateCountryTweets();
 });
