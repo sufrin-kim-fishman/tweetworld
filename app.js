@@ -66,11 +66,16 @@ function setStreaming() {
 
 function streamTweets(client) {
   console.log('Accepting tweets...');
-  stream.on('tweet', function(tweet) {
+  var emitTweet = function(tweet) {
     if (tweet.place !== null) {
       console.log(tweet.text);
       client.emit('tweets', JSON.stringify(tweet));
     }
+  };
+  stream.on('tweet', emitTweet);
+  client.on('disconnect', function() {
+    console.log('DISCONNECTED!!!!!!!!!!!!!!!!!!!');
+    stream.removeListener('tweet', emitTweet);
   });
 }
 
