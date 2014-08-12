@@ -38,36 +38,24 @@ require('./routes/routes.js')(app, env.passport);
 
 var server = env.http.createServer(app);
 var io = env.socket.listen(server);
-var client;
-var stream;
+var client, stream;
 
 function openTweetConnection() {
   io.sockets.on('connection', function(clientSide) {
     client = clientSide;
-    catchError();
     streamTweets();
-    restartStreaming();
-    stopStreaming();
-    getUsername();
-    getCountry();
+    startListeners();
   });
 }
 
-function catchError() {
-  client.on('error', function() {
-    console.log('error catch!');
-  });
+function startListeners() {
+  restartStreaming();
+  stopStreaming();
 }
 
-function streamTweets() {
-  setTimeout(function() {
-    setStreaming().on('tweet', function(tweet) {
-      if (tweet.place !== null) {
-        console.log(tweet);
-        client.emit('tweets', JSON.stringify(tweet));
-      }
-    });
-  }, 500);
+function getData() {
+  getUsername();
+  getCountry();
 }
 
 function setStreaming() {
@@ -78,21 +66,41 @@ function setStreaming() {
       access_token_secret: apikeys.access_token_secret
   });
   stream = t.stream('statuses/sample');
+  console.log('set stream');
   return stream;
+}
+
+function streamTweets() {
+  console.log('About to stream...');
+  setStreaming().on('tweet', function(tweet) {
+    if (tweet.place !== null) {
+      console.log(tweet);
+      client.emit('tweets', JSON.stringify(tweet));
+    }
+  });
+  getData();
+}
+
+function streamTweetsAfterDelay() {
+  setTimeout(function() {
+    streamTweets();
+  }, 500);
 }
 
 function restartStreaming() {
   client.on('restart-tweets', function() {
-    stream.stop();
     setTimeout(function() {
-      streamTweets();
+      stream.stop();
+      streamTweetsAfterDelay();
     }, 500);
   });
 }
 
 function stopStreaming() {
   client.on('stop-tweets', function() {
-    stream.stop();
+    setTimeout(function() {
+      stream.stop();
+    }, 500);
   });
 }
 
