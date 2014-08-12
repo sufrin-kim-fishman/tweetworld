@@ -58,6 +58,8 @@ var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions)
         icon: icon
       })
       marker.setMap(map);
+      map.setZoom(8);
+      map.panTo(marker.position);
       var contentString = d.text;
       var infowindow = new google.maps.InfoWindow({
         content: contentString

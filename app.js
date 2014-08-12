@@ -76,9 +76,10 @@ function streamTweets() {
         console.log(tweet);
         addCountryToDatabase(tweet);
         client.emit('tweets', JSON.stringify(tweet));
+        setTimeout(function(){}, '6000');
       }
       i++;
-    }
+      }
   });
 }
 
