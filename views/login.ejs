@@ -1,17 +1,31 @@
-<head>
-   <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TWEET WORLD</title>
+     <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+      #twitter { height: 1px; width: 1px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnmgA_TW_34xNXfZ6q6pSMiznkbQtCutY"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="javascripts/script.js"></script>
+    <script type="text/javascript" src="javascripts/map.js"></script>
 
-     <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
+    <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
     <!-- Latest compiled and minified CSS -->
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <!-- Optional theme -->
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-     <!--  flat-ui theme -->
+   
+      <!--  flat-ui theme -->
         <link rel="stylesheet" src="../stylesheets/flat-ui.css">
 
          <!--  any custom styles -->
@@ -23,8 +37,8 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
+<body>
 
  <header>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -85,3 +99,6 @@
 
 <!-- Latest compiled and minified bootstrap JavaScript -->
       <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  </body>
+  </html>
