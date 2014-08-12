@@ -3,13 +3,23 @@ server.on('error', function() {
   server.socket.connect();
 });
 
+
+
 function insertTweet(tweet, country) {
-  var $countryUl = $("#" + country + " ul");
+  // jQuery
+$.getScript('./countries.js', function()
+{
+    // script is now loaded and executed.
+    // put your dependent JS here.
+
+
+  var $countryUl = $("#" + states[country] + " ul");
   if  ($countryUl.children().length > 9) {
     $("#" + country +" li").last().remove();
   }
   $countryUl.prepend('<li>' + tweet.text + '</li>');
 }
+)}
 
 function normalizeName(name) {
   return name.split(" ").join("-");
