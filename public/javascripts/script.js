@@ -12,7 +12,7 @@ function insertTweet(tweet, country) {
 }
 
 function normalizeName(name) {
-  return name.split(" ").join("-");
+  return name.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" ").join("-");
 }
 
 function submitListener() {
