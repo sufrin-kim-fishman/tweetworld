@@ -8,7 +8,7 @@ function insertTweet(tweet, country) {
   if  ($countryUl.children().length > 9) {
     $("#" + country +" li").last().remove();
   }
- $countryUl.prepend('<li>' + tweet.text + '</li>');
+  $countryUl.prepend('<li>' + tweet.text + '</li>');
 }
 
 function normalizeName(name) {
@@ -33,8 +33,8 @@ function addNewCountry($country, country) {
 }
 
 function tweetListener() {
-  server.on('tweets', function(tweet) {
-    tweet = JSON.parse(tweet);
+  server.on('tweets', function(data) {
+    var tweet = JSON.parse(data);
     var normalizedCountry = normalizeName(tweet.place.country);
     if($("#" + normalizedCountry).length === 1) {
       insertTweet(tweet, normalizedCountry);
@@ -42,7 +42,21 @@ function tweetListener() {
   });
 }
 
+function stopStreaming() {
+  $('a').click(function() {
+    server.emit('stop-tweets');
+  });
+}
+
+function restartStreaming() {
+  if ($("#home").length === 1) {
+    server.emit('restart-tweets');
+  }
+}
+
 $(function(){
   submitListener();
   tweetListener();
+  stopStreaming();
+  restartStreaming();
 });

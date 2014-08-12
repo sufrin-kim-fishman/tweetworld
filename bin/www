@@ -16,4 +16,4 @@ var server = app.listen(app.get('port'), function() {
 
 
 var pg = require('pg');
-var conString = "postgres://ilanasufrin:password@localhost:8080/database";
+var conString = "postgres://Ado:password@localhost:8080/database";
