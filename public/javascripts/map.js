@@ -28,17 +28,14 @@ var styling = [{"featureType":"water","elementType":"geometry","stylers":
   "stylers":[{"color":"#000000"},{"lightness":20}]},
   {"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]}];
 
-$(document).ready(function() {
-  initialize();
-});
+var map;
 
 function initialize() {
   var myLatlng = new google.maps.LatLng(25, 10);
   var icon = setIcon();
   var mapOptions = setMapOptions(myLatlng);
-  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-  tweetListener(map, icon);
-  google.maps.event.addDomListener(window, 'load', initialize);
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  tweetListener(icon);
 }
 
 function setIcon() {
@@ -56,23 +53,20 @@ function setMapOptions(myLatlng) {
   };
 }
 
-function tweetListener(map, icon) {
+function tweetListener(icon) {
   server.on('tweets', function(d) {
-    console.log('hi');
-    d = JSON.parse(d);
-    console.log(d);
-    d3.json(d, function(data) {
-      D3Markers(d, data, map, icon);
+    tweet = JSON.parse(d);
+    d3.json(tweet, function(data) {
+      D3Markers(tweet, data, icon);
     });
   });
 }
 
-function D3Markers(d, data, map, icon) {
-  var tweetLatlng = new google.maps.LatLng(d.geo.coordinates[0], d.geo.coordinates[1]);
-  console.log(tweetLatlng);
+function D3Markers(tweet, data, icon) {
+  var tweetLatlng = new google.maps.LatLng(tweet.geo.coordinates[0], tweet.geo.coordinates[1]);
   var marker = setMarker(tweetLatlng, icon);
   marker.setMap(map);
-  var contentString = d.text;
+  var contentString = tweet.text;
   var infowindow = new google.maps.InfoWindow({
     content: contentString
   });
@@ -87,3 +81,5 @@ function setMarker(tweetLatlng, icon) {
     icon: icon
   });
 }
+
+google.maps.event.addDomListener(window, 'load', initialize);
