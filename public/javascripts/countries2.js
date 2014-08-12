@@ -119,7 +119,7 @@ var states = {
 	"Romania": "Romania", 
 	"Morocco": "Royaume du Maroc", 
 	"Russia": "Russia", 
-	"St. Barths ": "Saint Barthelemy", 
+	"St. Barths": "Saint Barthelemy", 
 	"St. Kitts and Nevis": "Saint Kitts and Nevis", 
 	"St. Lucia": "Saint Lucia", 
 	"St. Vincent and the Grenadines": "Saint Vincent and the Grenadines", 
@@ -157,8 +157,8 @@ var states = {
 	"United Arab Emirates", "الامارات العربية المتحدة"
 };
 
-for(var hi=0; hi<states_translated.length; hi++)
-    document.write("<option value=\""+states_translated[hi]+"\">"+states_translated[hi]+"</option>");
+for(var hi=0; hi<states.length; hi++)
+    document.write("<option value=\""+states[hi]+"\">"+states[hi]+"</option>");
 
 
 
