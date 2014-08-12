@@ -47,6 +47,7 @@ function openTweetConnection() {
     catchError();
     streamTweets();
     restartStreaming();
+    stopStreaming();
     getUsername();
     getCountry();
   });
@@ -82,6 +83,12 @@ function restartStreaming() {
     setTimeout(function() {
       streamTweets();
     }, 500);
+  });
+}
+
+function stopStreaming() {
+  client.on('stop-tweets', function() {
+    stream.stop();
   });
 }
 

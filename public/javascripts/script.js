@@ -42,6 +42,12 @@ function tweetListener() {
   });
 }
 
+function stopStreaming() {
+  $('a').click(function() {
+    server.emit('stop-tweets');
+  });
+}
+
 function restartStreaming() {
   if ($("#home").length === 1) {
     server.emit('restart-tweets');
@@ -51,5 +57,6 @@ function restartStreaming() {
 $(function(){
   submitListener();
   tweetListener();
+  stopStreaming();
   restartStreaming();
 });
