@@ -8,7 +8,7 @@ var states = {
 	"Argentina": "Argentina", 
 	"Armenia": "Armenia", 
 	"Australia": "Australia",
-	"Austria", "Österreich", 
+	"Austria": "Österreich", 
 	"Azerbaijan": "Azerbaijan", 
 	"Bahamas": "Bahamas", 
 	"Bahrain": "Bahrain", 

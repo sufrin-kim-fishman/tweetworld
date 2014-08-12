@@ -4,10 +4,6 @@ var env = require('./config/environment.js')()
   , User = database.sequelize.import(__dirname + "/models/user.js")
   , Country = database.sequelize.import(__dirname + "/models/country.js")
   , apikeys = require('./config/apikeys.js')();
-//go into models/index.js and change your database settings from ilanasufrin to yours
-
-//RUN THIS LOCALLY: create database "TweetWorld";
-//var conString = "postgres://ilanasufrin:@localhost:5432/TweetWorld";
 
 app.use(env.session({secret: 'topsecretsecret',
                 saveUninitialized: true,
@@ -35,7 +31,7 @@ env.db
         console.log('Express server listening on port ' + app.get('env.port'))
       })
     }
-  })
+  });
 
 require('./config/passport')(env.passport);
 require('./routes/routes.js')(app, env.passport);
@@ -43,20 +39,15 @@ require('./routes/routes.js')(app, env.passport);
 var server = env.http.createServer(app);
 var io = env.socket.listen(server);
 var client;
-
-var t = new env.twitter({
-    consumer_key: apikeys.consumer_key,          
-    consumer_secret: apikeys.consumer_secret,       
-    access_token: apikeys.access_token,      
-    access_token_secret: apikeys.access_token_secret
-});
-var stream = t.stream('statuses/sample');
+var stream;
 
 function openTweetConnection() {
   io.sockets.on('connection', function(clientSide) {
     client = clientSide;
     catchError();
     streamTweets();
+    restartStreaming();
+    stopStreaming();
     getUsername();
     getCountry();
   });
@@ -69,53 +60,53 @@ function catchError() {
 }
 
 function streamTweets() {
-  var i = 0;
-  stream.on('tweet', function(tweet) {
-    if (tweet.place !== null) {
-      if(i % 5 === 0) {
+  setTimeout(function() {
+    setStreaming().on('tweet', function(tweet) {
+      if (tweet.place !== null) {
         console.log(tweet);
-        addCountryToDatabase(tweet);
         client.emit('tweets', JSON.stringify(tweet));
-        setTimeout(function(){}, '6000');
       }
-      i++;
-      }
+    });
+  }, 500);
+}
+
+function setStreaming() {
+  var t = new env.twitter({
+      consumer_key: apikeys.consumer_key,          
+      consumer_secret: apikeys.consumer_secret,       
+      access_token: apikeys.access_token,      
+      access_token_secret: apikeys.access_token_secret
+  });
+  stream = t.stream('statuses/sample');
+  return stream;
+}
+
+function restartStreaming() {
+  client.on('restart-tweets', function() {
+    stream.stop();
+    setTimeout(function() {
+      streamTweets();
+    }, 500);
   });
 }
 
-function addCountryToDatabase(tweet, done) {
-  var countryname = tweet.place.country;
-      process.nextTick(function() {
-        Country.find({where: { 'name': countryname} })
-        .complete(function(err, country) {
-        if (!country) {
-          var newCountry = Country.build( {
-              name: countryname
-            });
-          newCountry.save()
-          .complete(function(err) {
-            if(err) {
-              throw err;
-              console.log('The country instance has not been saved:', err);
-            }
-            console.log('We have a persisted country instance now');
-          });
-      }
-    });
+function stopStreaming() {
+  client.on('stop-tweets', function() {
+    stream.stop();
   });
 }
 
 function getUsername() {
   client.on('username', function(username) {
-    findUser(username);
+    findUser(username)
+    .success(function(user) {
+      sendUsersCountries(user);
+    });
   });
 }
 
 function findUser(username) {
-  User.find({where: {'username': username}})
-  .success(function(user) {
-    sendUsersCountries(user);
-  });
+  return User.find({where: {'username': username}});
 }
 
 function sendUsersCountries(user) {
@@ -132,17 +123,17 @@ function getCountry() {
   });
 }
 
-// function persistCountry(countryName, username) {
-//   Country.findOrCreate({'name': countryName})
-//   .success(function(country, created) {
-//     if (created) {
-//       User.find({where: {'username': username}})
-//       .success(function(user) {
-//         user.addCountry(country);
-//       });
-//     }
-//   });
-// }
+function persistCountry(countryName, username) {
+  Country.findOrCreate({'name': countryName})
+  .success(function(country, created) {
+    if (created) {
+      findUser(username)
+      .success(function(user) {
+        user.addCountry(country);
+      });
+    }
+  });
+}
 
 function listenToServer() {
   server.listen(env.port);

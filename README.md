@@ -1,7 +1,6 @@
-node_express_sample_app
+Tweet World
 =======================
 
-# Tweet World
 
 ## Description
 
