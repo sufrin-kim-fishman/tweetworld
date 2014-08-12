@@ -78,7 +78,7 @@ function getUsername(client) {
   client.on('username', function(username) {
     findUser(username)
     .success(function(user) {
-      sendUsersCountries(user);
+      sendUsersCountries(user, client);
     });
   });
 }
@@ -87,14 +87,14 @@ function findUser(username) {
   return User.find({where: {'username': username}});
 }
 
-function sendUsersCountries(user) {
+function sendUsersCountries(user, client) {
   user.getCountries()
   .success(function(countries) {
     client.emit('username', countries);
   });
 }
 
-function getCountry(client, callback) {
+function getCountry(client) {
   client.on('country', function(countryObj) {
     var country = JSON.parse(countryObj);
     persistCountry(country.name, country.user);
