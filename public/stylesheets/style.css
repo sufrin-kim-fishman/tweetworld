@@ -119,8 +119,12 @@ a {
   bottom: 0;
   width: 100%;
   height: 5px;
+  font-size: 15px;
   /*text-shadow: 0.1em 0.1em 0.2em black;*/
-  background-color: lightgray;*/
+  background-color: lightgray;
+  padding-top: 0px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 
