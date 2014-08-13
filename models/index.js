@@ -2,9 +2,9 @@ var fs        = require('fs')
   , path      = require('path')
   , Sequelize = require('sequelize')
   , lodash    = require('lodash')
-  , sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
-      dialect: "postgres", // or 'sqlite', 'postgres', 'mariadb'
-      port:    5432, // or 3306 for any other SQL database
+  , sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
+      dialect: "postgres",
+      port:    5432, 
     })
   , db        = {}
  
