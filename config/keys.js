@@ -1,11 +1,11 @@
 module.exports = function() {
   return {
-    consumer_key: "K3Db1XfygzDvn8QLxdAuRWZtd",          
-    consumer_secret: "RmJMjSZ4XleOyD58lepilrwiGzWGOemVq6sgndXfqIqGIwzif3",       
-    access_token: "942399211-7J7mUWuEC1shJHXRnFvKyEFUJVhRh9aFfQd43BzB",      
-    access_token_secret: "EPXwymTXCdTWkMzcxlnVYsI0Gexxo4mB1505idQ40jb9k",
+    consumer_key: "N3wxjYdnjaq8OjmlyeAnQ0uiX",          
+    consumer_secret: "C2Y71NQyrFBCbGHhkSFPqHE9penIacIvB1DUgrk7jAkUW8qpmM",       
+    access_token: "316015598-IciiwWwpx7tf0HaslKVu2SL5otrONTzZOJwG0TnR",      
+    access_token_secret: "9Ju0fDyFZ2ksMf9YTwDJlO7csqyecrBs3pwtBclQqyjOg",
     session_secret: "topsecretsecret",
-    username: "ilanasufrin",
+    username: "Ado",
     password: null,
     host: "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
     database_url: "HEROKU_POSTGRESQL_BLUE_URL",

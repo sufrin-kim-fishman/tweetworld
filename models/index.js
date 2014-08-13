@@ -18,7 +18,7 @@ if (!global.hasOwnProperty('db')) {
     });
 
   } else {
-    sequelize = new Sequelize('TweetWorld', 'justinkim', "", {
+    sequelize = new Sequelize('TweetWorld', 'Ado', "", {
       dialect: "postgres",
       port:    5432
     });

@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "justinkim",
+    "username": "ilanasufrin",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
@@ -9,7 +9,7 @@
     "port": 5432
   },
   "test": {
-    "username": "justinkim",
+    "username": "ilanasufrin",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
@@ -17,12 +17,21 @@
     "protocol": "postgres"
   },
   "production": {
-    // "username": "justinkim",
+    // "username": "ilanasufrin",
     // "password": null,
     "use_env_variable": "HEROKU_POSTGRESQL_BLUE_URL".
-  //  "database": "HEROKU_POSTGRESQL_BLUE_URL",
+   //  "database": "HEROKU_POSTGRESQL_BLUE_URL",
    // "host": "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
+
+   
+    // "database": "HEROKU_POSTGRESQL_BLUE_URL",
+    // "host": "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
+
     "dialect": "postgres",
     "protocol": "postgres"
   }
+
+var key = require('./keys.js')();
+
 }
+
