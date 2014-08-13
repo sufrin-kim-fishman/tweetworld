@@ -34,6 +34,8 @@ Go to [www.tweetworld.me](http://www.tweetworld.me)
 
 Stream the whole world's tweets on the global map or live text stream, and optionally create an account to save your preferences.
 
+For best user experience, open the site in Safari or Google Chrome.
+
 
 ## Development/Contribution
 
