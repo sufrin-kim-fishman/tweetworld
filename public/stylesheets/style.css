@@ -38,6 +38,7 @@ body#stream_page {
 
 body#dashboard-page {
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 2em;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -55,11 +56,8 @@ body#page-top {
 }
 
 body#signup-page {
-<<<<<<< HEAD
   overflow: hidden;
   /*padding: 50px;*/
-=======
->>>>>>> 6178a5c49bd0d4cdd2b358d597f0824d3ef1af10
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
