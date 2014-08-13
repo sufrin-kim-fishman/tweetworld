@@ -1,3 +1,11 @@
+body {
+  overflow: hidden;
+}
+
+html {
+  overflow: hidden;
+}
+
 #map-canvas {
   position: absolute;
   z-index: 1;
@@ -8,6 +16,17 @@
 }
 
 body#about-page {
+  /*padding: 50px;*/
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 2em;
+  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body#stream_page {
   /*padding: 50px;*/
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 2em;
@@ -95,16 +114,13 @@ a {
   color: #00B7FF;
 }
 
-footer {
-  text-align: center;
-  font-size: 14px;
-  position: fixed;
+#footer {
+  position: absolute;
   bottom: 0;
   width: 100%;
-  height: 20px;
-  color:black;
+  height: 5px;
   /*text-shadow: 0.1em 0.1em 0.2em black;*/
-  background-color: lightgray;
+  background-color: lightgray;*/
 }
 
 
@@ -150,9 +166,14 @@ footer {
 .right-about {
   /*height: 400px;*/
   /*float: right;*/
+  padding-top: 0;
   width: 80%;
   margin: auto;
   text-align: center;
+}
+
+option:hover {
+  background-color: #428bca;
 }
 
 h2.center {
@@ -160,21 +181,32 @@ h2.center {
 }
 
 #submit {
-  border-radius: 4px;
-  moz-border-radius: 4px;
-  webkit-border-radius: 4px;
+  color: #428bca;
   background-color: #B2BBBF;
-  font-size: 30px;
+  font-size: 20px;
+  height: 35px;
+  width: 100px;
 }
 
-.ex_button {
-  border-radius: 100%;
-  border: 2px solid #c2c2c2;
-  position: relative;
-  padding: 1px 5px;
-  top: -20px;
-  background-color: #605F61;
-  left: 198px;
+#wrap {
+  display: inline;
+  width: 500px;
+  text-align: left;
+}
+
+.delete {
+  position: absolute;
+  padding: 0;
+  border: none;
+  background: none;
+  right: 0;
+  top: 0;
+  width: 25px;
+  height: 30px;
+}
+
+.country_name {
+  font-size: 20px;
 }
 
 .image {
@@ -192,47 +224,12 @@ h2.center {
   text-align: center;
 }
 
-#viewbuttons {
-  background-image: linear-gradient(to bottom,#0033CC 0,#0033CC 100%);
-}
-
-.btn-animation {
-  -webkit-transition: all 0.15s ease-in-out;
-  -moz-transition: all 0.15s ease-in-out;
-  -ms-transition: all 0.15s ease-in-out;
-  -o-transition: all 0.15s ease-in-out;
-}
-
-.green-glow:hover {
-  -webkit-text-shadow: 0 0 5px #fff;
-  text-shadow: 0 0 5px #fff;
-  -webkit-box-shadow: 0 0 5px #fff,
-                      0 0 10px #fff,
-                      0 0 15px #fff,
-                      0 0 20px #009900,
-                      0 0 35px #009900,
-                      0 0 40px #009900,
-                      0 0 50px #009900,
-                      0 0 75px #009900;
-  box-shadow: 0 0 5px #fff,
-              0 0 10px #fff,
-              0 0 15px #fff,
-              0 0 20px #009900,
-              0 0 35px #009900,
-              0 0 40px #009900,
-              0 0 50px #009900,
-              0 0 75px #009900;
-}
-
 .country_tweet_panel {
 background-color:white;
 border:2px;
-border-style:dashed;
+border-style:solid;
 border-color:gray;
 border-radius:5%;
 margin:auto;
 float:left;
 }
-
-
-
