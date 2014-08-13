@@ -2,7 +2,7 @@
 var debug = require('debug')('myapp');
 var express = require('express');
 var app = express();
-// var app = require('../app');
+ var app = require('../app');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -10,10 +10,10 @@ app.get('/', function(req, res, next) {
   res.send(200, "All set");
 });
 
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-});
+// var server = app.listen(app.get('port'), function() {
+//   debug('Express server listening on port ' + server.address().port);
+// });
 
 
-var pg = require('pg');
-var conString = "postgres://Ado:password@localhost:8080/database";
+// var pg = require('pg');
+// var conString = "postgres://Ado:password@localhost:8080/database";
