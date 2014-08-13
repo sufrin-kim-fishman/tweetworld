@@ -25,7 +25,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body id="login-page">
 
  <header>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,16 +63,16 @@
 
      <div class="container content" style="text-align:center;">
 
-<h1>Log In!</h1>
+<h1 class="form-title">Log In!</h1>
 
 <% if(message.length > 0) { %>
   <div><%= message %></div>
 <% } %>
 
-<form name="login_form" id="login_form" method="post" action="/login" style="font-size:20px">
+<form name="registration_form" id="login_form" method="post" action="/login" style="font-size:20px">
       Username: <input type="text" name="username" style="margin:10px"><br>
       Password: <input type="password" name="password" style="margin:10px"><br>
-      <input type="submit" value="Log In" id="login">
+      <input type="submit" value="Log In" id="submit_button">
 </form>
 
 </div> <!-- end container content -->
