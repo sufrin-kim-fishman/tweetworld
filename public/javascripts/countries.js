@@ -145,7 +145,7 @@ var states = {
 	"Turkey": "Türkiye", 
 	"Uganda": "Uganda", 
 	"Ukraine": "Ukraine",
-	"United Arab Emirates": "الامارات العربية المتحدة" 
+	"United Arab Emirates": "الامارات العربية المتحدة",
 	"United Kingdom": "United Kingdom",  
 	"Uruguay": "Uruguay", 
 	"Uzbekistan": "Uzbekistan",

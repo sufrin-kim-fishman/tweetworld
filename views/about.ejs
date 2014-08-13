@@ -1,23 +1,13 @@
 <html>
   <head>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <title>TWEET WORLD</title>
     <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-    <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
-    <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!-- Optional theme -->
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-      <!--  flat-ui theme -->
-        <link rel="stylesheet" src="../stylesheets/flat-ui.css">
-
-         <!--  any custom styles -->
-        <link rel="stylesheet" src="../stylesheets/style.css">
-   
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,81 +19,73 @@
   </head>
   <body id="about-page">
     <header>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="/" class="navbar-brand">Tweet World</a>
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">Tweet World</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li><a href="/about" >About</a></li>
+              <li><a href="/map" >Map</a></li>
+              <li><a href="/stream" >Stream</a></li>
+              <% if (login) { %>
+                <li><a href="/dashboard" >Dashboard</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/logout" >Log Out</a></li>
+              <% } else { %>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/signup" >Sign Up</a></li>
+                  <li><a href="/login" >Log In</a></li>
+              <% } %>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a href="/about" >About</a></li>
-            <li><a href="/map" >Map</a></li>
-            <li><a href="/stream" >Stream</a></li>
-            <% if (login) { %>
-              <li><a href="/dashboard" >Dashboard</a></li>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="/logout" >Log Out</a></li>
-            <% } else { %>
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-               <li><a href="/signup" >Sign Up</a></li>
-                <li><a href="/login" >Log In</a></li>
-            <% } %>
-          </ul>
-        </div><!--/.nav-collapse -->
       </div>
-    </div>
     </header>
 
   <div class="container content">
 
-
-    <!-- put all info here -->
-
-
     <h2 class="center">About The Team</h2>
-<div class="left-about about-div" >
-Tweet World was built by Justin Kim, Ilana Sufrin, and Adrienne Fishman to help you track tweets all over the world in real time. It's the visual component Twitter is missing! 
-</div>
-<div class="right-about about-div">
-<p>Tweet World was build with love in the Ruby-005 semester at the <a href="http://flatironschool.com" target="_blank">Flatiron School</a> by:</p>
-  <div class="bio">
-    <img alt="" class="Justin Kim photo" height="150" src="https://avatars3.githubusercontent.com/u/7275768?v=2&s=460" width="150">
-    <p>Justin Kim</p>
-    <a href="https://github.com/jusjmkim" target="_blank">Github</a> |
-    <a href="http://jusjmkim.github.io/" target="_blank">Blog</a>
-  </div>
-    <div class="bio">
-    <img alt="Ilana Sufrin photo" src="http://i.imgur.com/agr5Lmd.jpg" style="height:150px;width:140px">
-    <p>Ilana Sufrin</p>
-    <a href="http://github.com/ilanasufrin" target="_blank">Github</a> |
-    <a href="http://ilanaflatiron.tumblr.com/" target="_blank">Blog</a>
-  </div>
-    <div class="bio">
-    <img alt="" class="Adrienne Fishman photo" height="150" src="https://avatars2.githubusercontent.com/u/5332367?v=2&s=460" width="150">
-    <p>Adrienne Fishman</p>
-    <a href="https://github.com/adriennefishman" target="_blank">Github</a> |
-    <a href="http://adriennefishman.github.io/" target="_blank">Blog</a>
-  </div>
-</div>
+    <div class="left-about about-div" >
+      Tweet World was built by Justin Kim, Ilana Sufrin, and Adrienne Fishman to help you track tweets all over the world in real time. It's the visual component Twitter is missing! 
+    </div>
+    <div class="right-about about-div">
+      <p>Tweet World was build with love in the Ruby-005 semester at the <a href="http://flatironschool.com" target="_blank">Flatiron School</a> by:</p>
+      <div class="bio">
+        <img alt="" class="Justin Kim photo" height="150" src="https://avatars3.githubusercontent.com/u/7275768?v=2&s=460" width="150">
+        <p>Justin Kim</p>
+        <a href="https://github.com/jusjmkim" target="_blank">Github</a> |
+        <a href="http://jusjmkim.github.io/" target="_blank">Blog</a>
+      </div>
+        <div class="bio">
+        <img alt="Ilana Sufrin photo" src="http://i.imgur.com/agr5Lmd.jpg" style="height:150px;width:140px">
+        <p>Ilana Sufrin</p>
+        <a href="http://github.com/ilanasufrin" target="_blank">Github</a> |
+        <a href="http://ilanaflatiron.tumblr.com/" target="_blank">Blog</a>
+      </div>
+        <div class="bio">
+        <img alt="" class="Adrienne Fishman photo" height="150" src="https://avatars2.githubusercontent.com/u/5332367?v=2&s=460" width="150">
+        <p>Adrienne Fishman</p>
+        <a href="https://github.com/adriennefishman" target="_blank">Github</a> |
+        <a href="http://adriennefishman.github.io/" target="_blank">Blog</a>
+      </div>
+    </div>
 
   </div> <!-- end container content -->
 
   <footer id="footer">
     Built with &#9825; at the <a href="http://www.flatironschool.com" target="_blank">Flatiron School</a>
     <span style="float:left;padding-left:2px;">  &#169; Copyright 2014 MIT License</span>
-    </footer>
+  </footer>
 
-
-     <!-- Latest compiled and minified bootstrap JavaScript -->
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-      
   </body>
 </html>

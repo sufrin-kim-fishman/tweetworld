@@ -3,9 +3,9 @@ var env = require('./config/environment.js')()
   , database = require('./models/index.js')
   , User = database.sequelize.import(__dirname + "/models/user.js")
   , Country = database.sequelize.import(__dirname + "/models/country.js")
-  , apikeys = require('./config/apikeys.js')();
+  , keys = require('./config/keys.js')();
 
-app.use(env.session({secret: 'topsecretsecret',
+app.use(env.session({secret: keys.session_secret,
                 saveUninitialized: true,
                 resave: true}));
 app.use(env.express.static(env.path.join(__dirname, 'public')));
@@ -53,10 +53,10 @@ function getData(client) {
 
 function setStreaming() {
   var t = new env.twitter({
-      consumer_key: apikeys.consumer_key,          
-      consumer_secret: apikeys.consumer_secret,       
-      access_token: apikeys.access_token,      
-      access_token_secret: apikeys.access_token_secret
+      consumer_key: keys.consumer_key,          
+      consumer_secret: keys.consumer_secret,       
+      access_token: keys.access_token,      
+      access_token_secret: keys.access_token_secret
   });
   return t.stream('statuses/sample');
 }
@@ -64,7 +64,6 @@ function setStreaming() {
 function streamTweets() {
   setStreaming().on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      console.log(tweet.text);
       io.sockets.emit('tweets', JSON.stringify(tweet));
     }
   });
@@ -106,7 +105,6 @@ function persistCountry(countryName, username) {
       user.addCountry(country);
     });
   });
-  console.log(countryName + " was persisted");
 }
 
 function getCountryToDestroy(client) {
@@ -124,7 +122,6 @@ function deleteCountry(countryName, username) {
       user.removeCountry(country);
     });
   });
-  console.log(countryName + " was deleted");
 }
 
 function listenToServer() {

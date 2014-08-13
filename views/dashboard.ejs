@@ -1,26 +1,17 @@
 <html>
   <head>
     <title>TWEET WORLD</title>
-     <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
+    <meta http-equiv="Content-Type;X-UA-Compatible" content="text/html; charset=utf-8; IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="javascripts/countries.js"></script>
     <script src="javascripts/script.js"></script>
     <script type="text/javascript" src="javascripts/dashboard.js"></script>
 
-    <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
-    <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!-- Optional theme -->
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-   
-      <!--  flat-ui theme -->
-        <link rel="stylesheet" src="../stylesheets/flat-ui.css">
-
-         <!--  any custom styles -->
-        <link rel="stylesheet" src="../stylesheets/style.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,9 +21,9 @@
     <![endif]-->
 </head>
 
-  <body id="dashboard-page">
+<body id="dashboard-page">
 
-    <header>
+  <header>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -57,17 +48,16 @@
             <% } else { %>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-               <li><a href="/signup" >Sign Up</a></li>
+                <li><a href="/signup" >Sign Up</a></li>
                 <li><a href="/login" >Log In</a></li>
             <% } %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    </header>
+  </header>
 
-    <div class="container content" style="text-align:center;">
-
+  <div class="container content" style="text-align:center;">
 
     <h1>Hello <span id="username"><%= user.dataValues.username %></span>!</h1>
 
@@ -81,12 +71,12 @@
     
     <div class="tweet_country_holder"></div>
 
-    </div> <!-- end container content -->
+  </div> <!-- end container content -->
 
-    <footer>
+  <footer>
     Built with &#9825; at the <a href="http://www.flatironschool.com" target="_blank">Flatiron School</a>
     <span style="float:left;padding-left:2px;">  &#169; Copyright 2014 MIT License</span>
-    </footer>
+  </footer>
 
-  </body>
+</body>
 </html>

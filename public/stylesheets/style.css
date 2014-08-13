@@ -1,9 +1,16 @@
+
 body {
   overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 #map-canvas {
@@ -13,6 +20,14 @@ html {
   left: 0;
   bottom: 50px;
   right: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#twitter {
+  height: 1px;
+  width: 1px;
 }
 
 body#about-page {
