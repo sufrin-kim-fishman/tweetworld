@@ -14,7 +14,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "ilansufrin",
+    "username": "ilanasufrin",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
