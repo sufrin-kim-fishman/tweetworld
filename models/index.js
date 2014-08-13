@@ -1,12 +1,7 @@
-// var fs        = require('fs')
-//   , path      = require('path')
-//   , Sequelize = require('sequelize')
-//   , lodash    = require('lodash')
-//   , sequelize = new Sequelize('TweetWorld', 'ilanasufrin', "", {
-//       dialect: "postgres",
-//       port:    5432, 
-//     })
-//   , db        = {}
+var fs        = require('fs')
+  , path      = require('path')
+  , lodash    = require('lodash')
+  , db        = {}
  
 // fs
 //   .readdirSync(__dirname)
@@ -46,9 +41,10 @@ if (!global.hasOwnProperty('db')) {
       host:     match[3],
       logging:  true //false
     });
+
   } else {
     // the application is executed on the local machine ... use mysql
-    sequelize = new Sequelize('TweetWorld', 'ilanasufrin', null, {
+    sequelize = new Sequelize('TweetWorld', 'justinkim', null, {
       dialect: "postgres",
       port:    5432
     });

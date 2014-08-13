@@ -27,10 +27,10 @@ function submitListener() {
 
 function addNewCountry(country, countryName) {
   if($("#" + country).length === 0) {
-    var newCountry = "<div id='" + country + "' class='col-md-4' style='background-color:white;border:2px;border-style:dashed;border-color:gray;border-radius:5%;margin:auto;float:left;'>" + 
-      "<h2>" + countryName + "</h2>"+
+    var newCountry = "<div id='wrap'><div id='" + country + "' class='col-md-4' style='background-color:#F7FAFB;border:2px;font-size:20px;border-style:solid;border-color:gray;border-radius:5%;float:left;'>" + 
+      '<h2 class="country_name">' + countryName + "</h2>" +
       '<button type="button" class="delete">X</button>' +
-      "<ul></ul></div>";
+      "<ul></ul></div></div";
     $(".tweet_country_holder").append(newCountry);
   }
   removeCountry();
