@@ -1,7 +1,7 @@
 var fs        = require('fs')
   , path      = require('path')
   , lodash    = require('lodash')
-  , db        = {}
+  , db        = {};
 
 if (!global.hasOwnProperty('db')) {
   var Sequelize = require('sequelize')
