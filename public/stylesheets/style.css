@@ -141,5 +141,15 @@ h2.center {
               0 0 75px #009900;
 }
 
+.country_tweet_panel {
+background-color:white;
+border:2px;
+border-style:dashed;
+border-color:gray;
+border-radius:5%;
+margin:auto;
+float:left;
+}
+
 
 
