@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "justinkim",
+    "username": "ilanasufrin",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
@@ -9,14 +9,17 @@
     "port": 5432
   },
   "test": {
-    "username": "justinkim",
+    "username": "ilanasufrin",
     "password": null,
     "database": "TweetWorld",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "protocol": "postgres"
   },
-  "production": {
+  "production": { 
     "use_env_variable": "DATABASE_URL"
   }
+
+
+
 }

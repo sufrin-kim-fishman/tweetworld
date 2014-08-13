@@ -18,6 +18,7 @@
 body#about-page {
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 2em;
+  overflow: hidden;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -45,6 +46,7 @@ body#dashboard-page {
 }
 
 body#page-top {
+  overflow: hidden;
   background:url('../images/map.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -53,7 +55,36 @@ body#page-top {
 }
 
 body#signup-page {
+<<<<<<< HEAD
+  overflow: hidden;
+  /*padding: 50px;*/
+=======
+>>>>>>> 6178a5c49bd0d4cdd2b358d597f0824d3ef1af10
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body#login-page {
+  overflow: hidden;
+  /*padding: 50px;*/
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+body#map-page {
+  overflow: hidden;
+  /*padding: 50px;*/
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 20px;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -90,6 +121,11 @@ label {
   padding: 10px 40px; 
   background: #dddddd;
   width: 400px;
+}
+
+#dashboard_username {
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif
+  font-size: 40px;
 }
 
 #username {
