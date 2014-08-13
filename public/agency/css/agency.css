@@ -208,6 +208,7 @@ fieldset[disabled] .btn-xl.active {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
+    font-size: 20px;
     letter-spacing: 1px;
     color: #fff;
 }
