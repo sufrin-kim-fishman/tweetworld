@@ -27,6 +27,7 @@ footer {
 
 .content {
   /*background-color: #fff;*/
+  height: 100%;
   border-radius: 6px;
   min-height: 200px;
   padding-top: 10px;
