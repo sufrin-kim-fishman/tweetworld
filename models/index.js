@@ -33,11 +33,11 @@
 
 if (!global.hasOwnProperty('db')) {
   var Sequelize = require('sequelize')
-    , sequelize = null
+    , sequelize = null;
  
   if (process.env.HEROKU_POSTGRESQL_BLUE_URL) {
     // the application is executed on Heroku ... use the postgres database
-    var match = process.env.HEROKU_POSTGRESQL_BLUE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+    var match = process.env.HEROKU_POSTGRESQL_BLUE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
  
     sequelize = new Sequelize(match[5], match[1], match[2], {
       dialect:  'postgres',
@@ -45,7 +45,7 @@ if (!global.hasOwnProperty('db')) {
       port:     match[4],
       host:     match[3],
       logging:  true //false
-    })
+    });
   } else {
     // the application is executed on the local machine ... use mysql
     sequelize = new Sequelize('TweetWorld', 'ilanasufrin', null, {
