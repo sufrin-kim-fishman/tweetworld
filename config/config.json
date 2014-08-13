@@ -14,6 +14,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "database": "HEROKU_POSTGRESQL_BLUE_URL",
+    "database": "HEROKU_POSTGRESQL_BLUE_URL"
   }
 }
