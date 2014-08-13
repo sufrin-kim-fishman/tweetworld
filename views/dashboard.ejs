@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="javascripts/countries.js"></script>
+    <script src="javascripts/script.js"></script>
+    <script type="text/javascript" src="javascripts/dashboard.js"></script>
 
     <!-- BOOTSTRAP STUFF. think about compiling so it's available on every page-->
     <!-- Latest compiled and minified CSS -->
@@ -26,7 +30,7 @@
     <![endif]-->
 </head>
 
-  <body>
+  <body id="dashboard-page">
 
     <header>
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">

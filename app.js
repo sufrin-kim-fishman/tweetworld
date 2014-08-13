@@ -65,7 +65,7 @@ function setStreaming() {
 function streamTweets() {
   setStreaming().on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      // console.log(tweet.text);
+      console.log(tweet.text);
       io.sockets.emit('tweets', JSON.stringify(tweet));
     }
   });
@@ -75,6 +75,7 @@ function getUsername(client) {
   client.on('username', function(username) {
     findUser(username)
     .success(function(user) {
+      console.log('about to get users countries');
       sendUsersCountries(user, client);
     });
   });
@@ -99,7 +100,7 @@ function getCountryToPersist(client) {
 }
 
 function persistCountry(countryName, username) {
-  Country.find({'name': countryName})
+  Country.find({where: {'name': countryName}})
   .success(function(country) {
     findUser(username)
     .success(function(user) {
