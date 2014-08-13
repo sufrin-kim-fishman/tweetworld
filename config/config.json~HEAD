@@ -25,8 +25,4 @@
   }
 }
 
-<<<<<<< HEAD:config/config.json
 var key = require('./keys.js')();
-=======
-var key = require('/config/keys.js')();
->>>>>>> 25566e0e7f3defd742debb80ca1b4f456b3897f5:app/config/config.json
