@@ -1,5 +1,5 @@
 function scrapeUsername() {
-  return $("#username").text();
+  return $("#dashboard_username").text();
 }
 
 function sendUsername() {
