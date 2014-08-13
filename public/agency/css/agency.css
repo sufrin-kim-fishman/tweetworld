@@ -718,7 +718,8 @@ section#contact .text-danger {
 }
 
 footer {
-    padding: 25px 0;
+    padding-top: 0px;
+    padding-bottom: 20px;
     text-align: center;
 }
 
