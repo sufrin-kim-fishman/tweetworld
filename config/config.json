@@ -14,8 +14,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "Ado",
-    "password": null,
     "database": "HEROKU_POSTGRESQL_BLUE_URL",
     "host": "127.0.0.1",
     "dialect": "postgres"

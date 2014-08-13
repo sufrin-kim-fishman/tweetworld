@@ -1,12 +1,7 @@
 var fs        = require('fs')
   , path      = require('path')
-  , Sequelize = require('sequelize')
   , lodash    = require('lodash')
-  , sequelize = new Sequelize('TweetWorld', 'Ado', "", {
-      dialect: "postgres",
-      port:    5432, 
-     })
-   , db        = {}
+  , db        = {}
  
 // fs
 //   .readdirSync(__dirname)
@@ -33,11 +28,11 @@ var fs        = require('fs')
 
 if (!global.hasOwnProperty('db')) {
   var Sequelize = require('sequelize')
-    , sequelize = null
+    , sequelize = null;
  
   if (process.env.HEROKU_POSTGRESQL_BLUE_URL) {
     // the application is executed on Heroku ... use the postgres database
-    var match = process.env.HEROKU_POSTGRESQL_BLUE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/)
+    var match = process.env.HEROKU_POSTGRESQL_BLUE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
  
     sequelize = new Sequelize(match[5], match[1], match[2], {
       dialect:  'postgres',
@@ -45,11 +40,11 @@ if (!global.hasOwnProperty('db')) {
       port:     match[4],
       host:     match[3],
       logging:  true //false
->>>>>>> cd4acf5a24b78c8e24b2c0110d6e3dcd34526fa8
-    })
+    });
+
   } else {
     // the application is executed on the local machine ... use mysql
-    sequelize = new Sequelize('TweetWorld', 'ilanasufrin', null, {
+    sequelize = new Sequelize('TweetWorld', 'justinkim', null, {
       dialect: "postgres",
       port:    5432
     });
