@@ -7,8 +7,7 @@ var env = require('./config/environment.js')()
 
 app.use(env.session({secret: 'topsecretsecret',
                 saveUninitialized: true,
-                resave: true,
-                cookie: {maxAge: 6000}}));
+                resave: true}));
 app.use(env.express.static(env.path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.use("../stylesheets", env.express.static(__dirname + "/stylesheets"));
