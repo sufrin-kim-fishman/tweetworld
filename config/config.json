@@ -22,7 +22,6 @@
     "protocol": "postgres"
   }
 
-var key = require('./keys.js')();
+
 
 }
-
