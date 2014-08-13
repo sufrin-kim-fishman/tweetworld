@@ -71,7 +71,7 @@ function D3Markers(tweet, data, icon) {
     content: contentString
   });
   infowindow.open(map, marker);
-  setTimeout(function(){infowindow.close();}, '6000');
+  setTimeout(function(){infowindow.close();}, '4000');
 }
 
 function setMarker(tweetLatlng, icon) {
