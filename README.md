@@ -8,11 +8,11 @@ Tweet World
 
 ## Screenshots
 
-![](http://i.imgur.com/VsNtyhS.png)
+![](http://i.imgur.com/3klapJB.png)
 
-![](http://i.imgur.com/T6z1Xnp.png)
+![](http://i.imgur.com/JCMjLaa.png)
 
-![](http://i.imgur.com/T6z1Xnp.png)
+![](http://i.imgur.com/2jSQGO6.png)
 
 ## Background
 
