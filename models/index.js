@@ -38,13 +38,12 @@ if (!global.hasOwnProperty('db')) {
       dialect:  'postgres',
       protocol: 'postgres',
       port:     match[4],
-      host:     match[3],
-      logging:  true //false
+      host:     match[3]
     });
 
   } else {
     // the application is executed on the local machine ... use mysql
-    sequelize = new Sequelize('TweetWorld', 'ilanasufrin', null, {
+    sequelize = new Sequelize('TweetWorld', 'Ado', null, {
       dialect: "postgres",
       port:    5432
     });
