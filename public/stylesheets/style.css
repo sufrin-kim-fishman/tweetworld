@@ -1,11 +1,9 @@
-body#map-page {
-  /*padding: 50px;*/
-  font-family:"Symbola";
-  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+#map-canvas {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  bottom: 50px;
+  right: 0;
 }
 
 body#about-page {
