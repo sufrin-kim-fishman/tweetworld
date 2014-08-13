@@ -32,6 +32,7 @@ function addNewCountry($country, country) {
       "<ul></ul></div>";
     $(".tweet_country_holder").append(newCountry);
   }
+  removeCountry();
 }
 
 function removeCountry() {
