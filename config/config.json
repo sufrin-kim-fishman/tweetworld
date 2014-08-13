@@ -1,26 +1,26 @@
 {
   "development": {
-    "username": require('/config/keys.js')().username,
-    "password": require('/config/keys.js')().password,
-    "database": require('/config/keys.js')().database_local,
+    "username": "justinkim",
+    "password": null,
+    "database": "TweetWorld",
     "host": "127.0.0.1",
     "protocol": "postgres",
     "dialect": "postgres",
     "port": 5432
   },
   "test": {
-    "username": require('/config/keys.js')().username,
-    "password": require('/config/keys.js')().password,
-    "database": require('/config/keys.js')().database_local,
+    "username": "justinkim",
+    "password": null,
+    "database": "TweetWorld",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "protocol": "postgres"
   },
   "production": {
-    "username": require('/config/keys.js')().username,
-    "password": require('/config/keys.js')().password,
-    "database": require('/config/keys.js')().database_url,
-    "host": require('/config/keys.js')().host,
+    "username": "justinkim",
+    "password": null,
+    "database": "HEROKU_POSTGRESQL_BLUE_URL",
+    "host": "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
     "dialect": "postgres",
     "protocol": "postgres"
   }
