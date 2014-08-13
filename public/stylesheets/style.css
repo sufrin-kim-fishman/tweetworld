@@ -57,6 +57,7 @@ body#page-top {
 
 body#signup-page {
   overflow: hidden;
+  font-size: 2em;
   /*padding: 50px;*/
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
@@ -67,6 +68,7 @@ body#signup-page {
 }
 
 body#login-page {
+  font-size: 2em;
   overflow: hidden;
   /*padding: 50px;*/
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -157,8 +159,14 @@ a {
   color: #00B7FF;
 }
 
+#wrapper {
+  min-height: 100%;
+  position: relative;
+  margin-bottom: -5px;
+}
+
 #footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: 5px;
