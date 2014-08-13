@@ -1,29 +1,30 @@
 {
   "development": {
-    "username": key.username,
-    "password": key.password,
-    "database": key.database_local,
+    "username": "Ado",
+    "password": null,
+    "database": "TweetWorld",
     "host": "127.0.0.1",
     "protocol": "postgres",
     "dialect": "postgres",
     "port": 5432
   },
   "test": {
-    "username": key.username,
-    "password": key.password,
-    "database": key.database_local,
+    "username": "Ado",
+    "password": null,
+    "database": "TweetWorld",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "protocol": "postgres"
   },
   "production": {
-    "username": key.username,
-    "password": key.password,
-    "database": key.database_url,
-    "host": key.host,
+    "username": "Ado",
+    "password": null,
+    "database": "HEROKU_POSTGRESQL_BLUE_URL",
+    "host": "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
     "dialect": "postgres",
     "protocol": "postgres"
   }
+<<<<<<< HEAD
 }
 
 <<<<<<< HEAD:config/config.json
@@ -31,3 +32,6 @@ var key = require('./keys.js')();
 =======
 var key = require('/config/keys.js')();
 >>>>>>> 25566e0e7f3defd742debb80ca1b4f456b3897f5:app/config/config.json
+=======
+}
+>>>>>>> 679a18576fdf4b65f12d3c5cd5a984f20999771b
