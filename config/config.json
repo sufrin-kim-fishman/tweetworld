@@ -1,29 +1,27 @@
 {
   "development": {
-    "username": key.username,
-    "password": key.password,
-    "database": key.database_local,
+    "username": require('/config/keys.js')().username,
+    "password": require('/config/keys.js')().password,
+    "database": require('/config/keys.js')().database_local,
     "host": "127.0.0.1",
     "protocol": "postgres",
     "dialect": "postgres",
     "port": 5432
   },
   "test": {
-    "username": key.username,
-    "password": key.password,
-    "database": key.database_local,
+    "username": require('/config/keys.js')().username,
+    "password": require('/config/keys.js')().password,
+    "database": require('/config/keys.js')().database_local,
     "host": "127.0.0.1",
     "dialect": "postgres",
     "protocol": "postgres"
   },
   "production": {
-    "username": key.username,
-    "password": key.password,
-    "database": key.database_url,
-    "host": key.host,
+    "username": require('/config/keys.js')().username,
+    "password": require('/config/keys.js')().password,
+    "database": require('/config/keys.js')().database_url,
+    "host": require('/config/keys.js')().host,
     "dialect": "postgres",
     "protocol": "postgres"
   }
 }
-
-var key = require('/config/keys.js')();
