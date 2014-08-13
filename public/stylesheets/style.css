@@ -9,7 +9,8 @@
 
 body#about-page {
   /*padding: 50px;*/
-  font-family:"Symbola";
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 2em;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -19,7 +20,7 @@ body#about-page {
 
 body#dashboard-page {
   /*padding: 50px;*/
-  font-family:"Symbola";
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
   background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -29,6 +30,57 @@ body#dashboard-page {
 
 body#page-top {
   background:url('../images/map.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body#signup-page {
+  /*padding: 50px;*/
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+h1.form-title {
+  text-align: center;
+  color: #428bca;
+  font-size: 60px;
+  padding-top: 100px;
+  margin-top: 50px;
+  padding-bottom: 10px;
+  padding-left: 200px;
+  width: 80%;
+}
+
+#registration_form {
+  font-size: 60px;
+  color: #428bca;
+  text-align: center;
+}
+
+label {
+  font-size: 20px;
+  color: #428bca;
+}
+
+#submit_button {
+  font-size: 20px;
+  color: #428bca;
+  border: 2px solid #a1a1a1;
+  padding: 10px 40px; 
+  background: #dddddd;
+  width: 400px;
+}
+
+body#login-page {
+  /*padding: 50px;*/
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:url('../images/pale_blue_background.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
