@@ -44,7 +44,7 @@ if (!global.hasOwnProperty('db')) {
 
   } else {
     // the application is executed on the local machine ... use mysql
-    sequelize = new Sequelize('TweetWorld', 'justinkim', null, {
+    sequelize = new Sequelize('TweetWorld', 'ilanasufrin', null, {
       dialect: "postgres",
       port:    5432
     });
