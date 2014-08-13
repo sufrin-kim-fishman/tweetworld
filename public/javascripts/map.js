@@ -54,11 +54,15 @@ function setMapOptions(myLatlng) {
 }
 
 function tweetListener(icon) {
+  var i = 0;
   server.on('tweets', function(d) {
     tweet = JSON.parse(d);
-    d3.json(tweet, function(data) {
-      D3Markers(tweet, data, icon);
-    });
+    if (i % 5 === 0) {
+      d3.json(tweet, function(data) {
+        D3Markers(tweet, data, icon);
+      });
+    }
+    i++;
   });
 }
 
