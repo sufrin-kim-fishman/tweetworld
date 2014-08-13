@@ -25,4 +25,4 @@
   }
 }
 
-var key = require('./keys.js')();
+var key = require('/config/keys.js')();
