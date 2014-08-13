@@ -40,7 +40,6 @@ var io = env.socket.listen(server);
 
 function openTweetConnection() {
   io.sockets.on('connection', function(client) {
-    console.log('Something is connected...');
     getData(client);
   });
 }
