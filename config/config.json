@@ -16,17 +16,8 @@
     "dialect": "postgres",
     "protocol": "postgres"
   },
-  "production": {
-    // "username": "ilanasufrin",
-    // "password": null,
-    "use_env_variable": "HEROKU_POSTGRESQL_BLUE_URL".
-   //  "database": "HEROKU_POSTGRESQL_BLUE_URL",
-   // "host": "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
-
-   
-    // "database": "HEROKU_POSTGRESQL_BLUE_URL",
-    // "host": "yzmaxbfjqgoqxr:IzZnKk9NoQWxN9GWQsoAm5VbW1@ec2-54-225-101-199.compute-1.amazonaws.com:5432/dbgvojp417uj1l",
-
+  "production": { 
+    "use_env_variable": "HEROKU_POSTGRESQL_BLUE_URL",
     "dialect": "postgres",
     "protocol": "postgres"
   }
