@@ -38,8 +38,7 @@ if (!global.hasOwnProperty('db')) {
       dialect:  'postgres',
       protocol: 'postgres',
       port:     match[4],
-      host:     match[3],
-      logging:  true //false
+      host:     match[3]
     });
 
   } else {
