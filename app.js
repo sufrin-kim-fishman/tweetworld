@@ -48,7 +48,8 @@ function openTweetConnection() {
 
 function getData(client) {
   getUsername(client);
-  getCountry(client);
+  getCountryToPersist(client);
+  getCountryToDestroy(client);
 }
 
 function setStreaming() {
@@ -64,7 +65,7 @@ function setStreaming() {
 function streamTweets() {
   setStreaming().on('tweet', function(tweet) {
     if (tweet.place !== null) {
-      console.log(tweet.text);
+      // console.log(tweet.text);
       io.sockets.emit('tweets', JSON.stringify(tweet));
     }
   });
@@ -90,23 +91,40 @@ function sendUsersCountries(user, client) {
   });
 }
 
-function getCountry(client) {
-  client.on('country', function(countryObj) {
+function getCountryToPersist(client) {
+  client.on('persistCountry', function(countryObj) {
     var country = JSON.parse(countryObj);
     persistCountry(country.name, country.user);
   });
 }
 
 function persistCountry(countryName, username) {
-  Country.findOrCreate({'name': countryName})
-  .success(function(country, created) {
-    if (created) {
-      findUser(username)
-      .success(function(user) {
-        user.addCountry(country);
-      });
-    }
+  Country.find({'name': countryName})
+  .success(function(country) {
+    findUser(username)
+    .success(function(user) {
+      user.addCountry(country);
+    });
   });
+  console.log(countryName + " was persisted");
+}
+
+function getCountryToDestroy(client) {
+  client.on('deleteCountry', function(countryObj) {
+    var country = JSON.parse(countryObj);
+    deleteCountry(country.name, country.user);
+  });
+}
+
+function deleteCountry(countryName, username) {
+  Country.find({where: {'name': countryName}})
+  .success(function(country) {
+    findUser(username)
+    .success(function(user) {
+      user.removeCountry(country);
+    });
+  });
+  console.log(countryName + " was deleted");
 }
 
 function listenToServer() {
