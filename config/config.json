@@ -1,21 +1,28 @@
 {
   "development": {
-    "username": "Ado",
-    "password": null,
-    "database": "TweetWorld",
+    "username": key.username,
+    "password": key.password,
+    "database": key.database_local,
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "protocol": "postgres",
+    "dialect": "postgres",
+    "port": 5432
   },
   "test": {
-    "username": "Ado",
-    "password": null,
-    "database": "TweetWorld",
+    "username": key.username,
+    "password": key.password,
+    "database": key.database_local,
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "database": "HEROKU_POSTGRESQL_BLUE_URL",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "username": key.username,
+    "password": key.password,
+    "database": key.database_url,
+    "host": key.host,
+    "dialect": "postgres",
+    "protocol": "postgres"
   }
 }
+
+var key = require('./keys.js')();
