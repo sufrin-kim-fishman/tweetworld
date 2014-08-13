@@ -96,6 +96,20 @@ label {
   width: 400px;
 }
 
+#username {
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  color: black;
+}
+
+#password {
+  font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  color: black;
+}
+
 body#login-page {
   /*padding: 50px;*/
   font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
