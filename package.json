@@ -23,9 +23,11 @@
     "sequelize-cli": "^0.2.4",
     "static-favicon": "~1.0.0",
     "lodash": "2.4.1",
-    "path": "0.4.9",
     "socket.io": "1.0.6",
-    "http": "*",
     "twit": "1.1.18"
+  },
+  "engines": {
+    "node": "~0.10.30",
+    "npm": "1.4.22"
   }
 }
