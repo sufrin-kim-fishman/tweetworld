@@ -16,7 +16,7 @@ Tweet World
 
 ## Background
 
-Justin, Ilana, and Adrienne made this app with love during project mode at the Flatiron School.
+[Justin](https://github.com/jusjmkim), [Ilana](https://github.com/ilanasufrin), and [Adrienne](https://github.com/adriennefishman) made this app with love during project mode at the Flatiron School.
 
 ## Technology in our stack
 
@@ -31,7 +31,9 @@ Justin, Ilana, and Adrienne made this app with love during project mode at the F
 
 Go to [www.tweetworld.me](http://www.tweetworld.me)
 
-Create an account to select which countries to view, or stream the whole world's tweets on the global map.
+
+Stream the whole world's tweets on the global map or live text stream, and optionally create an account to save your preferences.
+
 
 ## Development/Contribution
 
