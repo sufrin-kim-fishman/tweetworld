@@ -97,8 +97,8 @@ function getCountryToPersist(client) {
 }
 
 function persistCountry(countryName, username) {
-  Country.find({where: {'name': countryName}})
-  .success(function(country) {
+  Country.findOrCreate({'name': countryName})
+  .success(function(country, created) {
     findUser(username)
     .success(function(user) {
       user.addCountry(country);
