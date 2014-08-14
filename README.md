@@ -39,7 +39,9 @@ For best user experience, open the site in Safari or Google Chrome.
 
 ## Development/Contribution
 
-Make a pull request if you're interested in helping develop for this project.
+Make a pull request if you're interested in helping develop for this project. 
+
+Set up a config/keys.js file with your own Twitter API keys. 
 
 ## Future
 

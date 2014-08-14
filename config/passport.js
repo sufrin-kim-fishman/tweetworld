@@ -61,7 +61,7 @@ module.exports = function(passport) {
           return done(null, false, req.flash('loginMessage', 'The username or password was wrong.'));
         return done(null, user);
       });
-    }))
+    }));
 };
 
 function generateHash(password) {

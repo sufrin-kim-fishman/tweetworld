@@ -72,7 +72,6 @@ function getUsername(client) {
   client.on('username', function(username) {
     findUser(username)
     .success(function(user) {
-      console.log('about to get users countries');
       sendUsersCountries(user, client);
     });
   });
