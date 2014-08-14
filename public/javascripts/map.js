@@ -56,9 +56,9 @@ function setMapOptions(myLatlng) {
 function tweetListener(icon) {
   server.on('tweets', function(d) {
     tweet = JSON.parse(d);
-      d3.json(tweet, function(data) {
-        D3Markers(tweet, data, icon);
-      });
+    d3.json(tweet, function(data) {
+      D3Markers(tweet, data, icon);
+    });
   });
 }
 

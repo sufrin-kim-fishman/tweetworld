@@ -280,11 +280,16 @@ h2.center {
 }
 
 .country_tweet_panel {
-background-color:white;
-border:2px;
-border-style:solid;
-border-color:gray;
-border-radius:5%;
-margin:auto;
-float:left;
+  background-color:white;
+  border:2px;
+  border-style:solid;
+  border-color:gray;
+  border-radius:5%;
+  margin:auto;
+  float:left;
 }
+
+.col-md-4 {
+  margin-bottom: 40px;
+}
+
